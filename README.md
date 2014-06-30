@@ -10,7 +10,7 @@ Features
 
 How Does It Look Like
 ---------------------
-  * [angularjs-goolge-maps](https://github.com/allenhwkim/angularjs-google-maps/build/doc)
+  * [angularjs-goolge-maps Documentation](https://github.com/allenhwkim/angularjs-google-maps/build/doc)
 
 Install
 -------
@@ -20,21 +20,18 @@ Run
 ---
 Run jsdoc command to generate your documentation. 
 All command line options are the options of [jsdoc](http://usejsdoc.org/about-commandline.html)
-  
     $ path/to/jsdoc -c path to conf> -t <template> <your source code>
 
 In example, 
-
     $ node_modules/jsdoc/jsdoc.js -c node_modules/angular-jsdoc/conf -t node_modules/angular-jsdoc/template myDir
 
 Run with gulp-jsdoc
 -------------------
 
-1. install gulp-jsdoc
-
+1. install gulp-jsdoc  
     `$ npm install gulp-jsdoc --save-dev`
 
-2. add the following to the gulpfile.json
+2. add the following to the gulpfile.json  
    ```
     var jsdoc = require('gulp-jsdoc');
 
@@ -49,6 +46,5 @@ Run with gulp-jsdoc
         ));
     });
    ```
-3. run gulp task
-
+3. run gulp task  
     `$ gulp doc`
