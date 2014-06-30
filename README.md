@@ -5,12 +5,12 @@ A simple collection of JSDoc plugin and template for AngularJS, nothing else!
 
 Features
 ----------
-  * Right side TOC for navigation by Directives, Services, Controllers, etc
+  * Right side table of contents for navigation by Directives, Services, Controllers, etc
   * Read and process @ngdoc tag
 
 How Does It Look Like
 ---------------------
-  * [angularjs-goolge-maps Documentation](https://github.com/allenhwkim/angularjs-google-maps/build/doc)
+  * [angularjs-goolge-maps Documentation](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)
 
 Install
 -------
@@ -29,22 +29,18 @@ Run with gulp-jsdoc
 -------------------
 
 1. install gulp-jsdoc  
-    `$ npm install gulp-jsdoc --save-dev`
+    `$ npm install gulp-shell --save-dev`
 
 2. add the following to the gulpfile.json  
    ```
-    var jsdoc = require('gulp-jsdoc');
-
-    gulp.task('doc', function() {
-      return gulp.src(['./src'])                         // source directory
-        .pipe(jsdoc('./build/docs',                      // target directory
-          {path: 'node_modules/angular-jsdoc/template'}, // template directory
-          {plugins: [                                    // plugin files
-            'node_moduels/jsdoc/plugins/mamrkdown', 
-            'node_moduels/angular-jsdoc/plugins/ngdoc',
-          ]}
-        ));
-    });
+   var shell = require('gulp-shell'); 
+   gulp.task('docs', shell.task([ 
+     'node_modules/jsdoc/jsdoc.js '+ 
+       '-c node_modules/angular-jsdoc/conf.json '+   // config file
+       '-t node_modules/angular-jsdoc/template '+    // template file
+       '-d build/docs '+                             // output directory
+       '-r app/scripts'                              // source code directory
+   ])); 
    ```
 3. run gulp task  
-    `$ gulp doc`
+    `$ gulp docs`
