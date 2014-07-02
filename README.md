@@ -3,6 +3,7 @@ Angular-JSDoc
 AngularJS Template for JSDoc 3.  
 A simple collection of JSDoc plugin and template for AngularJS, nothing else!  
 
+![Imgur](http://i.imgur.com/945Oncq.png)
 Features
 ----------
   * Right side table of contents for navigation by Directives, Services, Controllers, etc
