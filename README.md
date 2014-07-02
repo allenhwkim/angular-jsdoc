@@ -52,7 +52,7 @@ Run with gulp-jsdoc
 Example of Directive Documentation
 ----------------------------------
 ```
-**
+/**
  * @ngdoc directive
  * @name map
  * @requires Attr2Options
