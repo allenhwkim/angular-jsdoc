@@ -3,12 +3,12 @@ var data = obj;
 var self = this;
 ?>
 <dt>
-
     <?js 
       var h4Title = data.attribs + name + (kind !== 'event' ? data.signature : '') ;
       h4Title = '<h4 class="name" id="' + id + '">' + h4Title + '</h4>';
     ?>
-    <?js if (data.meta && self.outputSourceFiles) {?>
+    <?js if (data.ngdoc == 'directive') { /* no action for directive */ ?>
+    <?js } else if (data.meta && self.outputSourceFiles) {?>
       <?js= self.linkto(meta.shortpath, h4Title, 'name-link', 'line' + meta.lineno) ?>
     <?js } else { ?>
       <?js= h4Title ?>
@@ -40,7 +40,10 @@ var self = this;
         <ul><li><?js= this.linkto(data['this'], data['this']) ?></li></ul>
     <?js } ?>
 
-    <?js if (data.params && params.length) { ?>
+    <?js if (data.params && params.length && data.ngdoc == "directive") { ?>
+        <h5>Attributes:</h5>
+        <?js= this.partial('params.tmpl', params) ?>
+    <?js } else if (data.params && params.length) { ?>
         <h5>Parameters:</h5>
         <?js= this.partial('params.tmpl', params) ?>
     <?js } ?>
@@ -48,9 +51,10 @@ var self = this;
     <?js= this.partial('details.tmpl', data) ?>
 
     <?js if (data.requires && data.requires.length) { ?>
-    <h5>Requires:</h5>
+    <h5><?js= data.ngdoc ? "Dependencies" : "Requires"?>:</h5>
     <ul><?js data.requires.forEach(function(r) { ?>
-        <li><?js= self.linkto(r) ?></li>
+        <?js r = r.replace(/^module:/,'') ?>
+        <li><?js= self.linkto(r, r+' servivce') ?></li>
     <?js }); ?></ul>
     <?js } ?>
 

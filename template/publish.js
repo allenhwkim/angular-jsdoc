@@ -45,6 +45,9 @@ function needsSignature(doclet) {
     var needsSig = false;
 
     // function and class definitions always get a signature
+   // if (doclet.ngdoc === 'directive') {
+   //     needsSig = false;
+   // } else
     if (doclet.kind === 'function' || doclet.kind === 'class') {
         needsSig = true;
     }
@@ -180,7 +183,8 @@ function addAttribs(f) {
     var attribs = helper.getAttribs(f);
     var attribsString = buildAttribsString(attribs);
 
-    f.attribs = util.format('<span class="type-signature">%s</span>', attribsString);
+    // I don't think we need attribs, static, inner, etc for Angular JS
+    // f.attribs = util.format('<span class="type-signature">%s</span>', attribsString);
 }
 
 function shortenPaths(files, commonPrefix) {

@@ -62,6 +62,7 @@
         <?js }); ?></ul>
     <?js } ?>
 
+    <!--
     <?js if (doc.requires && doc.requires.length) { ?>
         <h3 class="subsection-title">Requires</h3>
 
@@ -69,6 +70,7 @@
             <li><?js= self.linkto(r, r) ?></li>
         <?js }); ?></ul>
     <?js } ?>
+    -->
 
     <?js
         var classes = self.find({kind: 'class', memberof: doc.longname});
