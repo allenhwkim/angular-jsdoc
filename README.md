@@ -7,7 +7,7 @@ A simple collection of JSDoc plugin and template for AngularJS, nothing else!
 
 Features
 ----------
-  * Right side table of contents for navigation by Directives, Services, Controllers, etc
+  * Right side TOC, table of contents,  for navigation by Directives, Services, Controllers, etc
   * Read and process @ngdoc tag
 
 How Does It Look Like
@@ -18,8 +18,8 @@ Install
 -------
     $ npm install jsdoc angular-jsdoc --save-dev
   
-Run
----
+Run In Command Line
+-------------------
 Run jsdoc command to generate your documentation. 
 All command line options are the options of [jsdoc](http://usejsdoc.org/about-commandline.html)  
     
