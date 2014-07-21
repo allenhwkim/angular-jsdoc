@@ -1,7 +1,7 @@
 Angular-JSDoc
 =============
-AngularJS Template for JSDoc 3.  
-A simple collection of JSDoc plugin and template for AngularJS, nothing else!  
+JSDoc 3 Template for AngularJS.  
+A JSDoc plugin and template for AngularJS, nothing else!  
 
 <img src=http://i.imgur.com/FPo9x25.gif width=50%  />
 
