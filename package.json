@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "jsdoc": "~3.3.0-alpha9"
+    "jsdoc": "~3.3.0-alpha11"
   },
   "devDependencies": {
     "gulp-tap": "~0.1.1",
