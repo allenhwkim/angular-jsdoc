@@ -32,7 +32,7 @@ In example,
 Run with gulp-jsdoc
 -------------------
 
-1. install gulp-jsdoc  
+1. install gulp-shell  
     `$ npm install gulp-shell --save-dev`
 
 2. add the following to the gulpfile.json  
