@@ -54,7 +54,7 @@ var self = this;
     <h5><?js= data.ngdoc ? "Dependencies" : "Requires"?>:</h5>
     <ul><?js data.requires.forEach(function(r) { ?>
         <?js r = r.replace(/^module:/,'') ?>
-        <li><?js= self.linkto(r, r+' servivce') ?></li>
+        <li><?js= self.linkto(r, r+' service') ?></li>
     <?js }); ?></ul>
     <?js } ?>
 
