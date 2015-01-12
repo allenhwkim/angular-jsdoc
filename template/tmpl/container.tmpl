@@ -73,12 +73,34 @@
     -->
 
     <?js
-        var classes = self.find({kind: 'class', memberof: doc.longname});
-        if (doc.kind !== 'globalobj' && classes && classes.length) {
+        var controllers = self.find({ngdoc: 'controller', memberof: doc.longname});
+        if (doc.kind !== 'globalobj' && controllers && controllers.length) {
+    ?>
+        <h3 class="subsection-title">Controllers</h3>
+
+        <dl><?js controllers.forEach(function(c) { ?>
+            <dt><?js= self.linkto(c.longname, c.name) ?></dt>
+            <dd><?js if (c.summary) { ?><?js= c.summary ?><?js } ?></dd>
+        <?js }); ?></dl>
+    <?js } ?>
+
+    <?js
+        var classes = self.find({kind: 'class', memberof: doc.longname}) || [];
+          var non_ngdoc_exists = false;
+          classes.every(function(c) {
+            if (!c.ngdoc) {
+              non_ngdoc_exists = true;
+              return false;
+            }
+            return true;
+          });
+          if (doc.kind !== 'globalobj' && classes.length && non_ngdoc_exists) {
     ?>
         <h3 class="subsection-title">Classes</h3>
 
-        <dl><?js classes.forEach(function(c) { ?>
+        <dl><?js classes.forEach(function(c) {
+            if (c.ngdoc) { return; }
+            ?>
             <dt><?js= self.linkto(c.longname, c.name) ?></dt>
             <dd><?js if (c.summary) { ?><?js= c.summary ?><?js } ?></dd>
         <?js }); ?></dl>
