@@ -12,7 +12,7 @@ Features
 
 How Does It Look Like
 ---------------------
-  * [angularjs-goolge-maps Documentation](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)
+  * [angularjs-google-maps Documentation](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)
 
 Install
 -------
