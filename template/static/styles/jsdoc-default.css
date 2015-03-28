@@ -337,3 +337,7 @@ a.name-link {
 .disabled {
     color: #454545;
 }
+
+.section-readme {
+    padding-top: 10px;
+}
