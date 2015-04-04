@@ -70,8 +70,8 @@ nav
 {
     display: block;
     top: 28px;
+    bottom: 28px;
     border-left: 1px solid #ccc;
-    height: 100%;
     overflow-y: auto;
     position: fixed;
     right: 0px;
