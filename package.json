@@ -3,6 +3,10 @@
   "version": "0.3.3",
   "description": "JsDoc Plugin and Template for AngularJs",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:allenhwkim/angular-jsdoc.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
