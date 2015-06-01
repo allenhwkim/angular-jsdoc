@@ -27,7 +27,7 @@ All command line options are the options of [jsdoc](http://usejsdoc.org/about-co
 
 In example,  
 
-    `$ node_modules/jsdoc/jsdoc.js -c node_modules/angular-jsdoc/conf -t node_modules/angular-jsdoc/template -r myDir`
+    `$ node_modules/jsdoc/jsdoc.js -c node_modules/angular-jsdoc/conf.json -t node_modules/angular-jsdoc/template -r myDir`
 
 Run with gulp-jsdoc
 -------------------
