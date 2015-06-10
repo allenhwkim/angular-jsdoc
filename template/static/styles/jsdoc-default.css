@@ -252,7 +252,8 @@ a.name-link {
 
 .prettyprint.linenums
 {
-  padding-left: 70px;
+  padding-left: 4em;
+  color: #ccc
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
