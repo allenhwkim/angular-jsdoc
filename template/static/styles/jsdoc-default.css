@@ -69,8 +69,10 @@ section
 nav
 {
     display: block;
-    top: 28px;
-    bottom: 28px;
+    min-width: 200px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #fff;
     border-left: 1px solid #ccc;
     overflow-y: auto;
     position: fixed;
@@ -112,7 +114,13 @@ nav a:active {
     color: #5C5954;
 }
 
+#main  {
+    max-width: 976px;
+    margin: 0 auto;
+}
 footer {
+    max-width: 976px;
+    margin: 0 auto;
     display: block;
     padding: 6px;
     margin-top: 12px;
