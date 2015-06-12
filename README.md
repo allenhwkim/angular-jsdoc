@@ -29,7 +29,7 @@ In example,
 
     `$ node_modules/jsdoc/jsdoc.js -c node_modules/angular-jsdoc/conf.json -t node_modules/angular-jsdoc/template -r myDir`
 
-Run with gulp-jsdoc
+Run with gulp
 -------------------
 
 1. install gulp-shell  
@@ -49,6 +49,26 @@ Run with gulp-jsdoc
    ```
 3. run gulp task  
     `$ gulp docs`
+
+Run with grunt
+---------------
+copy/pasted from [hashbang blog](http://hashbang.nl/angular/2015/02/10/simple-and-clear-angular-application-documentation-using-angular-jsdoc/)
+
+    grunt.initConfig({
+      jsdoc : {
+        dist: {
+          src: [
+            'src/scripts/app/**/*.js',
+            'FRONTEND-GUIDE.md'
+          ], 
+          options: {
+            destination: '../docs/client-jsdocs',
+            configure: 'node_modules/angular-jsdoc/conf.json',
+            template: 'node_modules/angular-jsdoc/template'
+          }
+        }
+      }
+    });
 
 
 [Example of Directive Documentation](https://github.com/allenhwkim/angularjs-google-maps/blob/master/app/scripts/directives/map.js)
