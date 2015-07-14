@@ -12,8 +12,8 @@ Features
   * Right side TOC, table of contents,  for navigation by Directives, Services, Controllers, etc
   * Read and process @ngdoc tag
 
-How Does It Look Like
----------------------
+What It Looks Like
+------------------
   * [angularjs-google-maps Documentation](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)
 
 Install
