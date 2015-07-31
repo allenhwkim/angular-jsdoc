@@ -3,7 +3,7 @@ Angular-JSDoc
 JSDoc 3 Template for AngularJS.  
 A JSDoc plugin and template for AngularJS, nothing else!  
 
-Blog: [Sign, AngularJS Documentation](http://allenhwkim.tumblr.com/post/92161523693/sigh-angularjs-documentation)
+Blog: [Sigh, AngularJS Documentation](http://allenhwkim.tumblr.com/post/92161523693/sigh-angularjs-documentation)
 
 <img src=http://i.imgur.com/FPo9x25.gif width=50%  />
 
