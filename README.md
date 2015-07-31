@@ -73,6 +73,6 @@ copy/pasted from [hashbang blog](http://hashbang.nl/angular/2015/02/10/simple-an
     });
 
 
-[Example of Directive Documentation](https://github.com/allenhwkim/angularjs-google-maps/blob/master/app/scripts/directives/map.js)
+[Example of Directive Documentation](https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/map.js)
 
-[Example of Service Documentation](https://github.com/allenhwkim/angularjs-google-maps/blob/master/app/scripts/services/attr2_options.js)
+[Example of Service Documentation](https://github.com/allenhwkim/angularjs-google-maps/blob/master/services/attr2_options.js)
