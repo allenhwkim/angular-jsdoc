@@ -1,0 +1,107 @@
+<!--
+<div ng-include="'header.html'"></div>
+<div id="level2">
+  <div id="1" ng-if="::foo">YES</div>
+  <div id="2" ng-if="::bar">NO</div>
+  <div id="3" ng-class="::{foo:c-foo, bar:c-bar}"></div>
+  <div id="4">undefined</div>
+  <div ng-repeat="el in ::collection" id="idundefined">undefined</div>
+</div>
+<div ng-include="'footer.html'"></div>
+-->
+<h3> marker directive </h3>
+<a href="">source</a>
+
+<h4>Dependencies</h4>
+<ul>
+  <li>undefined</li>
+<li>undefined</li>
+</ul>
+
+<h4>Properties</h4>
+<ul>
+  
+</ul>
+
+<!--
+{
+  "comment": "/**\n * @ngdoc directive\n * @name marker\n * @requires Attr2Options \n * @requires NavigatorGeolocation\n * @description \n *   Draw a Google map marker on a map with given options and register events  \n *   \n *   Requires:  map directive\n *\n *   Restrict To:  Element \n *\n * @param {String} position address, 'current', or [latitude, longitude]  \n *    example:  \n *      '1600 Pennsylvania Ave, 20500  Washingtion DC',   \n *      'current position',  \n *      '[40.74, -74.18]'  \n * @param {Boolean} centered if set, map will be centered with this marker\n * @param {Expression} geo-callback if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback=\"showStoreInfo()\"\n * @param {String} &lt;MarkerOption> Any Marker options, https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions  \n * @param {String} &lt;MapEvent> Any Marker events, https://developers.google.com/maps/documentation/javascript/reference\n * @example\n * Usage: \n *   <map MAP_ATTRIBUTES>\n *    <marker ANY_MARKER_OPTIONS ANY_MARKER_EVENTS\"></MARKER>\n *   </map>\n *\n * Example: \n *   <map center=\"[40.74, -74.18]\">\n *    <marker position=\"[40.74, -74.18]\" on-click=\"myfunc()\"></div>\n *   </map>\n *\n *   <map center=\"the cn tower\">\n *    <marker position=\"the cn tower\" on-click=\"myfunc()\"></div>\n *   </map>\n */",
+  "meta": {
+    "range": [
+      0,
+      1361
+    ],
+    "filename": "marker.js",
+    "lineno": 1,
+    "path": "/Users/allen/github/angularjs-google-maps/directives",
+    "code": {}
+  },
+  "kind": "class",
+  "ngdoc": "directive",
+  "name": "marker",
+  "requires": [
+    "module:Attr2Options",
+    "module:NavigatorGeolocation"
+  ],
+  "description": "<p>Draw a Google map marker on a map with given options and register events  </p>\n<p>  Requires:  map directive</p>\n<p>  Restrict To:  Element</p>",
+  "params": [
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>address, 'current', or [latitude, longitude]<br>   example:<br>     '1600 Pennsylvania Ave, 20500  Washingtion DC',<br>     'current position',<br>     '[40.74, -74.18]'</p>",
+      "name": "position"
+    },
+    {
+      "type": {
+        "names": [
+          "Boolean"
+        ]
+      },
+      "description": "<p>if set, map will be centered with this marker</p>",
+      "name": "centered"
+    },
+    {
+      "type": {
+        "names": [
+          "Expression"
+        ]
+      },
+      "description": "<p>if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback=&quot;showStoreInfo()&quot;</p>",
+      "name": "geo-callback"
+    },
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>Any Marker options, https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions</p>",
+      "name": "&lt;MarkerOption>"
+    },
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>Any Marker events, https://developers.google.com/maps/documentation/javascript/reference</p>",
+      "name": "&lt;MapEvent>"
+    }
+  ],
+  "examples": [
+    {
+      "caption": "",
+      "code": "Usage: \n  <map MAP_ATTRIBUTES>\n   <marker ANY_MARKER_OPTIONS ANY_MARKER_EVENTS\"></MARKER>\n  </map>\n\nExample: \n  <map center=\"[40.74, -74.18]\">\n   <marker position=\"[40.74, -74.18]\" on-click=\"myfunc()\"></div>\n  </map>\n\n  <map center=\"the cn tower\">\n   <marker position=\"the cn tower\" on-click=\"myfunc()\"></div>\n  </map>"
+    }
+  ],
+  "longname": "marker",
+  "___id": "T000002R000291",
+  "___s": true,
+  "children": [],
+  "jsDocUrl": "marker.html",
+  "sourceUrl": "marker.html#1"
+}
+-->

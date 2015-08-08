@@ -1,0 +1,306 @@
+<!--
+<div ng-include="'header.html'"></div>
+<div id="level2">
+  <div id="1" ng-if="::foo">YES</div>
+  <div id="2" ng-if="::bar">NO</div>
+  <div id="3" ng-class="::{foo:c-foo, bar:c-bar}"></div>
+  <div id="4">undefined</div>
+  <div ng-repeat="el in ::collection" id="idundefined">undefined</div>
+</div>
+<div ng-include="'footer.html'"></div>
+-->
+<h3> MapController controller </h3>
+<a href="">source</a>
+
+<h4>Dependencies</h4>
+<ul>
+  <li>undefined</li>
+</ul>
+
+<h4>Properties</h4>
+<ul>
+  <li>
+    <b>controls</b> {{prop.description}}
+  </li>
+<li>
+    <b>markers</b> {{prop.description}}
+  </li>
+<li>
+    <b>shapes</b> {{prop.description}}
+  </li>
+</ul>
+
+<!--
+{
+  "comment": "/**\n   * @ngdoc controller\n   * @name MapController\n   * @requires $scope\n   * @property {Hash} controls collection of Controls initiated within `map` directive\n   * @property {Hash} markers collection of Markers initiated within `map` directive\n   * @property {Hash} shapes collection of shapes initiated within `map` directive\n   */",
+  "meta": {
+    "range": [
+      53,
+      387
+    ],
+    "filename": "map_controller.js",
+    "lineno": 5,
+    "path": "/Users/allen/github/angularjs-google-maps/directives",
+    "code": {}
+  },
+  "kind": "class",
+  "ngdoc": "controller",
+  "name": "MapController",
+  "requires": [
+    "module:$scope"
+  ],
+  "properties": [
+    {
+      "type": {
+        "names": [
+          "Hash"
+        ]
+      },
+      "description": "<p>collection of Controls initiated within <code>map</code> directive</p>",
+      "name": "controls"
+    },
+    {
+      "type": {
+        "names": [
+          "Hash"
+        ]
+      },
+      "description": "<p>collection of Markers initiated within <code>map</code> directive</p>",
+      "name": "markers"
+    },
+    {
+      "type": {
+        "names": [
+          "Hash"
+        ]
+      },
+      "description": "<p>collection of shapes initiated within <code>map</code> directive</p>",
+      "name": "shapes"
+    }
+  ],
+  "longname": "MapController",
+  "___id": "T000002R000240",
+  "___s": true,
+  "children": [
+    {
+      "comment": "/**\n     * Add an object to the collection of group\n     * @memberof MapController\n     * @function addObject\n     * @param groupName the name of collection that object belongs to\n     * @param obj  an object to add into a collection, i.e. marker, shape\n     */",
+      "meta": {
+        "range": [
+          1494,
+          1755
+        ],
+        "filename": "map_controller.js",
+        "lineno": 42,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {}
+      },
+      "description": "<p>Add an object to the collection of group</p>",
+      "memberof": "MapController",
+      "kind": "function",
+      "name": "addObject",
+      "params": [
+        {
+          "description": "<p>the name of collection that object belongs to</p>",
+          "name": "groupName"
+        },
+        {
+          "description": "<p>an object to add into a collection, i.e. marker, shape</p>",
+          "name": "obj"
+        }
+      ],
+      "scope": "static",
+      "longname": "MapController.addObject",
+      "___id": "T000002R000250",
+      "___s": true,
+      "children": [],
+      "examples": [],
+      "jsDocUrl": "MapController.html#addObject",
+      "sourceUrl": "MapController.html#42"
+    },
+    {
+      "comment": "/**\n     * Add collected objects to map\n     * @memberof MapController\n     * @function addObjects\n     * @param {Array} objects the collection of objects. i.e., map.markers\n     */",
+      "meta": {
+        "range": [
+          3375,
+          3556
+        ],
+        "filename": "map_controller.js",
+        "lineno": 93,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {}
+      },
+      "description": "<p>Add collected objects to map</p>",
+      "memberof": "MapController",
+      "kind": "function",
+      "name": "addObjects",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "Array"
+            ]
+          },
+          "description": "<p>the collection of objects. i.e., map.markers</p>",
+          "name": "objects"
+        }
+      ],
+      "scope": "static",
+      "longname": "MapController.addObjects",
+      "___id": "T000002R000260",
+      "___s": true,
+      "children": [],
+      "examples": [],
+      "jsDocUrl": "MapController.html#addObjects",
+      "sourceUrl": "MapController.html#93"
+    },
+    {
+      "comment": "/**\n     * Delete an object from the collection and remove from map\n     * @memberof MapController\n     * @function deleteObject\n     * @param {Array} objs the collection of objects. i.e., map.markers\n     * @param {Object} obj the object to be removed. i.e., marker\n     */",
+      "meta": {
+        "range": [
+          2688,
+          2962
+        ],
+        "filename": "map_controller.js",
+        "lineno": 72,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {}
+      },
+      "description": "<p>Delete an object from the collection and remove from map</p>",
+      "memberof": "MapController",
+      "kind": "function",
+      "name": "deleteObject",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "Array"
+            ]
+          },
+          "description": "<p>the collection of objects. i.e., map.markers</p>",
+          "name": "objs"
+        },
+        {
+          "type": {
+            "names": [
+              "Object"
+            ]
+          },
+          "description": "<p>the object to be removed. i.e., marker</p>",
+          "name": "obj"
+        }
+      ],
+      "scope": "static",
+      "longname": "MapController.deleteObject",
+      "___id": "T000002R000256",
+      "___s": true,
+      "children": [],
+      "examples": [],
+      "jsDocUrl": "MapController.html#deleteObject",
+      "sourceUrl": "MapController.html#72"
+    },
+    {
+      "comment": "/**\n     * returns the location of an address or 'current-location'\n     * @memberof MapController\n     * @function getGeoLocation\n     * @param {String} string an address to find the location\n     * @returns {Promise} latlng the location of the address\n     */",
+      "meta": {
+        "range": [
+          4154,
+          4415
+        ],
+        "filename": "map_controller.js",
+        "lineno": 116,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {}
+      },
+      "description": "<p>returns the location of an address or 'current-location'</p>",
+      "memberof": "MapController",
+      "kind": "function",
+      "name": "getGeoLocation",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "String"
+            ]
+          },
+          "description": "<p>an address to find the location</p>",
+          "name": "string"
+        }
+      ],
+      "returns": [
+        {
+          "type": {
+            "names": [
+              "Promise"
+            ]
+          },
+          "description": "<p>latlng the location of the address</p>"
+        }
+      ],
+      "scope": "static",
+      "longname": "MapController.getGeoLocation",
+      "___id": "T000002R000264",
+      "___s": true,
+      "children": [],
+      "examples": [],
+      "jsDocUrl": "MapController.html#getGeoLocation",
+      "sourceUrl": "MapController.html#116"
+    },
+    {
+      "comment": "/**\n     * watch changes of attribute values and do appropriate action based on attribute name\n     * @memberof MapController\n     * @function observeAttrSetObj\n     * @param {Hash} orgAttrs attributes before its initialization\n     * @param {Hash} attrs    attributes after its initialization\n     * @param {Object} obj    map object that an action is to be done\n     */",
+      "meta": {
+        "range": [
+          5251,
+          5622
+        ],
+        "filename": "map_controller.js",
+        "lineno": 151,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {}
+      },
+      "description": "<p>watch changes of attribute values and do appropriate action based on attribute name</p>",
+      "memberof": "MapController",
+      "kind": "function",
+      "name": "observeAttrSetObj",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "Hash"
+            ]
+          },
+          "description": "<p>attributes before its initialization</p>",
+          "name": "orgAttrs"
+        },
+        {
+          "type": {
+            "names": [
+              "Hash"
+            ]
+          },
+          "description": "<p>attributes after its initialization</p>",
+          "name": "attrs"
+        },
+        {
+          "type": {
+            "names": [
+              "Object"
+            ]
+          },
+          "description": "<p>map object that an action is to be done</p>",
+          "name": "obj"
+        }
+      ],
+      "scope": "static",
+      "longname": "MapController.observeAttrSetObj",
+      "___id": "T000002R000271",
+      "___s": true,
+      "children": [],
+      "examples": [],
+      "jsDocUrl": "MapController.html#observeAttrSetObj",
+      "sourceUrl": "MapController.html#151"
+    }
+  ],
+  "examples": [],
+  "jsDocUrl": "MapController.html",
+  "sourceUrl": "MapController.html#5"
+}
+-->

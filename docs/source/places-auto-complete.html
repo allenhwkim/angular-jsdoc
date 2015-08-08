@@ -1,0 +1,133 @@
+<head>
+  <link href="../css/prettify.css" type="text/css" rel="stylesheet">
+  <script src="../js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <div>Path: /Users/allen/github/angularjs-google-maps/directives/places-auto-complete.js</div>
+  <div>TOC: [object Object]</div>
+  <div>Total Number Of Lines: 61</div>
+  <pre style="display:inline-block;text-align:right"><a id="line1">1.</a>
+<a id="line2">2.</a>
+<a id="line3">3.</a>
+<a id="line4">4.</a>
+<a id="line5">5.</a>
+<a id="line6">6.</a>
+<a id="line7">7.</a>
+<a id="line8">8.</a>
+<a id="line9">9.</a>
+<a id="line10">10.</a>
+<a id="line11">11.</a>
+<a id="line12">12.</a>
+<a id="line13">13.</a>
+<a id="line14">14.</a>
+<a id="line15">15.</a>
+<a id="line16">16.</a>
+<a id="line17">17.</a>
+<a id="line18">18.</a>
+<a id="line19">19.</a>
+<a id="line20">20.</a>
+<a id="line21">21.</a>
+<a id="line22">22.</a>
+<a id="line23">23.</a>
+<a id="line24">24.</a>
+<a id="line25">25.</a>
+<a id="line26">26.</a>
+<a id="line27">27.</a>
+<a id="line28">28.</a>
+<a id="line29">29.</a>
+<a id="line30">30.</a>
+<a id="line31">31.</a>
+<a id="line32">32.</a>
+<a id="line33">33.</a>
+<a id="line34">34.</a>
+<a id="line35">35.</a>
+<a id="line36">36.</a>
+<a id="line37">37.</a>
+<a id="line38">38.</a>
+<a id="line39">39.</a>
+<a id="line40">40.</a>
+<a id="line41">41.</a>
+<a id="line42">42.</a>
+<a id="line43">43.</a>
+<a id="line44">44.</a>
+<a id="line45">45.</a>
+<a id="line46">46.</a>
+<a id="line47">47.</a>
+<a id="line48">48.</a>
+<a id="line49">49.</a>
+<a id="line50">50.</a>
+<a id="line51">51.</a>
+<a id="line52">52.</a>
+<a id="line53">53.</a>
+<a id="line54">54.</a>
+<a id="line55">55.</a>
+<a id="line56">56.</a>
+<a id="line57">57.</a>
+<a id="line58">58.</a>
+<a id="line59">59.</a>
+<a id="line60">60.</a>
+<a id="line61">61.</a>
+  </pre>
+  <pre class="prettyprint" style="display:inline-block">/**
+ * @ngdoc directive
+ * @name places-auto-complete
+ * @requires Attr2Options 
+ * @description 
+ *   Provides address auto complete feature to an input element
+ *   Requires: input tag
+ *   Restrict To: Attribute
+ *
+ * @param {AutoCompleteOptions} Any AutocompleteOptions
+ *    https://developers.google.com/maps/documentation/javascript/3.exp/reference#AutocompleteOptions
+ *
+ * @example
+ * Example: 
+ *   &lt;script src="https://maps.googleapis.com/maps/api/js?libraries=places">&lt;/script>
+ *   &lt;input places-auto-complete types="['geocode']" />
+ */
+/* global google */
+(function() {
+  'use strict';
+
+  var placesAutoComplete = function(Attr2Options, $timeout) {
+    var parser = Attr2Options;
+
+    var linkFunc = function(scope, element, attrs, ngModelCtrl) {
+      var filtered = parser.filter(attrs);
+      var options = parser.getOptions(filtered);
+      var events = parser.getEvents(scope, filtered);
+      console.log('autocomplete options', options, 'events', events);
+      var autocomplete = new google.maps.places.Autocomplete(element[0], options);
+      for (var eventName in events) {
+        google.maps.event.addListener(autocomplete, eventName, events[eventName]);
+      }
+      element[0].addEventListener('change', function() {
+        $timeout(function(){
+          ngModelCtrl && ngModelCtrl.$setViewValue(element.val());
+        },100);
+      });
+
+      attrs.$observe('types', function(val) {
+        if (val) {
+          console.log('observing types', val);
+          var optionValue = parser.toOptionValue(val, {key: 'types'});
+          console.log('setting types with value', optionValue);
+          autocomplete.setTypes(optionValue);
+        }
+      });
+    };
+
+    return {
+      restrict: 'A',
+      require: '?ngModel',
+      link: linkFunc
+    };
+  };
+
+  placesAutoComplete.$inject = ['Attr2Options', '$timeout'];
+  angular.module('ngMap').directive('placesAutoComplete', placesAutoComplete); 
+
+})();
+
+  </pre>
+</body>

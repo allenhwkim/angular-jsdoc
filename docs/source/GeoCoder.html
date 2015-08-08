@@ -1,0 +1,93 @@
+<head>
+  <link href="../css/prettify.css" type="text/css" rel="stylesheet">
+  <script src="../js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <div>Path: /Users/allen/github/angularjs-google-maps/services/geo_coder.js</div>
+  <div>TOC: [object Object]</div>
+  <div>Total Number Of Lines: 41</div>
+  <pre style="display:inline-block;text-align:right"><a id="line1">1.</a>
+<a id="line2">2.</a>
+<a id="line3">3.</a>
+<a id="line4">4.</a>
+<a id="line5">5.</a>
+<a id="line6">6.</a>
+<a id="line7">7.</a>
+<a id="line8">8.</a>
+<a id="line9">9.</a>
+<a id="line10">10.</a>
+<a id="line11">11.</a>
+<a id="line12">12.</a>
+<a id="line13">13.</a>
+<a id="line14">14.</a>
+<a id="line15">15.</a>
+<a id="line16">16.</a>
+<a id="line17">17.</a>
+<a id="line18">18.</a>
+<a id="line19">19.</a>
+<a id="line20">20.</a>
+<a id="line21">21.</a>
+<a id="line22">22.</a>
+<a id="line23">23.</a>
+<a id="line24">24.</a>
+<a id="line25">25.</a>
+<a id="line26">26.</a>
+<a id="line27">27.</a>
+<a id="line28">28.</a>
+<a id="line29">29.</a>
+<a id="line30">30.</a>
+<a id="line31">31.</a>
+<a id="line32">32.</a>
+<a id="line33">33.</a>
+<a id="line34">34.</a>
+<a id="line35">35.</a>
+<a id="line36">36.</a>
+<a id="line37">37.</a>
+<a id="line38">38.</a>
+<a id="line39">39.</a>
+<a id="line40">40.</a>
+<a id="line41">41.</a>
+  </pre>
+  <pre class="prettyprint" style="display:inline-block">/**
+ * @ngdoc service
+ * @name GeoCoder
+ * @description
+ *   Provides [defered/promise API](https://docs.angularjs.org/api/ng/service/$q) service for Google Geocoder service
+ */
+/* global google */
+(function() {
+  'use strict';
+  var GeoCoder = function($q) {
+    return {
+      /**
+       * @memberof GeoCoder
+       * @param {Hash} options https://developers.google.com/maps/documentation/geocoding/#geocoding
+       * @example
+       * ```
+       *   GeoCoder.geocode({address: 'the cn tower'}).then(function(result) {
+       *     //... do something with result
+       *   });
+       * ```
+       * @returns {HttpPromise} Future object
+       */
+      geocode : function(options) {
+        var deferred = $q.defer();
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode(options, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            deferred.resolve(results);
+          } else {
+            deferred.reject('Geocoder failed due to: '+ status);
+          }
+        });
+        return deferred.promise;
+      }
+    }
+  };
+  GeoCoder.$inject = ['$q'];
+
+  angular.module('ngMap').service('GeoCoder', GeoCoder);
+})();
+
+  </pre>
+</body>

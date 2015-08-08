@@ -1,0 +1,15 @@
+<head>
+  <link href="../css/prettify.css" type="text/css" rel="stylesheet" />
+  <script src="../js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <div>Path: {{::path}}</div>
+  <div>TOC: {{::toc}}</div>
+  <div>Total Number Of Lines: {{::lineNumbers.length}}</div>
+  <pre style="display:inline-block;text-align:right"
+    ><a ng-repeat="no in ::lineNumbers" id="line{{::no}}">{{::no}}.</a>
+  </pre>
+  <pre class="prettyprint" style="display:inline-block"
+    >{{::code}}
+  </pre>
+</body>

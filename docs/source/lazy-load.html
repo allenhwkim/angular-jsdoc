@@ -1,0 +1,161 @@
+<head>
+  <link href="../css/prettify.css" type="text/css" rel="stylesheet">
+  <script src="../js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <div>Path: /Users/allen/github/angularjs-google-maps/directives/map-lazy-load.js</div>
+  <div>TOC: [object Object]</div>
+  <div>Total Number Of Lines: 75</div>
+  <pre style="display:inline-block;text-align:right"><a id="line1">1.</a>
+<a id="line2">2.</a>
+<a id="line3">3.</a>
+<a id="line4">4.</a>
+<a id="line5">5.</a>
+<a id="line6">6.</a>
+<a id="line7">7.</a>
+<a id="line8">8.</a>
+<a id="line9">9.</a>
+<a id="line10">10.</a>
+<a id="line11">11.</a>
+<a id="line12">12.</a>
+<a id="line13">13.</a>
+<a id="line14">14.</a>
+<a id="line15">15.</a>
+<a id="line16">16.</a>
+<a id="line17">17.</a>
+<a id="line18">18.</a>
+<a id="line19">19.</a>
+<a id="line20">20.</a>
+<a id="line21">21.</a>
+<a id="line22">22.</a>
+<a id="line23">23.</a>
+<a id="line24">24.</a>
+<a id="line25">25.</a>
+<a id="line26">26.</a>
+<a id="line27">27.</a>
+<a id="line28">28.</a>
+<a id="line29">29.</a>
+<a id="line30">30.</a>
+<a id="line31">31.</a>
+<a id="line32">32.</a>
+<a id="line33">33.</a>
+<a id="line34">34.</a>
+<a id="line35">35.</a>
+<a id="line36">36.</a>
+<a id="line37">37.</a>
+<a id="line38">38.</a>
+<a id="line39">39.</a>
+<a id="line40">40.</a>
+<a id="line41">41.</a>
+<a id="line42">42.</a>
+<a id="line43">43.</a>
+<a id="line44">44.</a>
+<a id="line45">45.</a>
+<a id="line46">46.</a>
+<a id="line47">47.</a>
+<a id="line48">48.</a>
+<a id="line49">49.</a>
+<a id="line50">50.</a>
+<a id="line51">51.</a>
+<a id="line52">52.</a>
+<a id="line53">53.</a>
+<a id="line54">54.</a>
+<a id="line55">55.</a>
+<a id="line56">56.</a>
+<a id="line57">57.</a>
+<a id="line58">58.</a>
+<a id="line59">59.</a>
+<a id="line60">60.</a>
+<a id="line61">61.</a>
+<a id="line62">62.</a>
+<a id="line63">63.</a>
+<a id="line64">64.</a>
+<a id="line65">65.</a>
+<a id="line66">66.</a>
+<a id="line67">67.</a>
+<a id="line68">68.</a>
+<a id="line69">69.</a>
+<a id="line70">70.</a>
+<a id="line71">71.</a>
+<a id="line72">72.</a>
+<a id="line73">73.</a>
+<a id="line74">74.</a>
+<a id="line75">75.</a>
+  </pre>
+  <pre class="prettyprint" style="display:inline-block">/**
+ * @ngdoc directive
+ * @name lazy-load
+ * @requires Attr2Options 
+ * @description 
+ *   Requires: Delay the initialization of directive until required .js loads
+ *   Restrict To: Attribute 
+ *
+ * @param {String} lazy-load
+      script source file location
+ *    example:  
+ *      'http://maps.googlecom/maps/api/js'   
+
+ * @example
+ * Example: 
+ *
+ *   &lt;div map-lazy-load="http://maps.google.com/maps/api/js">
+ *     &lt;map center="Brampton" zoom="10">
+ *       &lt;marker position="Brampton">&lt;/marker>
+ *     &lt;/map>
+ *   &lt;/div>
+ */
+(function() {
+  'use strict';
+  var $timeout, $compile, src, savedHtml;
+
+  var preLinkFunc = function(scope, element, attrs) {
+    window.lazyLoadCallback = function() {
+      console.log('script loaded,' + src);
+      $timeout(function() { /* give some time to load */
+        element.html(savedHtml);
+        $compile(element.contents())(scope);
+      }, 100);
+    };
+
+    if(window.google === undefined || window.google.maps === undefined) {
+      var scriptEl = document.createElement('script');
+      scriptEl.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback';
+      document.body.appendChild(scriptEl);
+    } else {
+      element.html(savedHtml);
+      $compile(element.contents())(scope);
+    }
+  };
+
+  var compileFunc = function(tElement, tAttrs) {
+
+    (!tAttrs.mapLazyLoad) && console.error('requires src with map-lazy-load');
+    savedHtml = tElement.html(); 
+    src = tAttrs.mapLazyLoad;
+
+    /**
+     * if already loaded, stop processing it
+     */
+    if (document.querySelector('script[src="'+src+'?callback=lazyLoadCallback"]')) {
+      return false;
+    }
+
+    tElement.html('');  // will compile again after script is loaded
+    return {
+      pre: preLinkFunc
+    };
+  };
+
+  var mapLazyLoad = function(_$compile_, _$timeout_) {
+    $compile = _$compile_, $timeout = _$timeout_;
+    return {
+      compile: compileFunc
+    }
+  };
+  mapLazyLoad.$inject = ['$compile','$timeout'];
+
+  angular.module('ngMap').directive('mapLazyLoad', mapLazyLoad);
+})();
+
+  </pre>
+</body>

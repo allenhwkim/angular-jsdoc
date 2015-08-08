@@ -1,0 +1,306 @@
+<!--
+<div ng-include="'header.html'"></div>
+<div id="level2">
+  <div id="1" ng-if="::foo">YES</div>
+  <div id="2" ng-if="::bar">NO</div>
+  <div id="3" ng-class="::{foo:c-foo, bar:c-bar}"></div>
+  <div id="4">undefined</div>
+  <div ng-repeat="el in ::collection" id="idundefined">undefined</div>
+</div>
+<div ng-include="'footer.html'"></div>
+-->
+<h3> map directive </h3>
+<a href="">source</a>
+
+<h4>Dependencies</h4>
+<ul>
+  <li>undefined</li>
+</ul>
+
+<h4>Properties</h4>
+<ul>
+  
+</ul>
+
+<!--
+{
+  "comment": "/**\n * @ngdoc directive\n * @memberof ngMap\n * @name map\n * @requires Attr2Options\n * @description\n *   Implementation of {@link MapController}\n *   Initialize a Google map within a `<div>` tag with given options and register events\n *   It accepts children directives; marker, shape, or marker-clusterer\n *\n *   It initialize map, children tags, then emits message as soon as the action is done\n *   The message emitted from this directive is;\n *     . mapInitialized\n *\n *   Restrict To:\n *     Element\n *\n * @param {Expression} geo-callback if center is an address or current location, the expression is will be executed when geo-lookup is successful. e.g., geo-callback=\"showMyStoreInfo()\"\n * @param {Array} geo-fallback-center \n *    The center of map incase geolocation failed. i.e. [0,0]\n * @param {Boolean} zoom-to-include-markers\n *    When true, map boundary will be changed automatially to include all markers when initialized\n * @param {Boolean} default-style\n *    When false, the default styling, `display:block;height:300px`, will be ignored.\n * @param {String} init-event The name of event to initialize this map. \n *    If this option is given, the map won't be initialized until the event is received.\n *    To invoke the event, use $scope.$emit or $scope.$broacast. \n *    i.e. <map init-event=\"init-map\" ng-click=\"$emit('init-map')\" center=... ></map>\n * @param {String} &lt;MapOption> Any Google map options, \n *    https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions\n * @param {String} &lt;MapEvent> Any Google map events, \n *    https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html\n * @example\n * Usage:\n *   <map MAP_OPTIONS_OR_MAP_EVENTS ..>\n *     ... Any children directives\n *   </map>\n * \n * Example:\n *   <map center=\"[40.74, -74.18]\" on-click=\"doThat()\">\n *   </map>\n *\n *   <map geo-fallback-center=\"[40.74, -74.18]\" zoom-to-inlude-markers=\"true\">\n *   </map>\n */",
+  "meta": {
+    "range": [
+      0,
+      1957
+    ],
+    "filename": "map.js",
+    "lineno": 1,
+    "path": "/Users/allen/github/angularjs-google-maps/directives",
+    "code": {}
+  },
+  "kind": "class",
+  "ngdoc": "directive",
+  "memberof": "ngMap",
+  "name": "map",
+  "requires": [
+    "module:Attr2Options"
+  ],
+  "description": "<p>Implementation of {@link MapController}\n  Initialize a Google map within a <code>&lt;div&gt;</code> tag with given options and register events\n  It accepts children directives; marker, shape, or marker-clusterer</p>\n<p>  It initialize map, children tags, then emits message as soon as the action is done\n  The message emitted from this directive is;\n    . mapInitialized</p>\n<p>  Restrict To:\n    Element</p>",
+  "params": [
+    {
+      "type": {
+        "names": [
+          "Expression"
+        ]
+      },
+      "description": "<p>if center is an address or current location, the expression is will be executed when geo-lookup is successful. e.g., geo-callback=&quot;showMyStoreInfo()&quot;</p>",
+      "name": "geo-callback"
+    },
+    {
+      "type": {
+        "names": [
+          "Array"
+        ]
+      },
+      "description": "<p>The center of map incase geolocation failed. i.e. [0,0]</p>",
+      "name": "geo-fallback-center"
+    },
+    {
+      "type": {
+        "names": [
+          "Boolean"
+        ]
+      },
+      "description": "<p>When true, map boundary will be changed automatially to include all markers when initialized</p>",
+      "name": "zoom-to-include-markers"
+    },
+    {
+      "type": {
+        "names": [
+          "Boolean"
+        ]
+      },
+      "description": "<p>When false, the default styling, <code>display:block;height:300px</code>, will be ignored.</p>",
+      "name": "default-style"
+    },
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>The name of event to initialize this map. \n   If this option is given, the map won't be initialized until the event is received.\n   To invoke the event, use $scope.$emit or $scope.$broacast. \n   i.e. <map init-event=\"init-map\" ng-click=\"$emit('init-map')\" center=... ></map></p>",
+      "name": "init-event"
+    },
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>Any Google map options, \n   https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions</p>",
+      "name": "&lt;MapOption>"
+    },
+    {
+      "type": {
+        "names": [
+          "String"
+        ]
+      },
+      "description": "<p>Any Google map events, \n   https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html</p>",
+      "name": "&lt;MapEvent>"
+    }
+  ],
+  "examples": [
+    {
+      "caption": "",
+      "code": "Usage:\n  <map MAP_OPTIONS_OR_MAP_EVENTS ..>\n    ... Any children directives\n  </map>\n\nExample:\n  <map center=\"[40.74, -74.18]\" on-click=\"doThat()\">\n  </map>\n\n  <map geo-fallback-center=\"[40.74, -74.18]\" zoom-to-inlude-markers=\"true\">\n  </map>"
+    }
+  ],
+  "scope": "static",
+  "longname": "ngMap.map",
+  "___id": "T000002R000207",
+  "___s": true,
+  "children": [
+    {
+      "comment": "/**\n     * Initialize map and events\n     * @memberof map\n     * @param {$scope} scope\n     * @param {angular.element} element\n     * @param {Hash} attrs\n     * @ctrl {MapController} ctrl\n     */",
+      "meta": {
+        "range": [
+          2578,
+          7140
+        ],
+        "filename": "map.js",
+        "lineno": 71,
+        "path": "/Users/allen/github/angularjs-google-maps/directives",
+        "code": {
+          "id": "astnode100002677",
+          "name": "linkFunc",
+          "type": "FunctionExpression",
+          "value": "function"
+        },
+        "vars": {
+          "orgAttrs": null,
+          "scope.google": null,
+          "el": null,
+          "el.style.width": null,
+          "el.style.height": null,
+          "": null,
+          "initializeMap": null,
+          "filtered": null,
+          "options": null,
+          "controlOptions": null,
+          "mapOptions": null,
+          "mapEvents": null
+        }
+      },
+      "description": "<p>Initialize map and events</p>",
+      "memberof": "map",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "$scope"
+            ]
+          },
+          "name": "scope"
+        },
+        {
+          "type": {
+            "names": [
+              "angular.element"
+            ]
+          },
+          "name": "element"
+        },
+        {
+          "type": {
+            "names": [
+              "Hash"
+            ]
+          },
+          "name": "attrs"
+        }
+      ],
+      "tags": [
+        {
+          "originalTitle": "ctrl",
+          "title": "ctrl",
+          "text": "{MapController} ctrl",
+          "value": "{MapController} ctrl"
+        }
+      ],
+      "name": "linkFunc",
+      "longname": "map.linkFunc",
+      "kind": "function",
+      "scope": "static",
+      "___id": "T000002R000214",
+      "___s": true,
+      "children": [
+        {
+          "comment": "/**\n       * create a new `div` inside map tag, so that it does not touch map element\n       * https://stackoverflow.com/questions/20955356\n       */",
+          "meta": {
+            "range": [
+              2933,
+              2967
+            ],
+            "filename": "map.js",
+            "lineno": 80,
+            "path": "/Users/allen/github/angularjs-google-maps/directives",
+            "code": {
+              "id": "astnode100002700",
+              "name": "el",
+              "type": "CallExpression"
+            }
+          },
+          "description": "<p>create a new <code>div</code> inside map tag, so that it does not touch map element\nhttps://stackoverflow.com/questions/20955356</p>",
+          "name": "el",
+          "longname": "map.linkFunc~el",
+          "kind": "member",
+          "memberof": "map.linkFunc",
+          "scope": "inner",
+          "___id": "T000002R000217",
+          "___s": true,
+          "children": [],
+          "examples": [],
+          "jsDocUrl": "map.linkFunc.html#el",
+          "sourceUrl": "map.linkFunc.html#80"
+        },
+        {
+          "comment": "/**\n       * get map options and events\n       */",
+          "meta": {
+            "range": [
+              6489,
+              6520
+            ],
+            "filename": "map.js",
+            "lineno": 189,
+            "path": "/Users/allen/github/angularjs-google-maps/directives",
+            "code": {
+              "id": "astnode100003064",
+              "name": "filtered",
+              "type": "CallExpression"
+            }
+          },
+          "description": "<p>get map options and events</p>",
+          "name": "filtered",
+          "longname": "map.linkFunc~filtered",
+          "kind": "member",
+          "memberof": "map.linkFunc",
+          "scope": "inner",
+          "___id": "T000002R000232",
+          "___s": true,
+          "children": [],
+          "examples": [],
+          "jsDocUrl": "map.linkFunc.html#filtered",
+          "sourceUrl": "map.linkFunc.html#189"
+        },
+        {
+          "comment": "/**\n       * initialize function\n       */",
+          "meta": {
+            "range": [
+              3670,
+              6392
+            ],
+            "filename": "map.js",
+            "lineno": 108,
+            "path": "/Users/allen/github/angularjs-google-maps/directives",
+            "code": {
+              "id": "astnode100002791",
+              "name": "initializeMap",
+              "type": "FunctionExpression",
+              "value": "function"
+            },
+            "vars": {
+              "map": null,
+              "map.markers": null,
+              "map.shapes": null,
+              "": null,
+              "mapOptions.zoom": null,
+              "center": null,
+              "mapOptions.center": null,
+              "eventName": null,
+              "ctrl.map": null,
+              "scope.map": null,
+              "scope.map.scope": null
+            }
+          },
+          "description": "<p>initialize function</p>",
+          "name": "initializeMap",
+          "longname": "map.linkFunc~initializeMap",
+          "kind": "function",
+          "memberof": "map.linkFunc",
+          "scope": "inner",
+          "___id": "T000002R000220",
+          "___s": true,
+          "children": [],
+          "examples": [],
+          "jsDocUrl": "map.linkFunc.html#initializeMap",
+          "sourceUrl": "map.linkFunc.html#108"
+        }
+      ],
+      "examples": [],
+      "jsDocUrl": "map.html#linkFunc",
+      "sourceUrl": "map.html#71"
+    }
+  ],
+  "jsDocUrl": "ngMap.map.html",
+  "sourceUrl": "ngMap.map.html#1"
+}
+-->

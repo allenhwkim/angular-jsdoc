@@ -1,0 +1,105 @@
+<head>
+  <link href="../css/prettify.css" type="text/css" rel="stylesheet">
+  <script src="../js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <div>Path: /Users/allen/github/angularjs-google-maps/directives/maps-engine-layer.js</div>
+  <div>TOC: [object Object]</div>
+  <div>Total Number Of Lines: 47</div>
+  <pre style="display:inline-block;text-align:right"><a id="line1">1.</a>
+<a id="line2">2.</a>
+<a id="line3">3.</a>
+<a id="line4">4.</a>
+<a id="line5">5.</a>
+<a id="line6">6.</a>
+<a id="line7">7.</a>
+<a id="line8">8.</a>
+<a id="line9">9.</a>
+<a id="line10">10.</a>
+<a id="line11">11.</a>
+<a id="line12">12.</a>
+<a id="line13">13.</a>
+<a id="line14">14.</a>
+<a id="line15">15.</a>
+<a id="line16">16.</a>
+<a id="line17">17.</a>
+<a id="line18">18.</a>
+<a id="line19">19.</a>
+<a id="line20">20.</a>
+<a id="line21">21.</a>
+<a id="line22">22.</a>
+<a id="line23">23.</a>
+<a id="line24">24.</a>
+<a id="line25">25.</a>
+<a id="line26">26.</a>
+<a id="line27">27.</a>
+<a id="line28">28.</a>
+<a id="line29">29.</a>
+<a id="line30">30.</a>
+<a id="line31">31.</a>
+<a id="line32">32.</a>
+<a id="line33">33.</a>
+<a id="line34">34.</a>
+<a id="line35">35.</a>
+<a id="line36">36.</a>
+<a id="line37">37.</a>
+<a id="line38">38.</a>
+<a id="line39">39.</a>
+<a id="line40">40.</a>
+<a id="line41">41.</a>
+<a id="line42">42.</a>
+<a id="line43">43.</a>
+<a id="line44">44.</a>
+<a id="line45">45.</a>
+<a id="line46">46.</a>
+<a id="line47">47.</a>
+  </pre>
+  <pre class="prettyprint" style="display:inline-block">/**
+ * @ngdoc directive
+ * @name maps-engine-layer
+ * @description 
+ *   Requires:  map directive
+ *   Restrict To:  Element
+ *
+ * @example
+ * Example: 
+ *   &lt;map zoom="14" center="[59.322506, 18.010025]">
+ *     &lt;maps-engine-layer layer-id="06673056454046135537-08896501997766553811">&lt;/maps-engine-layer>
+ *    &lt;/map>
+ */
+(function() {
+  'use strict';
+
+  angular.module('ngMap').directive('mapsEngineLayer', ['Attr2Options', function(Attr2Options) {
+    var parser = Attr2Options;
+
+    var getMapsEngineLayer = function(options, events) {
+      var layer = new google.maps.visualization.MapsEngineLayer(options);
+
+      for (var eventName in events) {
+        google.maps.event.addListener(layer, eventName, events[eventName]);
+      }
+
+      return layer;
+    };
+
+    
+    return {
+      restrict: 'E',
+      require: '^map',
+
+      link: function(scope, element, attrs, mapController) {
+        var filtered = parser.filter(attrs);
+        var options = parser.getOptions(filtered);
+        var events = parser.getEvents(scope, filtered, events);
+        console.log('maps-engine-layer options', options, 'events', events);
+
+        var layer = getMapsEngineLayer(options, events);
+        mapController.addObject('mapsEngineLayers', layer);
+      }
+     }; // return
+  }]);
+})();
+
+  </pre>
+</body>

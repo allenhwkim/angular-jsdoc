@@ -1,0 +1,119 @@
+<!--
+<div ng-include="'header.html'"></div>
+<div id="level2">
+  <div id="1" ng-if="::foo">YES</div>
+  <div id="2" ng-if="::bar">NO</div>
+  <div id="3" ng-class="::{foo:c-foo, bar:c-bar}"></div>
+  <div id="4">undefined</div>
+  <div ng-repeat="el in ::collection" id="idundefined">undefined</div>
+</div>
+<div ng-include="'footer.html'"></div>
+-->
+<h3> NavigatorGeolocation service </h3>
+<a href="">source</a>
+
+<h4>Dependencies</h4>
+<ul>
+  
+</ul>
+
+<h4>Properties</h4>
+<ul>
+  
+</ul>
+
+<!--
+{
+  "comment": "/**\n * @ngdoc service\n * @name NavigatorGeolocation\n * @description\n *  Provides [defered/promise API](https://docs.angularjs.org/api/ng/service/$q) service for navigator.geolocation methods\n */",
+  "meta": {
+    "range": [
+      0,
+      194
+    ],
+    "filename": "navigator_geolocation.js",
+    "lineno": 1,
+    "path": "/Users/allen/github/angularjs-google-maps/services",
+    "code": {}
+  },
+  "kind": "class",
+  "ngdoc": "service",
+  "name": "NavigatorGeolocation",
+  "description": "<p>Provides <a href=\"https://docs.angularjs.org/api/ng/service/$q\">defered/promise API</a> service for navigator.geolocation methods</p>",
+  "longname": "NavigatorGeolocation",
+  "___id": "T000002R000542",
+  "___s": true,
+  "children": [
+    {
+      "comment": "/**\n       * @memberof NavigatorGeolocation\n       * @param {function} success success callback function\n       * @param {function} failure failure callback function\n       * @example\n       * ```\n       *  NavigatorGeolocation.getCurrentPosition()\n       *    .then(function(position) {\n       *      var lat = position.coords.latitude, lng = position.coords.longitude;\n       *      .. do something lat and lng\n       *    });\n       * ```\n       * @returns {HttpPromise} Future object\n       */",
+      "meta": {
+        "range": [
+          813,
+          1306
+        ],
+        "filename": "navigator_geolocation.js",
+        "lineno": 27,
+        "path": "/Users/allen/github/angularjs-google-maps/services",
+        "code": {
+          "id": "astnode100007161",
+          "name": "getCurrentPosition",
+          "type": "FunctionExpression",
+          "value": "function"
+        },
+        "vars": {
+          "deferred": null,
+          "": null
+        }
+      },
+      "memberof": "NavigatorGeolocation",
+      "params": [
+        {
+          "type": {
+            "names": [
+              "function"
+            ]
+          },
+          "description": "<p>success callback function</p>",
+          "name": "success"
+        },
+        {
+          "type": {
+            "names": [
+              "function"
+            ]
+          },
+          "description": "<p>failure callback function</p>",
+          "name": "failure"
+        }
+      ],
+      "examples": [
+        {
+          "caption": "",
+          "code": "```\n NavigatorGeolocation.getCurrentPosition()\n   .then(function(position) {\n     var lat = position.coords.latitude, lng = position.coords.longitude;\n     .. do something lat and lng\n   });\n```"
+        }
+      ],
+      "returns": [
+        {
+          "type": {
+            "names": [
+              "HttpPromise"
+            ]
+          },
+          "description": "<p>Future object</p>"
+        }
+      ],
+      "name": "getCurrentPosition",
+      "longname": "NavigatorGeolocation.getCurrentPosition",
+      "kind": "function",
+      "scope": "static",
+      "___id": "T000002R000544",
+      "___s": true,
+      "children": [],
+      "jsDocUrl": "NavigatorGeolocation.html#getCurrentPosition",
+      "sourceUrl": "NavigatorGeolocation.html#27"
+    }
+  ],
+  "examples": [],
+  "jsDocUrl": "NavigatorGeolocation.html",
+  "sourceUrl": "NavigatorGeolocation.html#1"
+}
+-->
