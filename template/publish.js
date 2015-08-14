@@ -6,7 +6,7 @@ var logger = require('jsdoc/util/logger');
 var path = require('jsdoc/path');
 var taffy = require('taffydb').taffy;
 var util = require('util');
-var ngTemplate = require('angular-template');
+var microTemplate = require(__dirname+"/micro-template.js");
 
 var helper = require('jsdoc/util/templateHelper');
 //helper.toTutorial(tutorial, null, options)
@@ -24,6 +24,7 @@ var templatePath;
 var outdir = env.opts.destination;
 var conf   = env.conf.templates || {};
 var toc    = {}; //table of contents
+//console.log('env.opts', env.opts);
 
 var getDocletExamples = function(doclet) {
   var examples = (doclet.examples||[]).map(function(example) {
@@ -68,10 +69,15 @@ var copyStaticFiles = function() {
 
 // get children doclets that has member of current doclet longname
 var getChildren = function(data, doclet) {
-  var children  = helper.find(data, {memberof: doclet.longname});
-  if (children.length == 0 && doclet.kind == 'class') {
-    children  = helper.find(data, {memberof: doclet.name});
+  var members  = helper.find(data, {memberof: doclet.longname});
+  if (members.length == 0 && doclet.kind == 'class') {
+    members  = helper.find(data, {memberof: doclet.name});
   }
+  var children = {};
+  members.forEach(function(doclet) {
+    children[doclet.kind] = children[doclet.kind] || [];
+    children[doclet.kind].push(doclet);
+  });
   return children;
 }
 
@@ -89,16 +95,15 @@ var generate = function(filepath, data) {
   data.prettyJson = JSON.stringify(data,null,'  ');
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var layoutHtml = require('fs').readFileSync(layoutPath);
-  var html = ngTemplate(layoutHtml, data)
-
+  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
+  var html = microTemplate(layoutHtml, data);
   fs.writeFileSync(filepath, html, 'utf8');
 }
 
 var generateSourceFiles = function(sourceFiles) {
   fs.mkPath(path.join(outdir, "source"));
   var layoutPath = path.join(templatePath, 'html', 'source.html');
-  var layoutHtml = require('fs').readFileSync(layoutPath);
+  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   for(var jsDoc in sourceFiles) {
     var source = sourceFiles[jsDoc];
     var sourceCode = require('fs').readFileSync(source.path, 'utf8');
@@ -112,12 +117,11 @@ var generateSourceFiles = function(sourceFiles) {
       toc: toc, 
       lineNumbers: lineNumbers
     };
-    var html = ngTemplate(layoutHtml, data);
     var outputPath = path.join(outdir, "source", jsDoc);
+    var html = microTemplate(layoutHtml, data);
     fs.writeFileSync(outputPath, html, 'utf8');
   }
 }
-
 
 /**
   @param {TAFFY} taffyData See <http://taffydb.com/>.
@@ -134,14 +138,11 @@ exports.publish = function(data, opts) {
     //console.log('doclet.longname', doclet.longname + "("+doclet.kind+")");
     doclet.children = getChildren(data, doclet);
     doclet.examples = getDocletExamples(doclet);
-    doclet.children.forEach(function(child) {
-      //console.log('   doclet.child', child.longname+ "("+child.kind+")");
-    });
 
     doclet.jsDocUrl = helper.createLink(doclet);
     if (doclet.meta) {
       var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
-      doclet.sourceUrl = sourceHtml+"#"+doclet.meta.lineno;
+      doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
       sourceFiles[sourceHtml] = {
         path: getPathFromDoclet(doclet),
         toc: toc
@@ -158,16 +159,17 @@ exports.publish = function(data, opts) {
   });
   //console.log('sourceFiles', sourceFiles);
 
-  // index page displays information from package.json and lists files
+  copyStaticFiles();                //copy static files e.g., css, js
+  generateSourceFiles(sourceFiles); //generate source file as html
+
+  // generate jsDoc html files
   var classes  = helper.find(data, {kind: 'class'});
   classes.forEach(function(doclet) {
-    var outputDir = path.join(outdir, doclet.ngdoc);
-    fs.mkPath(outputDir);
-    var outputPath = path.join(outputDir, doclet.name+".html");
+    var jsDocPath = doclet.jsDocUrl.replace(/#.*$/,'');
+    var outputPath = path.join(outdir, jsDocPath);
+    //console.log('outputPath', outputPath);
     generate(outputPath, doclet);
   });
 
-  copyStaticFiles(); //copy static files
-  generateSourceFiles(sourceFiles);
   
 };

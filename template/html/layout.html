@@ -1,29 +1,107 @@
-<!--
-<div ng-include="'header.html'"></div>
-<div id="level2">
-  <div id="1" ng-if="::foo">YES</div>
-  <div id="2" ng-if="::bar">NO</div>
-  <div id="3" ng-class="::{foo:c-foo, bar:c-bar}"></div>
-  <div id="4">{{::fuz}}</div>
-  <div ng-repeat="el in ::collection" id="id{{::el}}">{{::el}}</div>
-</div>
-<div ng-include="'footer.html'"></div>
--->
-<h3> {{::name}} {{::ngdoc}} </h3>
-<a href="">source</a>
+<!doctype html>
+<html>
+  <head>
+    <base href="./" />
+  </head>
+  <body>
+    <div class="head">
+      <h1 class="title">
+        <%= longname %>
+        <sub><a class="source-link" href="<%= sourceUrl %>">source</a></sub>
+      </h1>
+      <span class="type">Angular Type: <%= ngdoc %></span>
+      <span class="desc">
+        <%= typeof description == 'undefined' ? '': description %>
+      </span>
+    </div>
+    <div class="requires">
+    <% if (typeof requires !== 'undefined') { %>
+      <h3>Dependencies</h3>
+      <ul class="dependencies">
+        <% requires.forEach(function(el) { %>
+          <li><%= el.module %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+    </div>
+    <div class="properties">
+    <% if (typeof properties !== 'undefined') { %>
+      <h3>Properties</h3>
+      <ul class="properties">
+        <% properties.forEach(function(el) { %>
+          <li> <b><%= el.name %></b> <%= el.description %> </li>
+        <% }); %>
+      </ul>
+    <% } %>
+    </div>
+    <div class="examples">
+    <% if (typeof examples !== 'undefined' && examples.length) { %>
+      <h3>Examples</h3>
+      <ul class="examples">
+        <% examples.forEach(function(el) { %>
+          <li> 
+            <b><%= el.caption %></b> 
+            <pre><%= el.code %></pre>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+    </div>
 
-<h4>Dependencies</h4>
-<ul>
-  <li ng-repeat="service in ::requires">{{::service.module}}</li>
-</ul>
+    <div class="member">
+    <% if (children.member) { %>
+      <ul>
+        <h3>Members</h3>
+        TODO: show members of this class here
+      </ul>
+    <% } %>
+    </div>
+    <div class="functions">
+    <% if (children.function) { %>
+        <h3>Functions</h3>
+        <ul>
+          <% children.function.forEach(function(func) { %>
+            <li>
+              <b class="name">Name: <%= func.name %></b>
+              <% if (func.params) { %>
+                <ul>
+                  <% func.params.forEach(function(param) { %>
+                    <li>
+                    <b><%= param.name %></b>
+                    <%= param.type && param.type.names[0] %>
+                    <%= param.description %>
+                    </li>
+                  <% }); %>
+                </ul>
+              <% } %>
+              <% if (func.returns) { %>
+                <ul>
+                  <% func.returns.forEach(function(ret) { %>
+                    <li>
+                      <b><%= ret.name %></b> <%= ret.type.names[0] %> <%= ret.description %>
+                    </li>
+                  <% }); %>
+                </ul>
+              <% } %>
+              <% if (func.examples) { %>
+                <ul>
+                  <% func.examples.forEach(function(example) { %>
+                    <li>
+                      <b><%= example.caption %></b>
+                      <pre><%= example.code %></pre>
+                    </li>
+                  <% }); %>
+                </ul>
+              <% } %>
+            </li>
+            <% }); %>
+        </ul>
+    <% } %>
+    </div>
 
-<h4>Properties</h4>
-<ul>
-  <li ng-repeat="prop in ::properties">
-    <b>{{::prop.name}}</b> {{prop.description}}
-  </li>
-</ul>
-
-<!--
-{{::prettyJson}}
--->
+    <pre>
+    <%= prettyJson %>
+    </pre>
+  </body>
+</html>
+  
