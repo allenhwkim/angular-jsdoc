@@ -11,11 +11,11 @@
       </h1>
       <span class="type">Angular Type: <%= ngdoc %></span>
       <span class="desc">
-        <%= typeof description == 'undefined' ? '': description %>
+        <%= description %>
       </span>
     </div>
     <div class="requires">
-    <% if (typeof requires !== 'undefined') { %>
+    <% if (requires) { %>
       <h3>Dependencies</h3>
       <ul class="dependencies">
         <% requires.forEach(function(el) { %>
@@ -25,7 +25,7 @@
     <% } %>
     </div>
     <div class="properties">
-    <% if (typeof properties !== 'undefined') { %>
+    <% if (properties) { %>
       <h3>Properties</h3>
       <ul class="properties">
         <% properties.forEach(function(el) { %>
@@ -39,8 +39,8 @@
       <h3>Examples</h3>
       <ul class="examples">
         <% examples.forEach(function(el) { %>
-          <li> 
-            <b><%= el.caption %></b> 
+          <li>
+            <b><%= el.caption %></b>
             <pre><%= el.code %></pre>
           </li>
         <% }); %>

@@ -17,11 +17,19 @@ var setWhiteSpaces = function(str, set) {
       .replace(/::BN::/g, "\n")
       .replace(/::BT::/g, "\t");
   }
-}
+};
+
+var addUndefinedCheck = function(str) {
+  return str.replace(
+       /<%\s*if\s*\(\s*([a-z_]+)\s*\)/gi, "<% if (typeof $1 !== 'undefined')")
+    .replace(
+       /<%=\s*([a-z_]+)\s*%>/gi, "<%= typeof $1 == 'undefined' ? '' : $1 %>");
+};
 
 var templateFunc = function(str) {
   str = getLineNoAdded(str);
   str = setWhiteSpaces(str, true);
+  str = addUndefinedCheck(str);
 
   var func = templateCache[str];
   if (!func) {
