@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <base href="../" />
+    <title>JSDoc: <%= ngdoc %>: <%= longname %></title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
+    <script src="js/prettify.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: <%= path.replace(/^.*\//,'') %></h1>
+      <article>
+        <pre class="prettyprint source linenums"><code><%= code %></code></pre>
+      </article>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Index</a><h2>
+      <% for (var moduleName in nav) { var module = nav[moduleName]; %>
+        <h3>module: <%= moduleName %></h3>
+        <ul>
+          <% for (var groupName in module) { var group = module[groupName]; %>
+            <h3><%= groupName %></h3>
+            <ul>
+              <% for (var className in group) { var klass = group[className]; %>
+                <li><a href="<%= klass.jsDocUrl %>"><%= className %></a></li>
+              <% } %>
+            </ul>
+          <% } %>
+        </ul>
+      <% } %>
+    </nav>
+
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
+      var line = document.querySelector("ol li:nth-child("+(lineNo||1)+")");
+      line && line.scrollIntoView();
+    </script>
+  </body>
+</html>

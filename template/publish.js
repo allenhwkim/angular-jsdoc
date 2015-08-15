@@ -13,15 +13,14 @@ var helper = require('jsdoc/util/templateHelper');
 //helper.getUniqueFilename(str)
 //helper.htmlsafe(str)
 //helper.getAncestors(data, doclet)
-//helper.prune(data)
+//helper.prune(data) //remove members that won't be in documentation
 //helper.resolveAuthorLinks;
 //helper.scopeToPunc;
 
 var templatePath;
 var outdir = env.opts.destination;
-var conf   = env.conf.templates || {};
+var conf   = env.conf.templates || {}; //jshint ignore:line
 var toc    = {}; //table of contents
-console.log('env.opts:', env.opts, 'conf:', conf);
 
 var getDocletExamples = function(doclet) {
   var examples = (doclet.examples||[]).map(function(example) {
@@ -41,7 +40,7 @@ var getDocletExamples = function(doclet) {
 };
 
 var getPathFromDoclet = function(doclet) {
-  if (!doclet.meta) { 
+  if (!doclet.meta) {
     return null;
   } else if (doclet.meta.path && doclet.meta.path !== 'null') {
     return path.join(doclet.meta.path, doclet.meta.filename);
@@ -79,7 +78,7 @@ var getChildren = function(data, doclet) {
 };
 
 var hashToLink = function(doclet, hash) {
-  if ( !/^(#.+)/.test(hash) ) { 
+  if ( !/^(#.+)/.test(hash) ) {
     return hash;
   } else {
     var url = helper.createLink(doclet);
@@ -91,15 +90,15 @@ var hashToLink = function(doclet, hash) {
 var generate = function(filepath, data) {
   data.prettyJson = JSON.stringify(data,null,'  ');
 
-  var layoutPath = path.join(templatePath, 'html', 'layout.html');
+  var layoutPath = path.join(templatePath, 'html', 'classes.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   var html = jsTemplate(layoutHtml, data);
   fs.writeFileSync(filepath, html, 'utf8');
 };
 
-var generateSourceFiles = function(sourceFiles) {
+var generateSourceFiles = function(sourceFiles, nav) {
   fs.mkPath(path.join(outdir, "source"));
-  var layoutPath = path.join(templatePath, 'html', 'source.html');
+  var layoutPath = path.join(templatePath, 'html', 'sources.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   for(var jsDoc in sourceFiles) {
     var source = sourceFiles[jsDoc];
@@ -111,7 +110,7 @@ var generateSourceFiles = function(sourceFiles) {
     var data = {
       path: source.path,
       code: sourceCode,
-      toc: toc,
+      nav: nav,
       lineNumbers: lineNumbers
     };
     var outputPath = path.join(outdir, "source", jsDoc);
@@ -125,14 +124,13 @@ var generateSourceFiles = function(sourceFiles) {
   @param {object} opts
  */
 exports.publish = function(data, opts) {
-  //data = helper.prune(data); //remove members that won't be in documentation
+  //console.log('options', opts);
   data.sort('longname, version, since');
 
   templatePath = opts.template;
   var sourceFiles = {};
 
   data().each(function(doclet) {
-    //console.log('doclet.longname', doclet.longname + "("+doclet.kind+")");
     doclet.children = getChildren(data, doclet);
     doclet.examples = getDocletExamples(doclet);
 
@@ -145,27 +143,41 @@ exports.publish = function(data, opts) {
         toc: toc
       };
     }
-    //console.log(" .....  ", doclet.longname, doclet.sourceUrl);
 
     if (doclet.see) {
       doclet.see.forEach(function(seeItem, i) {
         doclet.see[i] = hashToLink(doclet, seeItem);
       });
     }
-
   });
-  //console.log('sourceFiles', sourceFiles);
 
-  copyStaticFiles();                //copy static files e.g., css, js
-  generateSourceFiles(sourceFiles); //generate source file as html
-
-  // generate jsDoc html files
   var classes  = helper.find(data, {kind: 'class'});
+
+  // build navigation
+  var nav = {};
+  classes.forEach(function(doclet) {
+    var module = doclet.memberof || 'undefined';
+    var group = doclet.ngdoc || 'undefined';
+    nav[module] = nav[module] || {};
+    nav[module][group] = nav[module][group] || {};
+    nav[module][group][doclet.longname] = {jsDocUrl: doclet.jsDocUrl};
+  });
+
+  // generate source html files
+  copyStaticFiles();                     //copy static files e.g., css, js
+  generateSourceFiles(sourceFiles, nav); //generate source file as html
+
+  // generate jsdoc html files
   classes.forEach(function(doclet) {
     var jsDocPath = doclet.jsDocUrl.replace(/#.*$/,'');
     var outputPath = path.join(outdir, jsDocPath);
-    //console.log('outputPath', outputPath);
+    doclet.nav = nav;
     generate(outputPath, doclet);
   });
 
+  // generate index.html
+  var layoutPath = path.join(templatePath, 'html', 'index.html');
+  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
+  var html = jsTemplate(layoutHtml, {nav: nav, readme: opts.readme});
+  fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
 };
