@@ -1,16 +1,22 @@
 <html>
   <head>
     <base href="../" />
-    <link href="css/prettify.css" type="text/css" rel="stylesheet" />
+    <title>JSDoc: <%= ngdoc %>: <%= longname %></title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
     <script src="js/prettify.js"></script>
   </head>
-  <body onload="prettyPrint()">
-    <div>Path: <%= path %></div>
-    <div>TOC: <%= toc %></div>
-    <div>Total Number Of Lines: <%= lineNumbers.length %></div>
-    <pre style="display:inline-block;text-align:right"><% lineNumbers.forEach(function(no) { %>
-      <a id="line<%= no %>"><%= no %></a>
-    <% }); %></pre>
-    <pre class="prettyprint" style="display:inline-block"><%= code %></pre>
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: <%= path.replace(/^.*\//,'') %></h1>
+      <article>
+        <pre class="prettyprint source linenums"><code><%= code %></code></pre>
+      </article>
+    </div>
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
+      document.querySelector("ol li:nth-child("+(lineNo||1)+")").scrollIntoView();
+    </script>
   </body>
 </html>

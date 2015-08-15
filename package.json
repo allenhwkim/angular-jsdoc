@@ -12,10 +12,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "js-template": "^0.1.1",
     "jsdoc": "~3.3.0-alpha11"
   },
   "devDependencies": {
-    "angular-template": "^0.3.0",
     "gulp": "~3.8.5",
     "gulp-bump": "~0.1.10",
     "gulp-shell": "~0.2.7",

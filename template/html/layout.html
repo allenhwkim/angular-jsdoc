@@ -2,106 +2,158 @@
 <html>
   <head>
     <base href="./" />
+    <title>JSDoc: <%= ngdoc %>: <%= longname %></title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
+    <script src="js/prettify.js"></script>
   </head>
-  <body>
-    <div class="head">
-      <h1 class="title">
-        <%= longname %>
-        <sub><a class="source-link" href="<%= sourceUrl %>">source</a></sub>
-      </h1>
-      <span class="type">Angular Type: <%= ngdoc %></span>
-      <span class="desc">
-        <%= description %>
-      </span>
-    </div>
-    <div class="requires">
-    <% if (requires) { %>
-      <h3>Dependencies</h3>
-      <ul class="dependencies">
-        <% requires.forEach(function(el) { %>
-          <li><%= el.module %></li>
-        <% }); %>
-      </ul>
-    <% } %>
-    </div>
-    <div class="properties">
-    <% if (properties) { %>
-      <h3>Properties</h3>
-      <ul class="properties">
-        <% properties.forEach(function(el) { %>
-          <li> <b><%= el.name %></b> <%= el.description %> </li>
-        <% }); %>
-      </ul>
-    <% } %>
-    </div>
-    <div class="examples">
-    <% if (typeof examples !== 'undefined' && examples.length) { %>
-      <h3>Examples</h3>
-      <ul class="examples">
-        <% examples.forEach(function(el) { %>
-          <li>
-            <b><%= el.caption %></b>
-            <pre><%= el.code %></pre>
-          </li>
-        <% }); %>
-      </ul>
-    <% } %>
-    </div>
-
-    <div class="member">
-    <% if (children.member) { %>
-      <ul>
-        <h3>Members</h3>
-        TODO: show members of this class here
-      </ul>
-    <% } %>
-    </div>
-    <div class="functions">
-    <% if (children.function) { %>
-        <h3>Functions</h3>
-        <ul>
-          <% children.function.forEach(function(func) { %>
-            <li>
-              <b class="name">Name: <%= func.name %></b>
-              <% if (func.params) { %>
-                <ul>
-                  <% func.params.forEach(function(param) { %>
-                    <li>
-                    <b><%= param.name %></b>
-                    <%= param.type && param.type.names[0] %>
-                    <%= param.description %>
-                    </li>
-                  <% }); %>
-                </ul>
-              <% } %>
-              <% if (func.returns) { %>
-                <ul>
-                  <% func.returns.forEach(function(ret) { %>
-                    <li>
-                      <b><%= ret.name %></b> <%= ret.type.names[0] %> <%= ret.description %>
-                    </li>
-                  <% }); %>
-                </ul>
-              <% } %>
-              <% if (func.examples) { %>
-                <ul>
-                  <% func.examples.forEach(function(example) { %>
-                    <li>
-                      <b><%= example.caption %></b>
-                      <pre><%= example.code %></pre>
-                    </li>
-                  <% }); %>
-                </ul>
-              <% } %>
-            </li>
+  <body onload="prettyPrint()">
+    <h1 class="title">
+      <%= ngdoc %>: <%= longname %>
+      <a class="name-link signature-attributes" href="<%= sourceUrl %>">source</a>
+    </h1>
+    <div class="container-overview">
+      <dt></dt>
+      <dd>
+        <div class="description">
+          <%= description %>
+        </div>
+        <div class="details"></div>
+        <% if (params) { %>
+          <h5>Attributes:</h5>
+          <table class="params" width="50%">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+            </thead>
+            <tbody>
+            <% params.forEach(function(param) { %>
+              <tr>
+                <td class="name" nowrap><code><%= param.name %></code></td>
+                <td class="type"><span class="param-type">
+                  <%= param.type && param.type.names[0] %>
+                </span></td>
+                <td class="description last"><%= param.description %></td>
+              </tr>
             <% }); %>
-        </ul>
-    <% } %>
+            </tbody>
+          </table>
+        <% } %>
+        <% if (properties) { %>
+          <h5>Properties:</h5>
+          <table class="props" width="50%">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+            </thead>
+            <tbody>
+            <% properties.forEach(function(prop) { %>
+              <tr>
+                <td class="name" nowrap><code><%= prop.name %></code></td>
+                <td class="type"><span class="param-type">
+                  <%= prop.type && prop.type.names[0] %>
+                </span></td>
+                <td class="description last"><%= prop.description %></td>
+              </tr>
+            <% }); %>
+            </tbody>
+          </table>
+        <% } %>
+        <% if (requires) { %>
+          <h5>Dependencies</h5>
+          <ul>
+            <% requires.forEach(function(el) { %>
+              <li><%= el %> Service</li>
+            <% }); %>
+          </ul>
+        <% } %>
+        <% if (typeof examples !== 'undefined' && examples.length) { %>
+          <h5>Example</h5>
+          <% examples.forEach(function(example) { %>
+            <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
+          <% }); %>
+        <% } %>
+      </dd>
     </div>
 
-    <pre>
-    <%= prettyJson %>
-    </pre>
+    <section>
+      <% if (children.member) { %>
+        <h3 class="subsection-title">Members</h3>
+        <dl>
+        <% children.member.forEach(function(member) { %>
+          <dt>
+            <a href="<%= sourceUrl %>" class="name-link">
+              <h4 class="name"><%= member.name %></h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description"><%= member.description %></div>
+          </dd>
+        <% }); %>
+        </dl>
+      <% } %>
+      </div>
+      <div class="functions">
+      <% if (children.function) { %>
+        <h3 class="subsection-title">Methods</h3>
+        <dl>
+        <% children.function.forEach(function(func) { %>
+          <dt>
+            <a href="<%= sourceUrl %>" class="name-link">
+              <h4 class="name">
+                <%= func.name %><span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
+              </h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description">
+              <%= func.description %>
+            </div>
+            <% if (func.examples) { %>
+              <h5>Example</h5>
+              <% func.examples.forEach(function(example) { %>
+                <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
+              <% }); %>
+            <% } %>
+            <% if (func.params) { %>
+              <h5>Parameters:</h5>
+              <table class="params" width="50%">
+                <thead>
+                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                <% func.params.forEach(function(param) { %>
+                  <tr>
+                    <td class="name"><code><%= param.name %></code></td>
+                    <td class="type"><span class="param-type">
+                      <%= param.type && param.type.names[0] %>
+                    </span></td>
+                    <td class="description last"><%= param.description %></td>
+                  </tr>
+                <% }); %>
+                </tbody>
+              </table>
+            <% } %>
+            <% if (func.returns) { %>
+              <% var ret = func.returns[0];%>
+              <h5>Returns:</h5>
+              <div class="param-desc"><%= ret.description %></div>
+              <dl>
+                <dt>Type</dt>
+                <dd><span class="param-type"><%= ret.type.names[0] %></span></dd>
+              </dl>
+            <% } %>
+          </dd>
+        <% }); %>
+        </dl>
+      <% } %>
+      </div>
+    </section>
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+      using 
+      <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a> 
+    </footer>
+
+    <!--%= prettyJson %-->
   </body>
 </html>
-  

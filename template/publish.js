@@ -2,11 +2,8 @@
 'use strict';
 
 var fs = require('jsdoc/fs');
-var logger = require('jsdoc/util/logger');
 var path = require('jsdoc/path');
-var taffy = require('taffydb').taffy;
-var util = require('util');
-var microTemplate = require(__dirname+"/micro-template.js");
+var jsTemplate = require('js-template');
 
 var helper = require('jsdoc/util/templateHelper');
 //helper.toTutorial(tutorial, null, options)
@@ -16,7 +13,7 @@ var helper = require('jsdoc/util/templateHelper');
 //helper.getUniqueFilename(str)
 //helper.htmlsafe(str)
 //helper.getAncestors(data, doclet)
-//helper.prune(data) 
+//helper.prune(data)
 //helper.resolveAuthorLinks;
 //helper.scopeToPunc;
 
@@ -24,7 +21,7 @@ var templatePath;
 var outdir = env.opts.destination;
 var conf   = env.conf.templates || {};
 var toc    = {}; //table of contents
-//console.log('env.opts', env.opts);
+console.log('env.opts:', env.opts, 'conf:', conf);
 
 var getDocletExamples = function(doclet) {
   var examples = (doclet.examples||[]).map(function(example) {
@@ -51,7 +48,7 @@ var getPathFromDoclet = function(doclet) {
   } else {
     return doclet.meta.filename;
   }
-}
+};
 
 // copy the template's static files to outdir
 var copyStaticFiles = function() {
@@ -70,7 +67,7 @@ var copyStaticFiles = function() {
 // get children doclets that has member of current doclet longname
 var getChildren = function(data, doclet) {
   var members  = helper.find(data, {memberof: doclet.longname});
-  if (members.length == 0 && doclet.kind == 'class') {
+  if (members.length === 0 && doclet.kind === 'class') {
     members  = helper.find(data, {memberof: doclet.name});
   }
   var children = {};
@@ -79,7 +76,7 @@ var getChildren = function(data, doclet) {
     children[doclet.kind].push(doclet);
   });
   return children;
-}
+};
 
 var hashToLink = function(doclet, hash) {
   if ( !/^(#.+)/.test(hash) ) { 
@@ -89,16 +86,16 @@ var hashToLink = function(doclet, hash) {
     url = url.replace(/(#.+|$)/, hash);
     return '<a href="' + url + '">' + hash + '</a>';
   }
-}
+};
 
 var generate = function(filepath, data) {
   data.prettyJson = JSON.stringify(data,null,'  ');
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var html = microTemplate(layoutHtml, data);
+  var html = jsTemplate(layoutHtml, data);
   fs.writeFileSync(filepath, html, 'utf8');
-}
+};
 
 var generateSourceFiles = function(sourceFiles) {
   fs.mkPath(path.join(outdir, "source"));
@@ -110,25 +107,25 @@ var generateSourceFiles = function(sourceFiles) {
     sourceCode = sourceCode.replace(/</g,"&lt;");
     var lineNumbers = sourceCode.split("\n").map(function(el,i) {
       return i+1;
-    });
+    }); //jshint ignore:line
     var data = {
       path: source.path,
-      code: sourceCode, 
-      toc: toc, 
+      code: sourceCode,
+      toc: toc,
       lineNumbers: lineNumbers
     };
     var outputPath = path.join(outdir, "source", jsDoc);
-    var html = microTemplate(layoutHtml, data);
+    var html = jsTemplate(layoutHtml, data);
     fs.writeFileSync(outputPath, html, 'utf8');
   }
-}
+};
 
 /**
   @param {TAFFY} taffyData See <http://taffydb.com/>.
   @param {object} opts
  */
 exports.publish = function(data, opts) {
-  data = helper.prune(data); //remove members that won't be in documentation
+  //data = helper.prune(data); //remove members that won't be in documentation
   data.sort('longname, version, since');
 
   templatePath = opts.template;
@@ -146,7 +143,7 @@ exports.publish = function(data, opts) {
       sourceFiles[sourceHtml] = {
         path: getPathFromDoclet(doclet),
         toc: toc
-      }
+      };
     }
     //console.log(" .....  ", doclet.longname, doclet.sourceUrl);
 
@@ -171,5 +168,4 @@ exports.publish = function(data, opts) {
     generate(outputPath, doclet);
   });
 
-  
 };
