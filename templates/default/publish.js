@@ -88,9 +88,10 @@ var hashToLink = function(doclet, hash) {
 };
 
 var generate = function(filepath, data) {
+  data.title = data.ngdoc + ":" + data.longname;
   data.prettyJson = JSON.stringify(data,null,'  ');
 
-  var layoutPath = path.join(templatePath, 'html', 'classes.html');
+  var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   var html = jsTemplate(layoutHtml, data);
   fs.writeFileSync(filepath, html, 'utf8');
@@ -98,7 +99,7 @@ var generate = function(filepath, data) {
 
 var generateSourceFiles = function(sourceFiles, nav) {
   fs.mkPath(path.join(outdir, "source"));
-  var layoutPath = path.join(templatePath, 'html', 'sources.html');
+  var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   for(var jsDoc in sourceFiles) {
     var source = sourceFiles[jsDoc];
@@ -111,7 +112,7 @@ var generateSourceFiles = function(sourceFiles, nav) {
       path: source.path,
       code: sourceCode,
       nav: nav,
-      lineNumbers: lineNumbers
+      title: "Source:"+source.path.replace(/^.*\//,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
     var html = jsTemplate(layoutHtml, data);
@@ -176,8 +177,8 @@ exports.publish = function(data, opts) {
   });
 
   // generate index.html
-  var layoutPath = path.join(templatePath, 'html', 'index.html');
+  var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var html = jsTemplate(layoutHtml, {nav: nav, readme: opts.readme});
+  var html = jsTemplate(layoutHtml, {nav: nav, readme: opts.readme, title: "Index"});
   fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
 };

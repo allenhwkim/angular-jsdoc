@@ -10,4 +10,15 @@ exports.defineTags = function(dictionary) {
       doclet.ngdoc = tag.value;
     }
   });
+
+  dictionary.defineTag('attribute', {
+    mustHaveValue: true,
+    canHaveType: true,
+    canHaveName: true,
+    onTagged: function(doclet, tag) {
+      if (!doclet.attributes) { doclet.attributes = []; }
+      doclet.attributes.push(tag.value);
+    }
+  })
+  .synonym('attr');
 };
