@@ -1,7 +1,7 @@
 {
   "plugins": [
     "node_modules/jsdoc/plugins/markdown",
-    "node_modules/angular-jsdoc/common/plugins/ngdoc"
+    "common/plugins/ngdoc"
   ],
   "templates": {
     "cleverLinks": true,
