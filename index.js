@@ -29,6 +29,8 @@ var angularJsdoc = function(dirs, optionsArg) {
   optionsArg = optionsArg || {};
   dirs = Array.isArray(dirs) ? dirs : dirs.split(" ");
   //default values
+  var command = 
+    optionsArg.command || path.join("node_modules", "jsdoc", "jsdoc.js");
   var options = extend({
       configure: path.join(__dirname, "common", "conf.json"),
       template: path.join(__dirname, "default"),
@@ -40,7 +42,6 @@ var angularJsdoc = function(dirs, optionsArg) {
     options.template = path.join(__dirname, optionsArg.template);
   };
 
-  var cmd = path.join(__dirname, "node_modules", "jsdoc", "jsdoc.js");
   var args = [
     '--configure', options.configure,
     '--template', options.template,
@@ -48,7 +49,7 @@ var angularJsdoc = function(dirs, optionsArg) {
     '--readme', options.readme
   ];
   args = args.concat(['--recurse']).concat(dirs);
-  runCommand(cmd, args).then(function(output) {
+  runCommand(command, args).then(function(output) {
     console.log('DONE', output);
   });
 };

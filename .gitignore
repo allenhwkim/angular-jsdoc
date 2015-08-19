@@ -1,6 +1,5 @@
 *.swp
 nohup.out
-/node_modules/gulp*
-/node_modules/.*
+node_modules
 /tmp/
 /out
