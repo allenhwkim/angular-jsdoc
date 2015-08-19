@@ -1,6 +1,6 @@
 {
   "name": "angular-jsdoc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JsDoc Plugin and Template for AngularJs",
   "main": "index.js",
   "repository": {
@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "js-template": "~0.1.3",
-    "jsdoc": "^3.3.2",
+    "jsdoc": "3.3.2",
     "q": "^1.4.1"
   },
   "devDependencies": {
@@ -26,11 +26,5 @@
     "gulp-shell": "~0.2.7",
     "gulp-tap": "~0.1.1",
     "gulp-util": "~2.2.19"
-  },
-  "readme": "Angular-JSDoc\n=============\nAngularJS Template for JSDoc 3.  \nA simple collection of JSDoc plugin and template for AngularJS, nothing else!  \n\nFeatures\n----------\n  * Right side table of contents for navigation by Directives, Services, Controllers, etc\n  * Read and process @ngdoc tag\n\nHow Does It Look Like\n---------------------\n  * [angularjs-goolge-maps Documentation](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)\n\nInstall\n-------\n    $ npm install jsdoc angular-jsdoc --save-dev\n  \nRun\n---\nRun jsdoc command to generate your documentation. \nAll command line options are the options of [jsdoc](http://usejsdoc.org/about-commandline.html)  \n    \n    $ path/to/jsdoc -c path to conf> -t <template> <your source code>\n\nIn example,  \n\n    `$ node_modules/jsdoc/jsdoc.js -c node_modules/angular-jsdoc/conf -t node_modules/angular-jsdoc/template -r myDir`\n\nRun with gulp-jsdoc\n-------------------\n\n1. install gulp-jsdoc  \n    `$ npm install gulp-shell --save-dev`\n\n2. add the following to the gulpfile.json  \n   ```\n   var shell = require('gulp-shell'); \n   gulp.task('docs', shell.task([ \n     'node_modules/jsdoc/jsdoc.js '+ \n       '-c node_modules/angular-jsdoc/conf.json '+   // config file\n       '-t node_modules/angular-jsdoc/template '+    // template file\n       '-d build/docs '+                             // output directory\n       '-r app/scripts'                              // source code directory\n   ])); \n   ```\n3. run gulp task  \n    `$ gulp docs`\n",
-  "readmeFilename": "README.md",
-  "gitHead": "3c0825da12a70ca5f6bc8c4fa0629d3580847780",
-  "_id": "angular-jsdoc@0.1.1",
-  "_shasum": "5392e150a2db3daf6aa8bbc99caaa07fa076c7ff",
-  "_from": "angular-jsdoc@0.1.1"
+  }
 }
