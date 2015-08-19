@@ -58,11 +58,11 @@ Specification
 Example
 --------
 
-   - Directive: [map.js](sample-codes/ngmap/map.js)
+   - Directive: [map.js](sample-codes/ngmap/map.js) | 
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.map.html)
-   - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js)
+   - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js) | 
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.Attr2Options.html)
-   - Controller: [map-controller.js]((sample-codes/ngmap/map-controller.js)
+   - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) | 
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.MapController.html)
 
 Customization
