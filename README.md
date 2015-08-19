@@ -43,12 +43,12 @@ Quick Start
 ### With Command Line
 
     // or you can run in command line
-    $ node_modules/jsdoc/jsdoc.js \
-      --configure node_modules/angular-jsdoc/common/conf.json \
-      --template node_modules/angular-jsdoc/default \
-      --destination docs \
-      --readme README.md \
-      --recurse sample-codes
+    node_modules/jsdoc/jsdoc.js \
+     --configure node_modules/angular-jsdoc/common/conf.json \
+     --template node_modules/angular-jsdoc/default \
+     --destination build/docs \
+     --readme README.md \
+     --recurse directives services
 
 Specification
 --------------
