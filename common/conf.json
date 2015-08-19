@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "node_modules/jsdoc/plugins/markdown",
+    "common/plugins/ngdoc"
+  ],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  }
+}
