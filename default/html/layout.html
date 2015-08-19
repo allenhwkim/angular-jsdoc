@@ -8,13 +8,6 @@
     <script src="js/prettify.js"></script>
   </head>
   <body>
-    <h1 class="title">
-      <%= title %>
-      <% if (data.longname) { %>
-        <a class="name-link signature-attributes" href="<%= sourceUrl %>">source</a>
-      <% } %>
-    </h1>
-
     <nav>
       <h2><a href="index.html">Index</a></h2>
       <% for (var moduleName in nav) { var module = nav[moduleName]; %>
@@ -33,6 +26,13 @@
         </ul>
       <% } %>
     </nav>
+
+    <h1 class="title">
+      <%= title %>
+      <% if (data.longname) { %>
+        <a class="name-link signature-attributes" href="<%= sourceUrl %>">source</a>
+      <% } %>
+    </h1>
 
     <div id="main">
     <% if (data.code) { %>
