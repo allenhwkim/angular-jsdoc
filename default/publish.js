@@ -179,14 +179,16 @@ exports.publish = function(data, opts) {
   });
 
   // generate index.html
-  var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var data = {
-    nav: nav, 
-    readme: opts.readme, 
-    basePath: __dirname,
-    title: "Index"
-  };
-  var html = jsTemplate(layoutHtml, data);
-  fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
+  if (opts.readme) {
+    var layoutPath = path.join(templatePath, 'html', 'layout.html');
+    var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
+    var data = {
+      nav: nav, 
+      readme: opts.readme, 
+      basePath: __dirname,
+      title: "Index"
+    };
+    var html = jsTemplate(layoutHtml, data);
+    fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
+  }
 };

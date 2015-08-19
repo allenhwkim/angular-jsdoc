@@ -26,12 +26,14 @@ var runCommand = function(cmd, args) {
  * main function
  */
 var angularJsdoc = function(dirs, optionsArg) {
+  optionsArg = optionsArg || {};
   dirs = Array.isArray(dirs) ? dirs : dirs.split(" ");
   //default values
   var options = extend({
       configure: path.join(__dirname, "common", "conf.json"),
       template: path.join(__dirname, "default"),
-      destination: "docs"
+      destination: "docs",
+      readme: 'README.md'
     }, optionsArg); 
   // if given template a single word including dash
   if (optionsArg.template && optionsArg.template.match(/^[\w-]+$/i)) {
@@ -43,7 +45,7 @@ var angularJsdoc = function(dirs, optionsArg) {
     '--configure', options.configure,
     '--template', options.template,
     '--destination', options.destination,
-    (options.readme||'')
+    '--readme', options.readme
   ];
   args = args.concat(['--recurse']).concat(dirs);
   runCommand(cmd, args).then(function(output) {
@@ -52,10 +54,4 @@ var angularJsdoc = function(dirs, optionsArg) {
 };
 
 module.exports = angularJsdoc;
-
-angularJsdoc('sample-codes', {
-  template: 'default',
-  destination: 'default/docs',
-  readme: "sample-codes/README.md"
-});
 

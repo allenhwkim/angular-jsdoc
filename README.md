@@ -22,33 +22,70 @@ Install
 
     $ npm install jsdoc angular-jsdoc --save-dev
 
-Usage
---------
+Quick Start
+-----------
 
     var angularJsdoc = require('angualr-jsdoc');
+    angularJsdoc(['my-source1', 'my-source2']); 
 
-    angularJsdoc(['../angularjs-google-maps/directives', '../angularjs-google-maps/services'], {
-      configure: ...
-      destination: ...
-      template: 'tomorrow-night', 
-      readme: "../angularjs-google-maps/README.md"
+
+    // or with options
+    angularJsdoc('sample-codes', {
+      template: 'default',
+      destination: 'default/docs',
+      readme: "sample-codes/README.md"
     });
+
+Specification
+--------------
+
+  angularJsdoc(sourceDirectory, options)
+
+  - sourceDirectory: list of source code directories. e.g. ['dir1', 'dir2']
+
+  - options:
+
+    - configure: The path to the configuration file.
+                 Default: angular-jsdoc/common/conf.json
+    - destination: The path to the output folder. 
+                 Default: ./docs
+    - template:  The path to the template to use
+                 Default: angular-jsdoc/default
+    - readme: The path to the project's README file.
+                 Default: 'README.md'
 
 Example
 --------
 
-   - Directive: sample-codes/ngmap/map.js [Output]()
-   - Service: sample-codes/ngmap/attr2-optins.js [Output]()
-   - Controller: sample-codes/ngmap/mpa-controller.js [Output]()
+   - Directive: sample-codes/ngmap/map.js 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/map.html)
+   - Service: sample-codes/ngmap/attr2-optins.js 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/Attr2Options.html)
+   - Controller: sample-codes/ngmap/mpa-controller.js 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/MapController.html)
+
+Customization
+-------------
+To make your own template, please copy the default directory to your own, then, make your own css, js, and html files. Then, run angularJsdoc with your own template. e.g., `angularJsDoc({template:'myown'})`
+
+If you want to share your template with others, please send a pull request after adding your template directory where `default` directory is.
+
+The following is the example of directory with explanation;
 
 
-default/
-├── css
-│   ├── jsdoc-default.css 
-│   └── prettify.css
-├── html
-│   ├── class.html
-│   └── layout.html
-├── js
-│   └── prettify.js
-└── publish.js
+    my-template
+      ├── css
+      │   └── my.css          # css used in layout.html
+      ├── js
+      │   └── my.js           # javascript used in layout.html
+      ├── fonts
+      │   └── my.woff         # font used in layout.html
+      ├── html
+      │   ├── class.html      # template used by layout.html
+      │   └── layout.html     # layout file
+      └── publish.js          # the main file that generate jsdoc
+
+
+Copyright
+--------
+  MIT licence

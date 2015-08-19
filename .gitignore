@@ -1,7 +1,5 @@
 *.swp
 nohup.out
-local_conf.json
-docs
 /node_modules/
 /tmp/
 /out
