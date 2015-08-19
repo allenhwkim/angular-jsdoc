@@ -62,6 +62,23 @@ Quick Start
         '-r directives services'                    // source code directory
     ])); 
 
+### Or, With Grunt
+
+    grunt.initConfig({
+      jsdoc : {
+        dist: {
+          src: ['directives', 'services'],
+          options: {
+            destination: 'build/docs',
+            configure: 'node_modules/angular-jsdoc/conf.json',
+            template: 'node_modules/angular-jsdoc/template',
+            readme: './README.md'
+          }
+        }
+      }
+    });
+
+
 Specification
 --------------
 
