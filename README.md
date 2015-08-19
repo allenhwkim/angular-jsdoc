@@ -58,12 +58,12 @@ Specification
 Example
 --------
 
-   - Directive: sample-codes/ngmap/map.js 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/map.html)
-   - Service: sample-codes/ngmap/attr2-optins.js 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/Attr2Options.html)
-   - Controller: sample-codes/ngmap/mpa-controller.js 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/MapController.html)
+   - Directive: [map.js](sample-codes/ngmap/map.js) | 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.map.html)
+   - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js) | 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.Attr2Options.html)
+   - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) | 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.MapController.html)
 
 Customization
 -------------
@@ -90,4 +90,3 @@ The following is the example of directory with explanation;
 Copyright
 --------
   MIT licence
->>>>>>> ngTemplate
