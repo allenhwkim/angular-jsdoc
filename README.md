@@ -37,6 +37,14 @@ Quick Start
       readme: "sample-codes/README.md"
     });
 
+    // or you can run in command line
+    $ node_modules/jsdoc/jsdoc.js \
+      --configure node_modules/common/test_conf.json \
+      --template node_modules/angular-jsdoc/default \
+      --destination docs \
+      --readme README.md \
+      --recurse sample-codes
+
 Specification
 --------------
 
