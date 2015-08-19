@@ -40,7 +40,7 @@ Quick Start
       readme: "sample-codes/README.md"
     });
 
-### With Command Line
+### Or, With Command Line
 
     // or you can run in command line
     node_modules/jsdoc/jsdoc.js \
