@@ -26,6 +26,9 @@ Install
 Quick Start
 -----------
 
+
+### With NodeJS
+
     var angularJsdoc = require('angualr-jsdoc');
     angularJsdoc(['my-source1', 'my-source2']); 
 
@@ -37,9 +40,11 @@ Quick Start
       readme: "sample-codes/README.md"
     });
 
+### With Command Line
+
     // or you can run in command line
     $ node_modules/jsdoc/jsdoc.js \
-      --configure node_modules/common/test_conf.json \
+      --configure node_modules/angular-jsdoc/common/conf.json \
       --template node_modules/angular-jsdoc/default \
       --destination docs \
       --readme README.md \
