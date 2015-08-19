@@ -30,12 +30,12 @@ var angularJsdoc = function(dirs, optionsArg) {
   //default values
   var options = extend({
       configure: path.join(__dirname, "common", "conf.json"),
-      template: path.join(__dirname, "templates", "default"),
+      template: path.join(__dirname, "default"),
       destination: "docs"
     }, optionsArg); 
   // if given template a single word including dash
   if (optionsArg.template && optionsArg.template.match(/^[\w-]+$/i)) {
-    options.template = path.join(__dirname, "templates", optionsArg.template);
+    options.template = path.join(__dirname, optionsArg.template);
   };
 
   var cmd = path.join(__dirname, "node_modules", "jsdoc", "jsdoc.js");
@@ -53,12 +53,9 @@ var angularJsdoc = function(dirs, optionsArg) {
 
 module.exports = angularJsdoc;
 
-angularJsdoc(['sample-codes'], {
-//  //template: 'default', 
+angularJsdoc('sample-codes', {
+  template: 'default',
+  destination: 'default/docs',
   readme: "sample-codes/README.md"
 });
 
-//angularJsdoc(['../angularjs-google-maps/directives', '../angularjs-google-maps/services'], {
-//  //template: 'default', 
-//  readme: "../angularjs-google-maps/README.md"
-//});

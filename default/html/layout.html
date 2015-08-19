@@ -18,7 +18,9 @@
     <nav>
       <h2><a href="index.html">Index</a><h2>
       <% for (var moduleName in nav) { var module = nav[moduleName]; %>
-        <h3>module: <%= moduleName %></h3>
+        <% if (moduleName != 'undefined') { %>
+          <h3>module: <%= moduleName %></h3>
+        <% } %>
         <ul>
           <% for (var groupName in module) { var group = module[groupName]; %>
             <h3><%= groupName %></h3>
@@ -44,7 +46,7 @@
         </article>
       </section>
     <% } else { %>
-      <%= include('templates/default/html/class.html', data) %>
+      <%= include(basePath+'/html/class.html', data) %>
     <% } %>
     </div>
 

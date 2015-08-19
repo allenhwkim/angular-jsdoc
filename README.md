@@ -34,14 +34,21 @@ Usage
       readme: "../angularjs-google-maps/README.md"
     });
 
-TODO
-------
+Example
+--------
 
-   - sample-codes/module1/directive.js
-   - sample-codes/module1/service.js
-   - sample-codes/module1/controller.js
-   - sample-codes/module2/directive.js
-   - sample-codes/module2/service.js
-   - sample-codes/module2/controller.js
-   - default/output
+   - Directive: sample-codes/ngmap/map.js [Output]()
+   - Service: sample-codes/ngmap/attr2-optins.js [Output]()
+   - Controller: sample-codes/ngmap/mpa-controller.js [Output]()
 
+
+default/
+├── css
+│   ├── jsdoc-default.css 
+│   └── prettify.css
+├── html
+│   ├── class.html
+│   └── layout.html
+├── js
+│   └── prettify.js
+└── publish.js

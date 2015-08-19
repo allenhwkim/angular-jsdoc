@@ -6,7 +6,7 @@
         </div>
         <div class="details"></div>
         <% if (params) { %>
-          <h5>Attributes:</h5>
+          <h5>Dependencies:</h5>
           <table class="params" width="50%">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
@@ -14,7 +14,7 @@
             <tbody>
             <% params.forEach(function(param) { %>
               <tr>
-                <td class="name" nowrap><code><%= param.name %></code></td>
+                <td class="name" nowrap><%= param.name %></td>
                 <td class="type"><span class="param-type">
                   <%= param.type && param.type.names[0] %>
                 </span></td>
@@ -33,7 +33,7 @@
             <tbody>
             <% properties.forEach(function(prop) { %>
               <tr>
-                <td class="name" nowrap><code><%= prop.name %></code></td>
+                <td class="name" nowrap><%= prop.name %></td>
                 <td class="type"><span class="param-type">
                   <%= prop.type && prop.type.names[0] %>
                 </span></td>
@@ -45,14 +45,14 @@
         <% } %>
         <% if (attributes) { %>
           <h5>Attributes:</h5>
-          <table class="attrs" width="50%">
+          <table class="params" width="50%">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
             <% attributes.forEach(function(attr) { %>
               <tr>
-                <td class="name" nowrap><code><%= attr.name %></code></td>
+                <td class="name" nowrap><%= attr.name %></td>
                 <td class="type"><span class="param-type">
                   <%= attr.type && attr.type.names[0] %>
                 </span></td>
@@ -106,6 +106,11 @@
             <a href="<%= sourceUrl %>" class="name-link">
               <h4 class="name">
                 <%= func.name %><span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
+                <% if (func.returns && func.returns[0].type) { %>
+                  <span class="type-signature">
+                    -&gt; <%= func.returns[0].type.names[0] %>
+                  </span>
+                <% } %>
               </h4>
             </a>
           </dt>
@@ -113,7 +118,7 @@
             <div class="description">
               <%= func.description %>
             </div>
-            <% if (func.examples) { %>
+            <% if (func.examples && func.examples.length) { %>
               <h5>Example</h5>
               <% func.examples.forEach(function(example) { %>
                 <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
@@ -128,7 +133,7 @@
                 <tbody>
                 <% func.params.forEach(function(param) { %>
                   <tr>
-                    <td class="name"><code><%= param.name %></code></td>
+                    <td class="name"><%= param.name %></td>
                     <td class="type"><span class="param-type">
                       <%= param.type && param.type.names[0] %>
                     </span></td>
@@ -142,10 +147,6 @@
               <% var ret = func.returns[0];%>
               <h5>Returns:</h5>
               <div class="param-desc"><%= ret.description %></div>
-              <dl>
-                <dt>Type</dt>
-                <dd><span class="param-type"><%= ret.type.names[0] %></span></dd>
-              </dl>
             <% } %>
           </dd>
         <% }); %>

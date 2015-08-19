@@ -51,7 +51,7 @@ var getPathFromDoclet = function(doclet) {
 
 // copy the template's static files to outdir
 var copyStaticFiles = function() {
-  ['css','js'].forEach(function(dirName) {
+  ['css', 'js', 'fonts'].forEach(function(dirName) {
     var fromDir = path.join(templatePath, dirName);
     var staticFiles = fs.ls(fromDir, 3);
 
@@ -90,6 +90,7 @@ var hashToLink = function(doclet, hash) {
 var generate = function(filepath, data) {
   data.title = data.ngdoc + ":" + data.longname;
   data.prettyJson = JSON.stringify(data,null,'  ');
+  data.basePath = __dirname;
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
@@ -112,6 +113,7 @@ var generateSourceFiles = function(sourceFiles, nav) {
       path: source.path,
       code: sourceCode,
       nav: nav,
+      basePath: __dirname,
       title: "Source:"+source.path.replace(/^.*\//,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
@@ -179,6 +181,12 @@ exports.publish = function(data, opts) {
   // generate index.html
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var html = jsTemplate(layoutHtml, {nav: nav, readme: opts.readme, title: "Index"});
+  var data = {
+    nav: nav, 
+    readme: opts.readme, 
+    basePath: __dirname,
+    title: "Index"
+  };
+  var html = jsTemplate(layoutHtml, data);
   fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
 };
