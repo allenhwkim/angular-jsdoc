@@ -46,6 +46,8 @@ Specification
 
   - options:
 
+    - command: jsdoc.js command
+                 Default: node_modules/jsdoc/jsdoc.js
     - configure: The path to the configuration file.
                  Default: angular-jsdoc/common/conf.json
     - destination: The path to the output folder. 
