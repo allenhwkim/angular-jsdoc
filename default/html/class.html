@@ -7,7 +7,7 @@
         <div class="details"></div>
         <% if (params) { %>
           <h5>Dependencies:</h5>
-          <table class="params" width="50%">
+          <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
@@ -26,7 +26,7 @@
         <% } %>
         <% if (properties) { %>
           <h5>Properties:</h5>
-          <table class="props" width="50%">
+          <table class="props">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
@@ -45,7 +45,7 @@
         <% } %>
         <% if (attributes) { %>
           <h5>Attributes:</h5>
-          <table class="params" width="50%">
+          <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
@@ -56,7 +56,7 @@
                 <td class="type"><span class="param-type">
                   <%= attr.type && attr.type.names[0] %>
                 </span></td>
-                <td class="description last"><%= attr.description %></td>
+                <td class="description last"><%= marked(attr.description||'') %></td>
               </tr>
             <% }); %>
             </tbody>
@@ -126,7 +126,7 @@
             <% } %>
             <% if (func.params) { %>
               <h5>Parameters:</h5>
-              <table class="params" width="50%">
+              <table class="params">
                 <thead>
                   <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
                 </thead>

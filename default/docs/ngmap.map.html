@@ -44,7 +44,7 @@
         </div>
         <div class="details"></div>
           <h5>Dependencies:</h5>
-          <table class="params" width="50%">
+          <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
@@ -73,7 +73,7 @@
             </tbody>
           </table>
           <h5>Attributes:</h5>
-          <table class="params" width="50%">
+          <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
@@ -83,55 +83,60 @@
                 <td class="type"><span class="param-type">
                   Expression
                 </span></td>
-                <td class="description last">If center is an address or current location, the expression is will be executed 
-   when geo-lookup is successful. e.g., geo-callback="showMyStoreInfo()"</td>
+                <td class="description last"><p>If center is an address or current location, the expression is will be executed 
+   when geo-lookup is successful. e.g., geo-callback=&quot;showMyStoreInfo()&quot;</p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>geo-fallback-center</td>
                 <td class="type"><span class="param-type">
                   Array
                 </span></td>
-                <td class="description last">The center of map incase geolocation failed. i.e. [0,0]</td>
+                <td class="description last"><p>The center of map incase geolocation failed. i.e. [0,0]</p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>zoom-to-include-markers</td>
                 <td class="type"><span class="param-type">
                   Boolean
                 </span></td>
-                <td class="description last">If true, map boundary will be changed automatially to include all markers when initialized</td>
+                <td class="description last"><p>If true, map boundary will be changed automatially to include all markers when initialized</p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>default-style</td>
                 <td class="type"><span class="param-type">
                   Boolean
                 </span></td>
-                <td class="description last">When false, the default styling, `display:block;height:300px`, will be ignored.</td>
+                <td class="description last"><p>When false, the default styling, <code>display:block;height:300px</code>, will be ignored.</p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>init-event</td>
                 <td class="type"><span class="param-type">
                   String
                 </span></td>
-                <td class="description last">The name of event to initialize this map.
-   If this option is given, the map won't be initialized until the event is received.
+                <td class="description last"><p>The name of event to initialize this map.
+   If this option is given, the map won&#39;t be initialized until the event is received.
    To invoke the event, use $scope.$emit or $scope.$broacast.
-   i.e. <map init-event="init-map" ng-click="$emit('init-map')" center=... ></map></td>
+   i.e. <code>&lt;map init-event=&quot;init-map&quot; ng-click=&quot;$emit(&#39;init-map&#39;)&quot; center=... &gt;&lt;/map&gt;</code></p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>&lt;MapOption></td>
                 <td class="type"><span class="param-type">
                   String
                 </span></td>
-                <td class="description last">Any Google map options,
-   https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions</td>
+                <td class="description last"><p><a href="https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions">Any Google map options</a></p>
+</td>
               </tr>
               <tr>
                 <td class="name" nowrap>&lt;MapEvent></td>
                 <td class="type"><span class="param-type">
                   String
                 </span></td>
-                <td class="description last">Any Google map events,
-   https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html</td>
+                <td class="description last"><p><a href="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html">Any Google map events</a></p>
+</td>
               </tr>
             </tbody>
           </table>
@@ -164,7 +169,7 @@
               <p>Initialize map and events</p>
             </div>
               <h5>Parameters:</h5>
-              <table class="params" width="50%">
+              <table class="params">
                 <thead>
                   <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
                 </thead>

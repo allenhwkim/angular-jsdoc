@@ -4,6 +4,7 @@
 var fs = require('jsdoc/fs');
 var path = require('jsdoc/path');
 var jsTemplate = require('js-template');
+var marked = require('marked');
 
 var helper = require('jsdoc/util/templateHelper');
 //helper.toTutorial(tutorial, null, options)
@@ -91,6 +92,7 @@ var generate = function(filepath, data) {
   data.title = data.ngdoc + ":" + data.longname;
   data.prettyJson = JSON.stringify(data,null,'  ');
   data.basePath = __dirname;
+  data.marked = marked;
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');

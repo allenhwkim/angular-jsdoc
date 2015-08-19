@@ -28,11 +28,9 @@
    * @attr {String} init-event The name of event to initialize this map.
    *    If this option is given, the map won't be initialized until the event is received.
    *    To invoke the event, use $scope.$emit or $scope.$broacast.
-   *    i.e. <map init-event="init-map" ng-click="$emit('init-map')" center=... ></map>
-   * @attr {String} &lt;MapOption> Any Google map options,
-   *    https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
-   * @attr {String} &lt;MapEvent> Any Google map events,
-   *    https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html
+   *    i.e. `<map init-event="init-map" ng-click="$emit('init-map')" center=... ></map>`
+   * @attr {String} &lt;MapOption> [Any Google map options](https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions)
+   * @attr {String} &lt;MapEvent> [Any Google map events](https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html)
    * @example
    *   Usage:
    *   <map MAP_OPTIONS_OR_MAP_EVENTS ..>
