@@ -43,12 +43,24 @@ Quick Start
 ### Or, With Command Line
 
     // or you can run in command line
-    node_modules/jsdoc/jsdoc.js \
-     --configure node_modules/angular-jsdoc/common/conf.json \
-     --template node_modules/angular-jsdoc/default \
-     --destination build/docs \
-     --readme README.md \
-     --recurse directives services
+    $ node_modules/jsdoc/jsdoc.js \
+      --configure node_modules/angular-jsdoc/common/conf.json \
+      --template node_modules/angular-jsdoc/default \
+      --destination build/docs \
+      --readme README.md \
+      --recurse directives services
+
+### Or, With Gulp
+
+    var shell = require('gulp-shell'); 
+    gulp.task('docs', shell.task([ 
+      'node_modules/jsdoc/jsdoc.js '+ 
+        '-c node_modules/angular-jsdoc/common/conf.json '+   // config file
+        '-t node_modules/angular-jsdoc/default '+   // template file
+        '-d build/docs '+                           // output directory
+        './README.md ' +                            // to include README.md as index contents
+        '-r directives services'                    // source code directory
+    ])); 
 
 Specification
 --------------
