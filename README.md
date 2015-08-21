@@ -70,8 +70,8 @@ Quick Start
           src: ['directives', 'services'],
           options: {
             destination: 'build/docs',
-            configure: 'node_modules/angular-jsdoc/conf.json',
-            template: 'node_modules/angular-jsdoc/template',
+            configure: 'node_modules/angular-jsdoc/common/conf.json',
+            template: 'node_modules/angular-jsdoc/default',
             readme: './README.md'
           }
         }
