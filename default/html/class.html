@@ -105,7 +105,10 @@
           <dt>
             <a href="<%= sourceUrl %>" class="name-link">
               <h4 class="name">
-                <%= func.name %><span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
+                <%= func.name %>
+                <% if (func.params) { %>
+                  <span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
+                <% } %>
                 <% if (func.returns && func.returns[0].type) { %>
                   <span class="type-signature">
                     -&gt; <%= func.returns[0].type.names[0] %>

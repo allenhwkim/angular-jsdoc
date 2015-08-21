@@ -4,6 +4,12 @@ Angular-JSDoc
 JSDoc 3 Template for AngularJS.  
 A JSDoc plugin and template for AngularJS, nothing else!  
 
+NOTE: the location of configure file and template directory has been moved with the release of 1.0.0
+ Please make changes accordingly for your gulp file.
+
+   - configure: Old: `node_modules/angular-jsdoc/conf.json`  New: `node_modules/angular-jsdoc/common/conf.json`
+   - template:  Old: `node_modules/angular-jsdoc/template`   New: `node_modules/angular-jsdoc/default`
+
 Blog: [Sigh, AngularJS Documentation](http://allenhwkim.tumblr.com/post/92161523693/sigh-angularjs-documentation)
 
 <img src=http://i.imgur.com/FPo9x25.gif width=50%  />
@@ -26,21 +32,7 @@ Install
 Quick Start
 -----------
 
-
-### With NodeJS
-
-    var angularJsdoc = require('angualr-jsdoc');
-    angularJsdoc(['my-source1', 'my-source2']); 
-
-
-    // or with options
-    angularJsdoc('sample-codes', {
-      template: 'default',
-      destination: 'default/docs',
-      readme: "sample-codes/README.md"
-    });
-
-### Or, With Command Line
+### With Command Line
 
     // or you can run in command line
     $ node_modules/jsdoc/jsdoc.js \
@@ -76,6 +68,19 @@ Quick Start
           }
         }
       }
+    });
+
+### Or, With NodeJS
+
+    var angularJsdoc = require('angualr-jsdoc');
+    angularJsdoc(['my-source1', 'my-source2']); 
+
+
+    // or with options
+    angularJsdoc('sample-codes', {
+      template: 'default',
+      destination: 'default/docs',
+      readme: "sample-codes/README.md"
     });
 
 
