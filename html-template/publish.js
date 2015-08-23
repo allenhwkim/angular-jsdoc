@@ -61,8 +61,8 @@ var getChildren = function(data, doclet) {
   }
   var children = {};
   members.forEach(function(doclet) {
-    children[doclet.kind] = children[doclet.kind] || [];
-    children[doclet.kind].push(doclet);
+    children[doclet.kind+'s'] = children[doclet.kind] || [];
+    children[doclet.kind+'s'].push(doclet);
   });
   return children;
 };
@@ -84,15 +84,13 @@ var generate = function(filepath, data) {
   data.marked = marked;
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix:'ng'});
+  var html = angularTemplate(layoutPath, data, {jsMode:false, prefix:'ng'});
   fs.writeFileSync(filepath, html, 'utf8');
 };
 
 var generateSourceFiles = function(sourceFiles, nav) {
   fs.mkPath(path.join(outdir, "source"));
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
   for(var jsDoc in sourceFiles) {
     var source = sourceFiles[jsDoc];
     var sourceCode = require('fs').readFileSync(source.path, 'utf8');
@@ -108,7 +106,7 @@ var generateSourceFiles = function(sourceFiles, nav) {
       title: "Source:"+source.path.replace(/^.*\//,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
-    var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix: 'ng'});
+    var html = angularTemplate(layoutPath, data, {jsMode:false, prefix: 'ng'});
     fs.writeFileSync(outputPath, html, 'utf8');
   }
 };
@@ -172,14 +170,13 @@ exports.publish = function(data, opts) {
   // generate index.html
   if (opts.readme) {
     var layoutPath = path.join(templatePath, 'html', 'layout.html');
-    var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
     var data = {
       nav: nav, 
       readme: opts.readme, 
       basePath: __dirname,
       title: "Index"
     };
-    var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix: 'ng'});
+    var html = angularTemplate(layoutPath, data, {jsMode:false, prefix: 'ng'});
     fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
   }
 };

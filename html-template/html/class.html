@@ -12,7 +12,7 @@
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-              <tr ng-repeat="parm in params">
+              <tr ng-repeat="param in params">
                 <td class="name" nowrap>{{ param.name }}</td>
                 <td class="type"><span class="param-type">
                   {{ param.type && param.type.names[0] }}
@@ -64,17 +64,17 @@
         </div<
         <div ng-if="typeof examples !== 'undefined' && examples.length">
           <h5>Example</h5>
-          <pre ng-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code.replace(/</g,"&lt;") }}</span></code></pre>
+          <pre ng-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
         </div>
       </dd>
     </div>
 
     <section>
       <div class="member">
-      <div ng-if="children.member">
+      <div ng-if="children.members">
         <h3 class="subsection-title">Members</h3>
         <dl>
-          <dt ng-repeat="member in children">
+          <dt ng-repeat="member in children.members">
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">{{ member.name }}</h4>
             </a>
@@ -86,9 +86,9 @@
       </div>
       </div>
       <div class="functions">
-      <div ng-if="children.function">
+      <div ng-if="children.functions">
         <h3 class="subsection-title">Methods</h3>
-        <dl ng-repeat="func in children.function">
+        <dl ng-repeat="func in children.functions">
           <dt>
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">
@@ -106,7 +106,7 @@
             </div>
             <div ng-if="func.examples && func.examples.length">
               <h5>Example</h5>
-              <pre ng-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code.replace(/</g,"&lt;") }}</span></code></pre>
+              <pre ng-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
             </div>
             <div ng-if="func.params">
               <h5>Parameters:</h5>
