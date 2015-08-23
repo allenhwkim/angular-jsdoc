@@ -2,158 +2,134 @@
       <dt></dt>
       <dd>
         <div class="description">
-          <%= description %>
+          {{ description }}
         </div>
         <div class="details"></div>
-        <% if (params) { %>
+        <div ng-if="params">
           <h5>Dependencies:</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-            <% params.forEach(function(param) { %>
-              <tr>
-                <td class="name" nowrap><%= param.name %></td>
+              <tr ng-repeat="parm in params">
+                <td class="name" nowrap>{{ param.name }}</td>
                 <td class="type"><span class="param-type">
-                  <%= param.type && param.type.names[0] %>
+                  {{ param.type && param.type.names[0] }}
                 </span></td>
-                <td class="description last"><%= param.description %></td>
+                <td class="description last">{{ param.description }}</td>
               </tr>
-            <% }); %>
             </tbody>
           </table>
-        <% } %>
-        <% if (properties) { %>
+        </div>
+        <div ng-if="properties">
           <h5>Properties:</h5>
           <table class="props">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-            <% properties.forEach(function(prop) { %>
-              <tr>
-                <td class="name" nowrap><%= prop.name %></td>
+              <tr ng-repeat="prop in properties">
+                <td class="name" nowrap>{{ prop.name }}</td>
                 <td class="type"><span class="param-type">
-                  <%= prop.type && prop.type.names[0] %>
+                  {{ prop.type && prop.type.names[0] }}
                 </span></td>
-                <td class="description last"><%= prop.description %></td>
+                <td class="description last">{{ prop.description }}</td>
               </tr>
-            <% }); %>
             </tbody>
           </table>
-        <% } %>
-        <% if (attributes) { %>
+        </div>
+        <div ng-if="attributes">
           <h5>Attributes:</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-            <% attributes.forEach(function(attr) { %>
-              <tr>
-                <td class="name" nowrap><%= attr.name %></td>
+              <tr ng-repeat="attr in attributes">
+                <td class="name" nowrap>{{ attr.name }}</td>
                 <td class="type"><span class="param-type">
-                  <%= attr.type && attr.type.names[0] %>
+                  {{ attr.type && attr.type.names[0] }}
                 </span></td>
-                <td class="description last"><%= marked(attr.description||'') %></td>
+                <td class="description last">{{ marked(attr.description||'') }}</td>
               </tr>
-            <% }); %>
             </tbody>
           </table>
-        <% } %>
-        <% if (requires) { %>
+        </div>
+        <div ng-if="requires">
           <h5>Dependencies</h5>
           <ul>
-            <% requires.forEach(function(el) { %>
-              <li><%= el %> Service</li>
-            <% }); %>
+            <li ng-repeat="el in requires">{{ el }} Service</li>
           </ul>
-        <% } %>
-        <% if (typeof examples !== 'undefined' && examples.length) { %>
+        </div<
+        <div ng-if="typeof examples !== 'undefined' && examples.length">
           <h5>Example</h5>
-          <% examples.forEach(function(example) { %>
-            <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
-          <% }); %>
-        <% } %>
+          <pre ng-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code.replace(/</g,"&lt;") }}</span></code></pre>
+        </div>
       </dd>
     </div>
 
     <section>
       <div class="member">
-      <% if (children.member) { %>
+      <div ng-if="children.member">
         <h3 class="subsection-title">Members</h3>
         <dl>
-        <% children.member.forEach(function(member) { %>
-          <dt>
-            <a href="<%= sourceUrl %>" class="name-link">
-              <h4 class="name"><%= member.name %></h4>
+          <dt ng-repeat="member in children">
+            <a href="{{ sourceUrl }}" class="name-link">
+              <h4 class="name">{{ member.name }}</h4>
             </a>
           </dt>
           <dd>
-            <div class="description"><%= member.description %></div>
+            <div class="description">{{ member.description }}</div>
           </dd>
-        <% }); %>
         </dl>
-      <% } %>
+      </div>
       </div>
       <div class="functions">
-      <% if (children.function) { %>
+      <div ng-if="children.function">
         <h3 class="subsection-title">Methods</h3>
-        <dl>
-        <% children.function.forEach(function(func) { %>
+        <dl ng-repeat="func in children.function">
           <dt>
-            <a href="<%= sourceUrl %>" class="name-link">
+            <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">
-                <%= func.name %>
-                <% if (func.params) { %>
-                  <span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
-                <% } %>
-                <% if (func.returns && func.returns[0].type) { %>
-                  <span class="type-signature">
-                    -&gt; <%= func.returns[0].type.names[0] %>
-                  </span>
-                <% } %>
+                {{ func.name }}
+                <span ng-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
+                <span ng-if="func.returns && func.returns[0].type" class="type-signature">
+                  -&gt; {{ func.returns[0].type.names[0] }}
+                </span>
               </h4>
             </a>
           </dt>
           <dd>
             <div class="description">
-              <%= func.description %>
+              {{ func.description }}
             </div>
-            <% if (func.examples && func.examples.length) { %>
+            <div ng-if="func.examples && func.examples.length">
               <h5>Example</h5>
-              <% func.examples.forEach(function(example) { %>
-                <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
-              <% }); %>
-            <% } %>
-            <% if (func.params) { %>
+              <pre ng-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code.replace(/</g,"&lt;") }}</span></code></pre>
+            </div>
+            <div ng-if="func.params">
               <h5>Parameters:</h5>
               <table class="params">
                 <thead>
                   <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
                 </thead>
                 <tbody>
-                <% func.params.forEach(function(param) { %>
-                  <tr>
-                    <td class="name"><%= param.name %></td>
+                  <tr ng-repeat="param in func.params">
+                    <td class="name">{{ param.name }}</td>
                     <td class="type"><span class="param-type">
-                      <%= param.type && param.type.names[0] %>
+                      {{ param.type && param.type.names[0] }}
                     </span></td>
-                    <td class="description last"><%= param.description %></td>
+                    <td class="description last">{{ param.description }}</td>
                   </tr>
-                <% }); %>
                 </tbody>
               </table>
-            <% } %>
-            <% if (func.returns) { %>
-              <% var ret = func.returns[0];%>
+            </div>
+            <div ng-if="func.returns">
               <h5>Returns:</h5>
-              <div class="param-desc"><%= ret.description %></div>
-            <% } %>
+              <div class="param-desc">{{ func.returns[0].description }}</div>
+            </div>
           </dd>
-        <% }); %>
         </dl>
-      <% } %>
       </div>
     </section>

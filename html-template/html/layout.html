@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <base href="<%= data.code ? '../' : './' %>" />
-    <title>JSDoc: <%= title %></title>
+    <base href="{{ data.code ? '../' : './' }}" />
+    <title>JSDoc: {{ title }}</title>
     <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
     <script src="js/prettify.js"></script>
@@ -10,44 +10,32 @@
   <body>
     <nav>
       <h2><a href="index.html">Index</a></h2>
-      <% for (var moduleName in nav) { var module = nav[moduleName]; %>
-        <% if (moduleName != 'undefined') { %>
-          <h3>module: <%= moduleName %></h3>
-        <% } %>
-        <ul>
-          <% for (var groupName in module) { var group = module[groupName]; %>
-            <h3><%= groupName %></h3>
-            <ul>
-              <% for (var className in group) { var klass = group[className]; %>
-                <li><a href="<%= klass.jsDocUrl %>"><%= className %></a></li>
-              <% } %>
-            </ul>
-          <% } %>
-        </ul>
-      <% } %>
+      <div ng-repeat="(moduleName, module) in nav">
+        <h3 ng-if="moduleaName">module: {{ moduleName }}</h3>
+        <div ng-repeat="(groupName, group) in module">
+          <h3>{{ groupName }}</h3>
+          <ul ng-repeat="(className, klass) in group">
+            <li><a href="{{ klass.jsDocUrl }}"><{{ className }}</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <h1 class="title">
-      <%= title %>
-      <% if (data.longname) { %>
-        <a class="name-link signature-attributes" href="<%= sourceUrl %>">source</a>
-      <% } %>
+      {{ title }}
+      <a ng-if="data.longname" class="name-link signature-attributes" href="{{ sourceUrl }}">source</a>
     </h1>
 
     <div id="main">
-    <% if (data.code) { %>
-      <article>
-        <pre class="prettyprint source linenums"><code><%= code %></code></pre>
+      <article ng-if="data.code">
+        <pre class="prettyprint source linenums"><code>{{ code }}</code></pre>
       </article>
-    <% } else if (data.readme) { %>
-      <section class="section-readme">
+      <section ng-if="data.readme" class="section-readme">
         <article>
-          <%= data.readme %>
+          {{ data.readme }}
         </article>
       </section>
-    <% } else { %>
-      <%= include(basePath+'/html/class.html', data) %>
-    <% } %>
+      <div ng-if="!data.code && !data.readme" ng-include="class.html"></div>
     </div>
 
     <footer style="clear:both">
