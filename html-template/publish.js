@@ -3,20 +3,9 @@
 
 var fs = require('jsdoc/fs');
 var path = require('jsdoc/path');
-var jsTemplate = require('js-template');
+var angularTemplate = require('angular-template');
 var marked = require('marked');
-
 var helper = require('jsdoc/util/templateHelper');
-//helper.toTutorial(tutorial, null, options)
-//helper.getAncestorLinks(data, docket)
-//helper.createLink(doclet)
-//helper.getAttribs(data)
-//helper.getUniqueFilename(str)
-//helper.htmlsafe(str)
-//helper.getAncestors(data, doclet)
-//helper.prune(data) //remove members that won't be in documentation
-//helper.resolveAuthorLinks;
-//helper.scopeToPunc;
 
 var templatePath;
 var outdir = env.opts.destination;
@@ -96,7 +85,7 @@ var generate = function(filepath, data) {
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
   var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-  var html = jsTemplate(layoutHtml, data);
+  var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix:'ng'});
   fs.writeFileSync(filepath, html, 'utf8');
 };
 
@@ -119,7 +108,7 @@ var generateSourceFiles = function(sourceFiles, nav) {
       title: "Source:"+source.path.replace(/^.*\//,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
-    var html = jsTemplate(layoutHtml, data);
+    var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix: 'ng'});
     fs.writeFileSync(outputPath, html, 'utf8');
   }
 };
@@ -190,7 +179,7 @@ exports.publish = function(data, opts) {
       basePath: __dirname,
       title: "Index"
     };
-    var html = jsTemplate(layoutHtml, data);
+    var html = angularTemplate(layoutHtml, data, {jsMode:false, prefix: 'ng'});
     fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
   }
 };

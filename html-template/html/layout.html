@@ -11,11 +11,11 @@
     <nav>
       <h2><a href="index.html">Index</a></h2>
       <div ng-repeat="(moduleName, module) in nav">
-        <h3 ng-if="moduleaName">module: {{ moduleName }}</h3>
+        <h3 ng-if="moduleName">module: {{ moduleName }}</h3>
         <div ng-repeat="(groupName, group) in module">
           <h3>{{ groupName }}</h3>
           <ul ng-repeat="(className, klass) in group">
-            <li><a href="{{ klass.jsDocUrl }}"><{{ className }}</a></li>
+            <li><a href="{{ klass.jsDocUrl }}">{{ className }}</a></li>
           </ul>
         </div>
       </div>
@@ -35,7 +35,7 @@
           {{ data.readme }}
         </article>
       </section>
-      <div ng-if="!data.code && !data.readme" ng-include="class.html"></div>
+      <div ng-if="!data.code && !data.readme" ng-include="'class.html'"></div>
     </div>
 
     <footer style="clear:both">
