@@ -119,7 +119,21 @@ Example
 
 Customization
 -------------
-To make your own template, please copy the default directory to your own, then, make your own css, js, and html files. Then, run angularJsdoc with your own template. e.g., `angularJsDoc({template:'myown'})`
+
+Currently, there are two templates built-in;
+
+  - default
+  - angular-template
+
+To add your own template, please copy the default directory to your own, then, make your own css, js, and html files.   
+Then, run the `jsdoc.js` command with your template. e.g.,
+
+    $ node_modules/jsdoc/jsdoc.js \
+      --configure node_modules/angular-jsdoc/common/conf.json \
+      --template node_modules/angular-jsdoc/my-template \
+      --destination build/docs \
+      --readme README.md \
+      --recurse directives services
 
 If you want to share your template with others, please send a pull request after adding your template directory where `default` directory is.
 
