@@ -25,7 +25,7 @@ var runCommand = function(cmd, args) {
 /**
  * main function
  */
-var angularJsdoc = function(dirs, optionsArg) {
+var angularJsdoc = function(dirs, optionsArg, callback) {
   optionsArg = optionsArg || {};
   dirs = Array.isArray(dirs) ? dirs : dirs.split(" ");
   //default values
@@ -50,7 +50,7 @@ var angularJsdoc = function(dirs, optionsArg) {
   ];
   args = args.concat(['--recurse']).concat(dirs);
   runCommand(command, args).then(function(output) {
-    console.log('DONE', output);
+    callback && callback(output);
   });
 };
 

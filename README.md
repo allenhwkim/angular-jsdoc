@@ -81,13 +81,15 @@ Quick Start
       template: 'default',
       destination: 'default/docs',
       readme: "sample-codes/README.md"
+    }, function(output) {
+      console.log('output', output);
     });
 
 
 Specification
 --------------
 
-  angularJsdoc(sourceDirectory, options)
+  angularJsdoc(sourceDirectory, options, callback)
 
   - sourceDirectory: list of source code directories. e.g. ['dir1', 'dir2']
 
@@ -103,6 +105,7 @@ Specification
                  Default: angular-jsdoc/default
     - readme: The path to the project's README file.
                  Default: 'README.md'
+  - callback: callback function with output parameter. e.g., `function(output) {console.log(output)}`
 
 Example
 --------

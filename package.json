@@ -1,6 +1,6 @@
 {
   "name": "angular-jsdoc",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "JsDoc Plugin and Template for AngularJs",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git@github.com:allenhwkim/angular-jsdoc.git"
   },
   "scripts": {
-    "test": "node test.js"
+    "test": "./test.sh"
   },
   "author": {
     "name": "Allen Kim",

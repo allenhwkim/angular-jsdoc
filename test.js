@@ -9,7 +9,7 @@ angularJsdoc('sample-codes', {
 
 angularJsdoc('sample-codes', {
   configure: 'common/test_conf.json',
-  template: 'html-template',
-  destination: 'html-template/docs',
+  template: 'angular-template',
+  destination: 'angular-template/docs',
   readme: "sample-codes/README.md"
 });
