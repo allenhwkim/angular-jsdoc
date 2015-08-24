@@ -70,11 +70,10 @@
     </div>
 
     <section>
-      <div class="member">
-      <div ng-if="children.members">
+      <div class="members" ng-if="children.member">
         <h3 class="subsection-title">Members</h3>
         <dl>
-          <dt ng-repeat="member in children.members">
+          <dt ng-repeat="member in children.member">
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">{{ member.name }}</h4>
             </a>
@@ -84,11 +83,9 @@
           </dd>
         </dl>
       </div>
-      </div>
-      <div class="functions">
-      <div ng-if="children.functions">
+      <div class="functions" ng-if="children.function">
         <h3 class="subsection-title">Methods</h3>
-        <dl ng-repeat="func in children.functions">
+        <dl ng-repeat="func in children.function">
           <dt>
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">

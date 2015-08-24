@@ -61,8 +61,8 @@ var getChildren = function(data, doclet) {
   }
   var children = {};
   members.forEach(function(doclet) {
-    children[doclet.kind+'s'] = children[doclet.kind] || [];
-    children[doclet.kind+'s'].push(doclet);
+    children[doclet.kind] = children[doclet.kind] || [];
+    children[doclet.kind].push(doclet);
   });
   return children;
 };

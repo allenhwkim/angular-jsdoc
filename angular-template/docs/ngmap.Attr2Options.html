@@ -89,12 +89,179 @@
       </dd>
     </div>
     <section>
-      <div class="member">
-      </div>
       <div class="functions">
-      <div>
         <h3 class="subsection-title">Methods</h3>
         <dl>
+          <dt>
+            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+              <h4 class="name">
+                filter
+                <span class="signature">(attrs)</span>
+                <span class="type-signature">
+                  -&gt; Hash
+                </span>
+              </h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description">
+              <p>filters attributes by skipping angularjs methods $.. $$..</p>
+            </div>
+            <div>
+              <h5>Parameters:</h5>
+              <table class="params">
+                <thead>
+                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="name">attrs</td>
+                    <td class="type"><span class="param-type">
+                      Hash
+                    </span></td>
+                    <td class="description last"><p>tag attributes</p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h5>Returns:</h5>
+              <div class="param-desc"><p>filterd attributes</p></div>
+            </div>
+          </dd>
+        </dl><dl>
+          <dt>
+            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+              <h4 class="name">
+                getControlOptions
+                <span class="signature">(filtered)</span>
+                <span class="type-signature">
+                  -&gt; Hash
+                </span>
+              </h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description">
+              <p>Return options of Google map control, i.e streetview, pan, etc, not a general control</p>
+            </div>
+            <div>
+              <h5>Parameters:</h5>
+              <table class="params">
+                <thead>
+                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="name">filtered</td>
+                    <td class="type"><span class="param-type">
+                      Hash
+                    </span></td>
+                    <td class="description last"><p>filtered tag attributes</p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h5>Returns:</h5>
+              <div class="param-desc"><p>Google Map options</p></div>
+            </div>
+          </dd>
+        </dl><dl>
+          <dt>
+            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+              <h4 class="name">
+                getEvents
+                <span class="signature">(scope, attrs)</span>
+                <span class="type-signature">
+                  -&gt; Hash
+                </span>
+              </h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description">
+              <p>converts attributes hash to scope-specific event function</p>
+            </div>
+            <div>
+              <h5>Parameters:</h5>
+              <table class="params">
+                <thead>
+                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="name">scope</td>
+                    <td class="type"><span class="param-type">
+                      scope
+                    </span></td>
+                    <td class="description last"><p>angularjs scope</p></td>
+                  </tr><tr>
+                    <td class="name">attrs</td>
+                    <td class="type"><span class="param-type">
+                      Hash
+                    </span></td>
+                    <td class="description last"><p>tag attributes</p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h5>Returns:</h5>
+              <div class="param-desc"><p>events converted events</p></div>
+            </div>
+          </dd>
+        </dl><dl>
+          <dt>
+            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+              <h4 class="name">
+                getOptions
+                <span class="signature">(attrs, scope)</span>
+                <span class="type-signature">
+                  -&gt; Hash
+                </span>
+              </h4>
+            </a>
+          </dt>
+          <dd>
+            <div class="description">
+              <p>converts attributes hash to Google Maps API v3 options  </p>
+<pre class="prettyprint source"><code> . converts numbers to number   
+ . converts class-like string to google maps instance   
+   i.e. `LatLng(1,1)` to `new google.maps.LatLng(1,1)`  
+ . converts constant-like string to google maps constant    
+   i.e. `MapTypeId.HYBRID` to `google.maps.MapTypeId.HYBRID`   
+   i.e. `HYBRID&quot;` to `google.maps.MapTypeId.HYBRID`</code></pre>
+            </div>
+            <div>
+              <h5>Parameters:</h5>
+              <table class="params">
+                <thead>
+                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="name">attrs</td>
+                    <td class="type"><span class="param-type">
+                      Hash
+                    </span></td>
+                    <td class="description last"><p>tag attributes</p></td>
+                  </tr><tr>
+                    <td class="name">scope</td>
+                    <td class="type"><span class="param-type">
+                      scope
+                    </span></td>
+                    <td class="description last"><p>angularjs scope</p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h5>Returns:</h5>
+              <div class="param-desc"><p>options converted attributess</p></div>
+            </div>
+          </dd>
+        </dl><dl>
           <dt>
             <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
               <h4 class="name">
@@ -140,7 +307,7 @@
           </dd>
         </dl>
       </div>
-    </div></section></div>
+    </section></div>
       </div>
     </div>
     <footer style="clear:both">
