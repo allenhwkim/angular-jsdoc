@@ -23,7 +23,7 @@ var getDocletExamples = function(doclet) {
 
     return {
       caption: caption || '',
-      code: code || example
+      code: (code || example).replace(/</g,'&lt;')
     };
   });
   return examples;
