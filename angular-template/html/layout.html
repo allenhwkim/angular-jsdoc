@@ -14,8 +14,10 @@
         <h3 ng-if="moduleName">module: {{ moduleName }}</h3>
         <div ng-repeat="(groupName, group) in module">
           <h3>{{ groupName }}</h3>
-          <ul ng-repeat="(className, klass) in group">
-            <li><a href="{{ klass.jsDocUrl }}">{{ className }}</a></li>
+          <ul>
+            <li ng-repeat="(className, klass) in group">
+              <a href="{{ klass.jsDocUrl }}">{{ className }}</a>
+            </li>
           </ul>
         </div>
       </div>
