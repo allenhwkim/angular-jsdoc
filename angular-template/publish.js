@@ -127,7 +127,7 @@ exports.publish = function(data, opts) {
     doclet.examples = getDocletExamples(doclet);
 
     doclet.jsDocUrl = helper.createLink(doclet);
-    if (doclet.meta) {
+    if (doclet.meta && doclet.kind == 'class') {
       var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
       doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
       sourceFiles[sourceHtml] = {
