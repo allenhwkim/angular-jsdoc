@@ -116,6 +116,8 @@ Example
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.Attr2Options.html)
    - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) | 
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.MapController.html)
+   - Filter: [custom-currency.js](sample-codes/app/custom-currency.js) | 
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/app.customCurrency.html)
 
 Customization
 -------------

@@ -2,7 +2,7 @@
 <html>
   <head>
     <base href="../" />
-    <title>JSDoc: Source:test-service.js</title>
+    <title>JSDoc: Source:custom-currency.js</title>
     <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
     <script src="js/prettify.js"></script>
@@ -38,32 +38,52 @@
         </ul>
     </nav>
     <h1 class="title">
-      Source:test-service.js
+      Source:custom-currency.js
     </h1>
     <div id="main">
       <article>
-        <pre class="prettyprint source linenums"><code>(function () {
+        <pre class="prettyprint source linenums"><code>/**
+ * The siteLanguageServices provides information about available languges
+ * of a site.
+ *
+ * @memberof app
+ * @ngdoc filter
+ * @name customCurrency
+ * @param {$http} Test
+ * @desc
+ *  returns custom currency from the given input
+ */
+(function() {
   'use strict';
-  angular.module('app').service('testService', testService);
-  /**
-   * The siteLanguageServices provides information about available languges
-   * of a site.
-   *
-   * @memberof app
-   * @ngdoc service
-   * @name testService
-   * @param {$http} Test
-   * @ngInject
-   */
-  function testService ($http) {
-  }
-   /**
-    * @memberof testService
-    * @method test
-    * ///// NO param jsdoc tag here
-    */
-   function test() {
-   }
+  var customCurrency = function($http) { 
+    /**
+     * @func customCurrencyFilter
+     * @memberof customCurrency
+     * @desc
+     *  . Create the return function and set the required parameter name to **input**
+     *  . setup optional parameters for the currency symbol and location (left or right of the amount)
+     * @param {Number|String} input
+     * @param {String} symbol
+     * @param {Boolean} place  true or false
+     */
+    return function(input, symbol, place) {
+      // Ensure that we are working with a number
+      if(isNaN(input)) {
+        return input;
+      } else {
+        // Check if optional parameters are passed, if not, use the defaults
+        var symbol = symbol || '$';
+        var place = place === undefined ? true : place;
+        // Perform the operation to set the symbol in the right location
+        if( place === true) {
+          return symbol + input;
+        } else {
+          return input + symbol;
+        }
+      }
+    }
+  };
+  angular.module('app').filter('customCurrency', customCurrency);
 })();
 </code></pre>
       </article>

@@ -15,7 +15,7 @@
               <tr ng-repeat="param in params">
                 <td class="name" nowrap>{{ param.name }}</td>
                 <td class="type"><span class="param-type">
-                  {{ param.type && param.type.names[0] }}
+                  {{ param.type && param.type.names.join(" | ") }}
                 </span></td>
                 <td class="description last">{{ param.description }}</td>
               </tr>
@@ -32,7 +32,7 @@
               <tr ng-repeat="prop in properties">
                 <td class="name" nowrap>{{ prop.name }}</td>
                 <td class="type"><span class="param-type">
-                  {{ prop.type && prop.type.names[0] }}
+                  {{ prop.type && prop.type.names.join(" | ") }}
                 </span></td>
                 <td class="description last">{{ prop.description }}</td>
               </tr>
@@ -49,7 +49,7 @@
               <tr ng-repeat="attr in attributes">
                 <td class="name" nowrap>{{ attr.name }}</td>
                 <td class="type"><span class="param-type">
-                  {{ attr.type && attr.type.names[0] }}
+                  {{ attr.type && attr.type.names.join(" | ") }}
                 </span></td>
                 <td class="description last">{{ marked(attr.description||'') }}</td>
               </tr>
@@ -92,7 +92,7 @@
                 {{ func.name }}
                 <span ng-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
                 <span ng-if="func.returns && func.returns[0].type" class="type-signature">
-                  -&gt; {{ func.returns[0].type.names[0] }}
+                  -&gt; {{ func.returns[0].type.names.join(" | ") }}
                 </span>
               </h4>
             </a>
@@ -115,7 +115,7 @@
                   <tr ng-repeat="param in func.params">
                     <td class="name">{{ param.name }}</td>
                     <td class="type"><span class="param-type">
-                      {{ param.type && param.type.names[0] }}
+                      {{ param.type && param.type.names.join(" | ") }}
                     </span></td>
                     <td class="description last">{{ param.description }}</td>
                   </tr>

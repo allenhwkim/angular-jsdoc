@@ -16,7 +16,7 @@
               <tr>
                 <td class="name" nowrap><%= param.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= param.type && param.type.names[0] %>
+                  <%= param.type && param.type.names.join(" | ") %>
                 </span></td>
                 <td class="description last"><%= param.description %></td>
               </tr>
@@ -35,7 +35,7 @@
               <tr>
                 <td class="name" nowrap><%= prop.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= prop.type && prop.type.names[0] %>
+                  <%= prop.type && prop.type.names.join(" | ") %>
                 </span></td>
                 <td class="description last"><%= prop.description %></td>
               </tr>
@@ -54,7 +54,7 @@
               <tr>
                 <td class="name" nowrap><%= attr.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= attr.type && attr.type.names[0] %>
+                  <%= attr.type && attr.type.names.join(" | ") %>
                 </span></td>
                 <td class="description last"><%= marked(attr.description||'') %></td>
               </tr>
@@ -109,9 +109,9 @@
                 <% if (func.params) { %>
                   <span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
                 <% } %>
-                <% if (func.returns && func.returns[0].type) { %>
+                <% if (func.returns && func.returns.type) { %>
                   <span class="type-signature">
-                    -&gt; <%= func.returns[0].type.names[0] %>
+                    -&gt; <%= func.returns[0].type.names.join(" | ") %>
                   </span>
                 <% } %>
               </h4>
@@ -138,7 +138,7 @@
                   <tr>
                     <td class="name"><%= param.name %></td>
                     <td class="type"><span class="param-type">
-                      <%= param.type && param.type.names[0] %>
+                      <%= param.type && param.type.names.join(" | ") %>
                     </span></td>
                     <td class="description last"><%= param.description %></td>
                   </tr>
