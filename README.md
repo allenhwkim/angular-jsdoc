@@ -72,7 +72,7 @@ Quick Start
 
 ### Or, With NodeJS
 
-    var angularJsdoc = require('angualr-jsdoc');
+    var angularJsdoc = require('angular-jsdoc');
     angularJsdoc(['my-source1', 'my-source2']); 
 
 
