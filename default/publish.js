@@ -7,16 +7,6 @@ var jsTemplate = require('js-template');
 var marked = require('marked');
 
 var helper = require('jsdoc/util/templateHelper');
-//helper.toTutorial(tutorial, null, options)
-//helper.getAncestorLinks(data, docket)
-//helper.createLink(doclet)
-//helper.getAttribs(data)
-//helper.getUniqueFilename(str)
-//helper.htmlsafe(str)
-//helper.getAncestors(data, doclet)
-//helper.prune(data) //remove members that won't be in documentation
-//helper.resolveAuthorLinks;
-//helper.scopeToPunc;
 
 var templatePath;
 var outdir = env.opts.destination;
@@ -34,7 +24,7 @@ var getDocletExamples = function(doclet) {
 
     return {
       caption: caption || '',
-      code: code || example
+      code: (code || example).replace(/</g,'&lt;')
     };
   });
   return examples;
@@ -108,15 +98,12 @@ var generateSourceFiles = function(sourceFiles, nav) {
     var source = sourceFiles[jsDoc];
     var sourceCode = require('fs').readFileSync(source.path, 'utf8');
     sourceCode = sourceCode.replace(/</g,"&lt;");
-    var lineNumbers = sourceCode.split("\n").map(function(el,i) {
-      return i+1;
-    }); //jshint ignore:line
     var data = {
       path: source.path,
       code: sourceCode,
       nav: nav,
       basePath: __dirname,
-      title: "Source:"+source.path.replace(/^.*\//,'')
+      title: "Source:"+source.path.replace(/^.*[\/\\]/,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
     var html = jsTemplate(layoutHtml, data);
@@ -140,7 +127,7 @@ exports.publish = function(data, opts) {
     doclet.examples = getDocletExamples(doclet);
 
     doclet.jsDocUrl = helper.createLink(doclet);
-    if (doclet.meta) {
+    if (doclet.meta && doclet.kind == 'class') {
       var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
       doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
       sourceFiles[sourceHtml] = {
@@ -184,13 +171,13 @@ exports.publish = function(data, opts) {
   if (opts.readme) {
     var layoutPath = path.join(templatePath, 'html', 'layout.html');
     var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
-    var data = {
-      nav: nav, 
-      readme: opts.readme, 
+    var readmeData = {
+      nav: nav,
+      readme: opts.readme,
       basePath: __dirname,
       title: "Index"
     };
-    var html = jsTemplate(layoutHtml, data);
+    var html = jsTemplate(layoutHtml, readmeData);
     fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
   }
 };

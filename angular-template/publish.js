@@ -84,7 +84,7 @@ var generate = function(filepath, data) {
   data.marked = marked;
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var html = angularTemplate(layoutPath, data, {jsMode:false, prefix:'ng'});
+  var html = angularTemplate(layoutPath, data);
   fs.writeFileSync(filepath, html, 'utf8');
 };
 
@@ -95,18 +95,15 @@ var generateSourceFiles = function(sourceFiles, nav) {
     var source = sourceFiles[jsDoc];
     var sourceCode = require('fs').readFileSync(source.path, 'utf8');
     sourceCode = sourceCode.replace(/</g,"&lt;");
-    var lineNumbers = sourceCode.split("\n").map(function(el,i) {
-      return i+1;
-    }); //jshint ignore:line
     var data = {
       path: source.path,
       code: sourceCode,
       nav: nav,
       basePath: __dirname,
-      title: "Source:"+source.path.replace(/^.*\//,'')
+      title: "Source:"+source.path.replace(/^.*[\/\\]/,'')
     };
     var outputPath = path.join(outdir, "source", jsDoc);
-    var html = angularTemplate(layoutPath, data, {jsMode:false, prefix: 'ng'});
+    var html = angularTemplate(layoutPath, data);
     fs.writeFileSync(outputPath, html, 'utf8');
   }
 };
@@ -170,13 +167,13 @@ exports.publish = function(data, opts) {
   // generate index.html
   if (opts.readme) {
     var layoutPath = path.join(templatePath, 'html', 'layout.html');
-    var data = {
-      nav: nav, 
-      readme: opts.readme, 
+    var readmeData = {
+      nav: nav,
+      readme: opts.readme,
       basePath: __dirname,
       title: "Index"
     };
-    var html = angularTemplate(layoutPath, data, {jsMode:false, prefix: 'ng'});
+    var html = angularTemplate(layoutPath, readmeData);
     fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
   }
 };

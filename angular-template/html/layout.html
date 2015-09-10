@@ -10,12 +10,12 @@
   <body>
     <nav>
       <h2><a href="index.html">Index</a></h2>
-      <div ng-repeat="(moduleName, module) in nav">
-        <h3 ng-if="moduleName">module: {{ moduleName }}</h3>
-        <div ng-repeat="(groupName, group) in module">
+      <div ht-repeat="(moduleName, module) in nav">
+        <h3 ht-if="moduleName">module: {{ moduleName }}</h3>
+        <div ht-repeat="(groupName, group) in module">
           <h3>{{ groupName }}</h3>
           <ul>
-            <li ng-repeat="(className, klass) in group">
+            <li ht-repeat="(className, klass) in group">
               <a href="{{ klass.jsDocUrl }}">{{ className }}</a>
             </li>
           </ul>
@@ -25,20 +25,20 @@
 
     <h1 class="title">
       {{ title }}
-      <a ng-if="data.longname" class="name-link signature-attributes" href="{{ sourceUrl }}">source</a>
+      <a ht-if="data.longname" class="name-link signature-attributes" href="{{ sourceUrl }}">source</a>
     </h1>
 
     <div id="main">
-      <article ng-if="data.code">
+      <article ht-if="data.code">
         <pre class="prettyprint source linenums"><code>{{ code }}</code></pre>
       </article>
-      <section ng-if="data.readme" class="section-readme">
+      <section ht-if="data.readme" class="section-readme">
         <article>
           {{ data.readme }}
         </article>
       </section>
-      <div ng-if="!data.code && !data.readme">
-        <div ng-include="class.html"></div>
+      <div ht-if="!data.code && !data.readme">
+        <div ht-include="class.html"></div>
       </div>
     </div>
 
@@ -52,9 +52,8 @@
     <!--%= prettyJson %-->
     <script>
       prettyPrint();
-      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
-      var line = document.querySelector("ol li:nth-child("+(lineNo||1)+")");
-      line && line.scrollIntoView();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
     </script>
   </body>
 </html>

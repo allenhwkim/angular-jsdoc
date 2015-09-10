@@ -23,7 +23,6 @@
     "q": "^1.4.1"
   },
   "devDependencies": {
-    "angular-template": "^2.0.3",
     "gulp": "~3.8.5",
     "gulp-bump": "~0.1.10",
     "gulp-shell": "~0.2.7",

@@ -5,14 +5,14 @@
           {{ description }}
         </div>
         <div class="details"></div>
-        <div ng-if="params">
+        <div ht-if="params">
           <h5>Dependencies:</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-              <tr ng-repeat="param in params">
+              <tr ht-repeat="param in params">
                 <td class="name" nowrap>{{ param.name }}</td>
                 <td class="type"><span class="param-type">
                   {{ param.type && param.type.names.join(" | ") }}
@@ -22,14 +22,14 @@
             </tbody>
           </table>
         </div>
-        <div ng-if="properties">
+        <div ht-if="properties">
           <h5>Properties:</h5>
           <table class="props">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-              <tr ng-repeat="prop in properties">
+              <tr ht-repeat="prop in properties">
                 <td class="name" nowrap>{{ prop.name }}</td>
                 <td class="type"><span class="param-type">
                   {{ prop.type && prop.type.names.join(" | ") }}
@@ -39,14 +39,14 @@
             </tbody>
           </table>
         </div>
-        <div ng-if="attributes">
+        <div ht-if="attributes">
           <h5>Attributes:</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
             </thead>
             <tbody>
-              <tr ng-repeat="attr in attributes">
+              <tr ht-repeat="attr in attributes">
                 <td class="name" nowrap>{{ attr.name }}</td>
                 <td class="type"><span class="param-type">
                   {{ attr.type && attr.type.names.join(" | ") }}
@@ -56,24 +56,24 @@
             </tbody>
           </table>
         </div>
-        <div ng-if="requires">
+        <div ht-if="requires">
           <h5>Dependencies</h5>
           <ul>
-            <li ng-repeat="el in requires">{{ el }} Service</li>
+            <li ht-repeat="el in requires">{{ el }} Service</li>
           </ul>
         </div>
-        <div ng-if="typeof examples !== 'undefined' && examples.length">
+        <div ht-if="typeof examples !== 'undefined' && examples.length">
           <h5>Example</h5>
-          <pre ng-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+          <pre ht-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
         </div>
       </dd>
     </div>
 
     <section>
-      <div class="members" ng-if="children.member">
+      <div class="members" ht-if="children.member">
         <h3 class="subsection-title">Members</h3>
         <dl>
-          <dt ng-repeat="member in children.member">
+          <dt ht-repeat="member in children.member">
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">{{ member.name }}</h4>
             </a>
@@ -83,15 +83,15 @@
           </dd>
         </dl>
       </div>
-      <div class="functions" ng-if="children.function">
+      <div class="functions" ht-if="children.function">
         <h3 class="subsection-title">Methods</h3>
-        <dl ng-repeat="func in children.function">
+        <dl ht-repeat="func in children.function">
           <dt>
             <a href="{{ sourceUrl }}" class="name-link">
               <h4 class="name">
                 {{ func.name }}
-                <span ng-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
-                <span ng-if="func.returns && func.returns[0].type" class="type-signature">
+                <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
+                <span ht-if="func.returns && func.returns[0].type" class="type-signature">
                   -&gt; {{ func.returns[0].type.names.join(" | ") }}
                 </span>
               </h4>
@@ -101,18 +101,18 @@
             <div class="description">
               {{ func.description }}
             </div>
-            <div ng-if="func.examples && func.examples.length">
+            <div ht-if="func.examples && func.examples.length">
               <h5>Example</h5>
-              <pre ng-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+              <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
             </div>
-            <div ng-if="func.params">
+            <div ht-if="func.params">
               <h5>Parameters:</h5>
               <table class="params">
                 <thead>
                   <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="param in func.params">
+                  <tr ht-repeat="param in func.params">
                     <td class="name">{{ param.name }}</td>
                     <td class="type"><span class="param-type">
                       {{ param.type && param.type.names.join(" | ") }}
@@ -122,7 +122,7 @@
                 </tbody>
               </table>
             </div>
-            <div ng-if="func.returns">
+            <div ht-if="func.returns">
               <h5>Returns:</h5>
               <div class="param-desc">{{ func.returns[0].description }}</div>
             </div>
