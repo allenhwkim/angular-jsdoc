@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <base href="{{ data.code ? '../' : './' }}" />
+    <base ht-if="data.code" href="../" />
     <title>JSDoc: {{ title }}</title>
     <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
@@ -14,23 +14,27 @@
 
     <nav>
       <h2><a href="index.html">Index</a></h2>
-      <ul class="module" ht-repeat="(moduleName, module) in nav">
-        <h3 ht-if="moduleName">
-          <a href="" ng-click="module{{moduleName}} = !module{{moduleName}}">
+      <h2 ht-repeat="doc in nav.docs">
+        <a href="{{doc}}.html">{{doc}}</a>
+      </h2>
+      <ul class="module" ht-repeat="(moduleName, module) in nav.module">
+        <!-- {{ moduleVar= moduleName.replace(/[^a-z]/g,'_') }} -->
+        <h3 ht-if="moduleVar">
+          <a href="" ng-click="module{{moduleVar}} = !module{{moduleVar}}">
             module: {{ moduleName }}
           </a>
-          <i ng-cloak ng-show="module{{moduleName}}">+</i>
+          <i ng-cloak ng-show="module{{moduleVar}}">+</i>
         </h3>
-        <li id="{{moduleName}}" ng-hide="module{{moduleName}}">
+        <li id="{{moduleName}}" ng-hide="module{{moduleVar}}">
           <ul class="group" ht-repeat="(groupName, group) in module">
             <h3>
               <a href=""
-                ng-click="{{moduleName}}{{groupName}} = !{{moduleName}}{{groupName}}">
+                ng-click="{{moduleVar}}{{groupName}} = !{{moduleVar}}{{groupName}}">
                 {{ groupName }}
               </a>
-              <i ng-cloak ng-show="{{moduleName}}{{groupName}}">+</i>
+              <i ng-cloak ng-show="{{moduleVar}}{{groupName}}">+</i>
             </h3>
-            <ul ng-hide="{{moduleName}}{{groupName}}">
+            <ul ng-hide="{{moduleVar}}{{groupName}}">
               <li ht-repeat="(className, klass) in group">
                 <a href="{{ klass.jsDocUrl }}">{{ className }}</a>
               </li>
@@ -41,6 +45,10 @@
     </nav>
 
     <div id="content" class="page-wrap">
+
+      <h3 ht-if="data.ngdoc" style="float:right; color:#ccc">
+        Angular {{data.ngdoc}}
+      </h3>
 
       <h1 class="title">
         {{ title }}
