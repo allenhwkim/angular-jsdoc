@@ -101,7 +101,8 @@
     return {
       restrict: 'AE',
       controller: 'MapController',
-      link: linkFunc
+      link: linkFunc,
+      templateUrl: 'sample-codes/ngmap/test-template.html'
     };
   };
   angular.module('ngMap').directive('map', map);
@@ -118,9 +119,8 @@
     <!--%= prettyJson %-->
     <script>
       prettyPrint();
-      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
-      var line = document.querySelector("ol li:nth-child("+(lineNo||1)+")");
-      line && line.scrollIntoView();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
     </script>
   </body>
 </html>

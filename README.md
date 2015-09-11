@@ -44,15 +44,15 @@ Quick Start
 
 ### Or, With Gulp
 
-    var shell = require('gulp-shell'); 
-    gulp.task('docs', shell.task([ 
-      'node_modules/jsdoc/jsdoc.js '+ 
+    var shell = require('gulp-shell');
+    gulp.task('docs', shell.task([
+      'node_modules/jsdoc/jsdoc.js '+
         '-c node_modules/angular-jsdoc/common/conf.json '+   // config file
-        '-t node_modules/angular-jsdoc/default '+   // template file
+        '-t node_modules/angular-jsdoc/angular-template '+   // template file
         '-d build/docs '+                           // output directory
         './README.md ' +                            // to include README.md as index contents
         '-r directives services'                    // source code directory
-    ])); 
+    ]));
 
 ### Or, With Grunt
 
@@ -63,7 +63,7 @@ Quick Start
           options: {
             destination: 'build/docs',
             configure: 'node_modules/angular-jsdoc/common/conf.json',
-            template: 'node_modules/angular-jsdoc/default',
+            template: 'node_modules/angular-jsdoc/angular-template',
             readme: './README.md'
           }
         }
@@ -73,7 +73,7 @@ Quick Start
 ### Or, With NodeJS
 
     var angularJsdoc = require('angular-jsdoc');
-    angularJsdoc(['my-source1', 'my-source2']); 
+    angularJsdoc(['my-source1', 'my-source2']);
 
 
     // or with options

@@ -60,7 +60,8 @@
     return {
       restrict: 'AE',
       controller: 'MapController',
-      link: linkFunc
+      link: linkFunc,
+      templateUrl: 'sample-codes/ngmap/test-template.html'
     };
   };
 

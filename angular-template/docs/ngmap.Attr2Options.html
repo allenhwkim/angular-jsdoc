@@ -2,64 +2,110 @@
 <html>
   <head>
     <base href="./">
-    <title>JSDoc: service:ngmap.Attr2Options</title>
+    <title>JSDoc: service:Attr2Options</title>
     <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
+    <link href="css/custom.css" type="text/css" rel="stylesheet">
     <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
   </head>
-  <body>
+  <body ng-app="">
     <nav>
       <h2><a href="index.html">Index</a></h2>
-      <div>
-        <h3>module: app</h3>
-        <div>
-          <h3>filter</h3>
-          <ul>
-            <li>
-              <a href="app.customCurrency.html">app.customCurrency</a>
-            </li>
+      <ul class="module">
+        <h3>
+          <a href="" ng-click="moduleapp = !moduleapp">
+            module: app
+          </a>
+          <i ng-cloak="" ng-show="moduleapp">+</i>
+        </h3>
+        <li id="app" ng-hide="moduleapp">
+          <ul class="group">
+            <h3>
+              <a href="" ng-click="appfilter = !appfilter">
+                filter
+              </a>
+              <i ng-cloak="" ng-show="appfilter">+</i>
+            </h3>
+            <ul ng-hide="appfilter">
+              <li>
+                <a href="app.customCurrency.html">customCurrency</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="appservice = !appservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="appservice">+</i>
+            </h3>
+            <ul ng-hide="appservice">
+              <li>
+                <a href="app.testService.html">testService</a>
+              </li>
+            </ul>
           </ul>
-        </div><div>
-          <h3>service</h3>
-          <ul>
-            <li>
-              <a href="app.testService.html">app.testService</a>
-            </li>
+        </li>
+      </ul><ul class="module">
+        <h3>
+          <a href="" ng-click="modulengmap = !modulengmap">
+            module: ngmap
+          </a>
+          <i ng-cloak="" ng-show="modulengmap">+</i>
+        </h3>
+        <li id="ngmap" ng-hide="modulengmap">
+          <ul class="group">
+            <h3>
+              <a href="" ng-click="ngmapservice = !ngmapservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="ngmapservice">+</i>
+            </h3>
+            <ul ng-hide="ngmapservice">
+              <li>
+                <a href="ngmap.Attr2Options.html">Attr2Options</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="ngmapdirective = !ngmapdirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="ngmapdirective">+</i>
+            </h3>
+            <ul ng-hide="ngmapdirective">
+              <li>
+                <a href="ngmap.map.html">map</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="ngmapcontroller = !ngmapcontroller">
+                controller
+              </a>
+              <i ng-cloak="" ng-show="ngmapcontroller">+</i>
+            </h3>
+            <ul ng-hide="ngmapcontroller">
+              <li>
+                <a href="ngmap.MapController.html">MapController</a>
+              </li>
+            </ul>
           </ul>
-        </div>
-      </div><div>
-        <h3>module: ngmap</h3>
-        <div>
-          <h3>service</h3>
-          <ul>
-            <li>
-              <a href="ngmap.Attr2Options.html">ngmap.Attr2Options</a>
-            </li>
-          </ul>
-        </div><div>
-          <h3>directive</h3>
-          <ul>
-            <li>
-              <a href="ngmap.map.html">ngmap.map</a>
-            </li>
-          </ul>
-        </div><div>
-          <h3>controller</h3>
-          <ul>
-            <li>
-              <a href="ngmap.MapController.html">ngmap.MapController</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+        </li>
+      </ul>
     </nav>
-    <h1 class="title">
-      service:ngmap.Attr2Options
-      <a class="name-link signature-attributes" href="source/ngmap.Attr2Options.html#line4">source</a>
-    </h1>
-    <div id="main">
-      <div>
-        <div><div class="container-overview">
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        service:Attr2Options
+        <a class="name-link signature-attributes" href="source/ngmap.Attr2Options.html#line4">source</a>
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <!-- index.html -->
+        <!-- class files -->
+        <div>
+          <div><div class="container-overview">
       <dt></dt>
       <dd>
         <div class="description">
@@ -108,7 +154,7 @@
         <h3 class="subsection-title">Methods</h3>
         <dl>
           <dt>
-            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+            <a href="source/ngmap.Attr2Options.html#line34" class="name-link">
               <h4 class="name">
                 filter
                 <span class="signature">(attrs)</span>
@@ -146,7 +192,7 @@
           </dd>
         </dl><dl>
           <dt>
-            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+            <a href="source/ngmap.Attr2Options.html#line74" class="name-link">
               <h4 class="name">
                 getControlOptions
                 <span class="signature">(filtered)</span>
@@ -184,7 +230,7 @@
           </dd>
         </dl><dl>
           <dt>
-            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+            <a href="source/ngmap.Attr2Options.html#line64" class="name-link">
               <h4 class="name">
                 getEvents
                 <span class="signature">(scope, attrs)</span>
@@ -228,7 +274,7 @@
           </dd>
         </dl><dl>
           <dt>
-            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+            <a href="source/ngmap.Attr2Options.html#line53" class="name-link">
               <h4 class="name">
                 getOptions
                 <span class="signature">(attrs, scope)</span>
@@ -278,7 +324,7 @@
           </dd>
         </dl><dl>
           <dt>
-            <a href="source/ngmap.Attr2Options.html#line4" class="name-link">
+            <a href="source/ngmap.Attr2Options.html#line24" class="name-link">
               <h4 class="name">
                 toOptionValue
                 <span class="signature">(input, options)</span>
@@ -323,20 +369,20 @@
         </dl>
       </div>
     </section></div>
+        </div>
       </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
     </div>
-    <footer style="clear:both">
-      Documentation generated by
-      <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
-      using 
-      <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a> 
-    </footer>
     <!--%= prettyJson %-->
     <script>
       prettyPrint();
-      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
-      var line = document.querySelector("ol li:nth-child("+(lineNo||1)+")");
-      line && line.scrollIntoView();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
     </script>
   </body>
 </html>

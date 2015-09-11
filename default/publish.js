@@ -127,13 +127,15 @@ exports.publish = function(data, opts) {
     doclet.examples = getDocletExamples(doclet);
 
     doclet.jsDocUrl = helper.createLink(doclet);
-    if (doclet.meta && doclet.kind == 'class') {
+    if (doclet.meta) {
       var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
       doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
-      sourceFiles[sourceHtml] = {
-        path: getPathFromDoclet(doclet),
-        toc: toc
-      };
+      if (doclet.kind == 'class') {
+        sourceFiles[sourceHtml] = {
+          path: getPathFromDoclet(doclet),
+          toc: toc
+        };
+      }
     }
 
     if (doclet.see) {

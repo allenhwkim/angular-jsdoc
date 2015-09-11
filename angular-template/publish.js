@@ -10,7 +10,6 @@ var helper = require('jsdoc/util/templateHelper');
 var templatePath;
 var outdir = env.opts.destination;
 var conf   = env.conf.templates || {}; //jshint ignore:line
-var toc    = {}; //table of contents
 
 var getDocletExamples = function(doclet) {
   var examples = (doclet.examples||[]).map(function(example) {
@@ -27,16 +26,6 @@ var getDocletExamples = function(doclet) {
     };
   });
   return examples;
-};
-
-var getPathFromDoclet = function(doclet) {
-  if (!doclet.meta) {
-    return null;
-  } else if (doclet.meta.path && doclet.meta.path !== 'null') {
-    return path.join(doclet.meta.path, doclet.meta.filename);
-  } else {
-    return doclet.meta.filename;
-  }
 };
 
 // copy the template's static files to outdir
@@ -78,33 +67,61 @@ var hashToLink = function(doclet, hash) {
 };
 
 var generate = function(filepath, data) {
-  data.title = data.ngdoc + ":" + data.longname;
+  data.title = data.ngdoc + ":" + data.name;
   data.prettyJson = JSON.stringify(data,null,'  ');
   data.basePath = __dirname;
   data.marked = marked;
 
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  var html = angularTemplate(layoutPath, data);
+  var html = angularTemplate(layoutPath, data, {jsMode:false});
   fs.writeFileSync(filepath, html, 'utf8');
 };
 
-var generateSourceFiles = function(sourceFiles, nav) {
+var generateSourceFiles = function(sourceCodes, nav) {
   fs.mkPath(path.join(outdir, "source"));
   var layoutPath = path.join(templatePath, 'html', 'layout.html');
-  for(var jsDoc in sourceFiles) {
-    var source = sourceFiles[jsDoc];
-    var sourceCode = require('fs').readFileSync(source.path, 'utf8');
-    sourceCode = sourceCode.replace(/</g,"&lt;");
+
+  for (var key in sourceCodes) {
+    var el = sourceCodes[key];
+    var sourceCode = require('fs').readFileSync(path.join(el.path, el.filename), 'utf8');
+    var outputPath = path.join(outdir, "source", el.longname+".html");
     var data = {
-      path: source.path,
-      code: sourceCode,
+      name: el.name,
+      longname: el.longname,
+      path: el.path,
+      filename: el.filename,
+      code: sourceCode.replace(/</g,'&lt;'),
       nav: nav,
       basePath: __dirname,
-      title: "Source:"+source.path.replace(/^.*[\/\\]/,'')
+      title: "Source:"+el.filename
     };
-    var outputPath = path.join(outdir, "source", jsDoc);
     var html = angularTemplate(layoutPath, data);
     fs.writeFileSync(outputPath, html, 'utf8');
+  }
+};
+
+var generateTemplateFiles = function(templateCodes, nav) {
+  fs.mkPath(path.join(outdir, "templates"));
+
+  for (var key in templateCodes) {
+    var el = templateCodes[key];
+    if (fs.existsSync(el.filePath)) {
+      var templateHtml = require('fs').readFileSync(el.filePath, 'utf8');
+      var outputPath = path.join(outdir, "templates", el.outputName);
+      var data = {
+        name: el.name,
+        longname: el.longname,
+        path: el.filePath,
+        code: templateHtml.replace(/</g,'&lt;'),
+        nav: nav,
+        basePath: __dirname,
+        title: "Template: "+el.templateUrl
+      };
+
+      var layoutPath = path.join(templatePath, 'html', 'layout.html');
+      var html = angularTemplate(layoutPath, data);
+      fs.writeFileSync(outputPath, html, 'utf8');
+    }
   }
 };
 
@@ -117,20 +134,60 @@ exports.publish = function(data, opts) {
   data.sort('longname, version, since');
 
   templatePath = opts.template;
-  var sourceFiles = {};
+
+  var classes  = helper.find(data, {kind: 'class'});
+  var sourceCodes = {}, templateCodes = {};
+
+  classes.forEach(function(doclet) {
+
+    if (doclet.meta && doclet.kind == 'class') {
+      sourceCodes[doclet.name] = {
+        name: doclet.name,
+        longname: doclet.longname,
+        path: doclet.meta.path,
+        filename: doclet.meta.filename
+      };
+    }
+
+    if (doclet.ngdoc == 'directive') {
+      var code = fs.readFileSync(
+        path.join(doclet.meta.path, doclet.meta.filename), 'utf8');
+      var matches = code.match(/templateUrl\s*:\s* (.*)/);
+      var templateUrl = matches && matches[1];
+      if (templateUrl && templateUrl.indexOf('function') === -1) {
+        templateUrl = templateUrl.trim().replace(/['",]/g,'');
+        var templatePath = templateUrl;
+        var templateCode =  {
+          name: doclet.name,
+          longname: doclet.longname,
+          filePath: templatePath,
+          templateUrl: templateUrl,
+          outputName: templateUrl.replace(/[\/\\]/g,'_')
+        };
+        doclet.templateCode = templateCode;
+        doclet.templateUrl = path.join('templates', templateCode.outputName);
+        templateCodes[doclet.name] = templateCode;
+      }
+    }
+
+  });
 
   data().each(function(doclet) {
     doclet.children = getChildren(data, doclet);
     doclet.examples = getDocletExamples(doclet);
-
     doclet.jsDocUrl = helper.createLink(doclet);
-    if (doclet.meta && doclet.kind == 'class') {
-      var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
-      doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
-      sourceFiles[sourceHtml] = {
-        path: getPathFromDoclet(doclet),
-        toc: toc
-      };
+
+    if (doclet.meta) {
+      if (doclet.kind == 'class') {
+        doclet.sourceUrl = 'source/'+
+          sourceCodes[doclet.name].longname+
+          ".html#line"+doclet.meta.lineno;
+      } else if ( (doclet.kind == 'function' || doclet.kind == 'member') &&
+        sourceCodes[doclet.memberof]) {
+        doclet.sourceUrl = 'source/'+
+          sourceCodes[doclet.memberof].longname+
+          ".html#line"+doclet.meta.lineno;
+      }
     }
 
     if (doclet.see) {
@@ -140,8 +197,6 @@ exports.publish = function(data, opts) {
     }
   });
 
-  var classes  = helper.find(data, {kind: 'class'});
-
   // build navigation
   var nav = {};
   classes.forEach(function(doclet) {
@@ -149,12 +204,13 @@ exports.publish = function(data, opts) {
     var group = doclet.ngdoc || 'undefined';
     nav[module] = nav[module] || {};
     nav[module][group] = nav[module][group] || {};
-    nav[module][group][doclet.longname] = {jsDocUrl: doclet.jsDocUrl};
+    nav[module][group][doclet.name] = {jsDocUrl: doclet.jsDocUrl};
   });
 
   // generate source html files
   copyStaticFiles();                     //copy static files e.g., css, js
-  generateSourceFiles(sourceFiles, nav); //generate source file as html
+  generateSourceFiles(sourceCodes, nav); //generate source file as html
+  generateTemplateFiles(templateCodes, nav); //generate template file as html
 
   // generate jsdoc html files
   classes.forEach(function(doclet) {
@@ -173,7 +229,7 @@ exports.publish = function(data, opts) {
       basePath: __dirname,
       title: "Index"
     };
-    var html = angularTemplate(layoutPath, readmeData);
+    var html = angularTemplate(layoutPath, readmeData, {jsMode:false});
     fs.writeFileSync(path.join(outdir, 'index.html'), html, 'utf8');
   }
 };
