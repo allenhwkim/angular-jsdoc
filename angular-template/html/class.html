@@ -136,7 +136,7 @@
                   <tr ht-repeat="param in func.params">
                     <td class="name">{{ param.name }}</td>
                     <td class="type"><span class="param-type">
-                      {{ param.type && param.type.names.join(" | ") }}
+                      {{ param.type && param.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
                     </span></td>
                     <td class="description last">{{ param.description }}</td>
                   </tr>
