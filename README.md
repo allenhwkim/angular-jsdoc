@@ -107,6 +107,15 @@ Specification
                  Default: 'README.md'
   - callback: callback function with output parameter. e.g., `function(output) {console.log(output)}`
 
+Tags Available
+--------
+- `@ngdoc` - specifies the type of thing being documented. See below for more detail.
+- `@scope` - specifies that the documented directive will create a new scope
+- `@priority` - specifies the documented directive's priority
+- `@animations` - specifies the animations that the documented directive supports
+- `@restrict` - specifies how directives should be shown in the usage section. For example, for [E]lement, [A]ttribute, and [C]lass, use @restrict ECA
+- `@eventType emit|broadcast` - specifies whether the event is emitted or broadcast
+
 Example
 --------
 
