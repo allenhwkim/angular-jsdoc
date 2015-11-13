@@ -145,7 +145,19 @@
             </div>
             <div ht-if="func.returns">
               <h5>Returns:</h5>
-              <div class="param-desc">{{ func.returns[0].description }}</div>
+              <table class="params">
+                <thead>
+                  <tr><th>Type</th><th class="last">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr ht-repeat="ret in func.returns">
+                    <td class="type"><span class="param-type">
+                      {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
+                    </span></td>
+                    <td class="description last">{{ ret.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </dd>
         </dl>

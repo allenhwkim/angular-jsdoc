@@ -37,7 +37,7 @@ Quick Start
     // or you can run in command line
     $ node_modules/jsdoc/jsdoc.js \
       --configure node_modules/angular-jsdoc/common/conf.json \
-      --template node_modules/angular-jsdoc/default \
+      --template node_modules/angular-jsdoc/angular-template \
       --destination build/docs \
       --readme README.md \
       --recurse directives services
@@ -78,7 +78,7 @@ Quick Start
 
     // or with options
     angularJsdoc('sample-codes', {
-      template: 'default',
+      template: 'angular-template',
       destination: 'default/docs',
       readme: "sample-codes/README.md"
     }, function(output) {
@@ -96,15 +96,15 @@ Specification
   - options:
 
     - command: jsdoc.js command
-                 Default: node_modules/jsdoc/jsdoc.js
+      Default: node_modules/jsdoc/jsdoc.js
     - configure: The path to the configuration file.
-                 Default: angular-jsdoc/common/conf.json
+      Default: angular-jsdoc/common/conf.json
     - destination: The path to the output folder. 
-                 Default: ./docs
+      Default: ./docs
     - template:  The path to the template to use
-                 Default: angular-jsdoc/default
+      Default: angular-jsdoc/default
     - readme: The path to the project's README file.
-                 Default: 'README.md'
+      Default: 'README.md'
   - callback: callback function with output parameter. e.g., `function(output) {console.log(output)}`
 
 Tags Available
@@ -120,13 +120,13 @@ Example
 --------
 
    - Directive: [map.js](sample-codes/ngmap/map.js) | 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.map.html)
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.map.html)
    - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js) | 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.Attr2Options.html)
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.Attr2Options.html)
    - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) | 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/ngmap.MapController.html)
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.MapController.html)
    - Filter: [custom-currency.js](sample-codes/app/custom-currency.js) | 
-     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/default/docs/app.customCurrency.html)
+     [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/app.customCurrency.html)
 
 Customization
 -------------
@@ -134,9 +134,9 @@ Customization
 Currently, there are two templates built-in;
 
   - default
-  - angular-template
+  - angular-template (Recommended)
 
-To add your own template, please copy the default directory to your own, then, make your own css, js, and html files.   
+To add your own template, please copy the `angular-template` directory to your own, then, make your own css, js, and html files.   
 Then, run the `jsdoc.js` command with your template. e.g.,
 
     $ node_modules/jsdoc/jsdoc.js \
@@ -146,7 +146,7 @@ Then, run the `jsdoc.js` command with your template. e.g.,
       --readme README.md \
       --recurse directives services
 
-If you want to share your template with others, please send a pull request after adding your template directory where `default` directory is.
+If you want to share your template with others, please send a pull request after adding your template directory where `angular-template` directory is.
 
 The following is the example of directory with explanation;
 
