@@ -79,13 +79,24 @@
             <li ht-repeat="el in requires">{{ el }} Service</li>
           </ul>
         </div>
+
         <div ht-if="animations">
           <h5>Animations:</h5>
           <pre>{{ animations }}</pre>
         </div>
+
         <div ht-if="typeof examples !== 'undefined' && examples.length">
           <h5>Example</h5>
           <pre ht-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+        </div>
+
+        <div ht-if="typeof tutorials !== 'undefined' && tutorials.length">
+          <h5>Tutorials:</h5>
+          <ul>
+            <li ht-repeat="tutorial in tutorials">
+              {{tutoriallink(tutorial)}}
+            </li>
+          </ul>
         </div>
       </dd>
     </div>

@@ -146,47 +146,32 @@ var generateStaticDocuments = function(docs, nav) {
   });
 };
 
-////////////////////////////////
-helper.setTutorials(tutorials);
+var generateTutorialFile = function(title, tutorial, filename) {
+  var layoutPath = path.join(templatePath, 'html', 'tutorial.html');
+  var tutorialData = {
+    title: title,
+    header: tutorial.title,
+    content: tutorial.parse(),
+    children: tutorial.children
+  };
+  console.log('tutorialData', tutorialData);
 
-function tutoriallink(tutorial) {
-  return helper.toTutorial(tutorial, null, { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
-}
+  var tutorialPath = path.join(outdir, filename);
+  var tutoriallink = function (tutorial) {
+    return helper.toTutorial(tutorial, null,
+      { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+  };
 
-    view.tutoriallink = tutoriallink;
-
-    // set up tutorials for helper
-
-    // TODO: move the tutorial functions to templateHelper.js
-//    function generateTutorial(title, tutorial, filename) {
-//        var tutorialData = {
-//            title: title,
-//            header: tutorial.title,
-//            content: tutorial.parse(),
-//            children: tutorial.children
-//        };
-//
-//        var tutorialPath = path.join(outdir, filename),
-//            html = view.render('tutorial.tmpl', tutorialData);
-//
-//        // yes, you can use {@link} in tutorials too!
-//        html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
-//
-//        fs.writeFileSync(tutorialPath, html, 'utf8');
-//    }
-//
-//    // tutorials can have only one parent so there is no risk for loops
-//    function saveChildren(node) {
-//        node.children.forEach(function(child) {
-//            generateTutorial(
-//              'Tutorial: ' + child.title,
-//              child,
-//              helper.tutorialToUrl(child.name)
-//            );
-//            saveChildren(child);
-//        });
-//    }
-//    saveChildren(tutorials);
+  var html = angularTemplate(layoutPath, {
+    basePath: __dirname,
+    tutorialData: tutorialData,
+    tutoriallink: tutoriallink
+  });
+  // yes, you can use {@link} in tutorials too!
+  // turn {@link foo} into <a href="foodoc.html">foo</a>
+  html = helper.resolveLinks(html); 
+  fs.writeFileSync(tutorialPath, html, 'utf8');
+};
 
 var generateTutorialFiles = function(node) {
   fs.mkPath(path.join(outdir, "tutorials"));
@@ -198,57 +183,17 @@ var generateTutorialFiles = function(node) {
         helper.tutorialToUrl(child.name)
       );
 
-    generateTutorialFile(child);
+    generateTutorialFiles(child);
   });
 };
-generateTutorialFiles(tutorials.children);
-
-var generateTutorialFile = function(title, tutorial, filename) {
-  var layoutPath = path.join(templatePath, 'html', 'tutorial.html');
-  var tutorialData = {
-      title: title,
-      header: tutorial.title,
-      content: tutorial.parse(),
-      children: tutorial.children
-  };
-
-  var tutorialPath = path.join(outdir, filename);
-  var html = angularTemplate(layoutPath, {
-    basePath: __dirname,
-    tutorialData: tutorialData
-  });
-  // yes, you can use {@link} in tutorials too!
-  // turn {@link foo} into <a href="foodoc.html">foo</a>
-  html = helper.resolveLinks(html); 
-  fs.writeFileSync(tutorialPath, html, 'utf8');
-};
-
-/*
-//
-// file html/tutorial.html
-//
-<section ht-if="tutorialData && tutorialData.children.length > 0">
-  <header>
-      <ul>
-          <li ht-repeat="t in tutorialData.children">
-            {{tutoriallink(t.name)}}
-          </li>
-      </ul>
-      <h2>{{tutorialData.header}}</h2>
-  </header>
-
-  <article>
-      {{tutorialData.content}}
-  </article>
-</section>
-*/
 
 /**
   @param {TAFFY} taffyData See <http://taffydb.com/>.
   @param {object} opts
  */
 exports.publish = function(data, opts, tutorials) {
-  //console.log('options', opts);
+  helper.setTutorials(tutorials);
+
   data.sort('longname, version, since');
 
   templatePath = opts.template;
@@ -290,10 +235,15 @@ exports.publish = function(data, opts, tutorials) {
 
   });
 
+
   data().each(function(doclet) {
     doclet.children = getChildren(data, doclet);
     doclet.examples = getDocletExamples(doclet);
     doclet.jsDocUrl = helper.createLink(doclet);
+    doclet.tutoriallink = function (tutorial) {
+      return helper.toTutorial(tutorial, null,
+        { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+    };
 
     if (doclet.meta) {
       if (doclet.kind == 'class') {
@@ -330,9 +280,15 @@ exports.publish = function(data, opts, tutorials) {
 
   // generate source html files
   copyStaticFiles();                         // copy static files e.g., css, js
-  generateSourceFiles(sourceCodes, nav);     // generate source file as html
+  // generate source file as html
+  generateSourceFiles(sourceCodes, nav);
+  // generate static documents from env.opts.query.docs
+  generateStaticDocuments(docFiles, nav);
+  // generate tutorial files
+  //generateTutorialFiles(tutorials.children);
+  generateTutorialFiles(tutorials);
+  // angular directive has its template, we make those as file
   generateTemplateFiles(templateCodes, nav); // generate template file for directives
-  generateStaticDocuments(docFiles, nav);    // generate static documents
 
   // generate jsdoc html files
   classes.forEach(function(doclet) {

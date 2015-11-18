@@ -8,6 +8,7 @@
  * @param {$http} Test
  * @desc
  *  returns custom currency from the given input
+ * @tutorial tutorial1
  */
 (function() {
   'use strict';
