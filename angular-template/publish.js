@@ -146,12 +146,54 @@ var generateStaticDocuments = function(docs, nav) {
   });
 };
 
+var generateTutorialFile = function(title, tutorial, filename) {
+  var layoutPath = path.join(templatePath, 'html', 'tutorial.html');
+  var tutorialData = {
+    title: title,
+    header: tutorial.title,
+    content: tutorial.parse(),
+    children: tutorial.children
+  };
+  console.log('tutorialData', tutorialData);
+
+  var tutorialPath = path.join(outdir, filename);
+  var tutoriallink = function (tutorial) {
+    return helper.toTutorial(tutorial, null,
+      { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+  };
+
+  var html = angularTemplate(layoutPath, {
+    basePath: __dirname,
+    tutorialData: tutorialData,
+    tutoriallink: tutoriallink
+  });
+  // yes, you can use {@link} in tutorials too!
+  // turn {@link foo} into <a href="foodoc.html">foo</a>
+  html = helper.resolveLinks(html); 
+  fs.writeFileSync(tutorialPath, html, 'utf8');
+};
+
+var generateTutorialFiles = function(node) {
+  fs.mkPath(path.join(outdir, "tutorials"));
+
+  node.children.forEach(function(child) {
+    generateTutorialFile(
+        'Tutorial: ' + child.title,
+        child,
+        helper.tutorialToUrl(child.name)
+      );
+
+    generateTutorialFiles(child);
+  });
+};
+
 /**
   @param {TAFFY} taffyData See <http://taffydb.com/>.
   @param {object} opts
  */
-exports.publish = function(data, opts) {
-  //console.log('options', opts);
+exports.publish = function(data, opts, tutorials) {
+  helper.setTutorials(tutorials);
+
   data.sort('longname, version, since');
 
   templatePath = opts.template;
@@ -193,10 +235,15 @@ exports.publish = function(data, opts) {
 
   });
 
+
   data().each(function(doclet) {
     doclet.children = getChildren(data, doclet);
     doclet.examples = getDocletExamples(doclet);
     doclet.jsDocUrl = helper.createLink(doclet);
+    doclet.tutoriallink = function (tutorial) {
+      return helper.toTutorial(tutorial, null,
+        { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+    };
 
     if (doclet.meta) {
       if (doclet.kind == 'class') {
@@ -233,9 +280,15 @@ exports.publish = function(data, opts) {
 
   // generate source html files
   copyStaticFiles();                         // copy static files e.g., css, js
-  generateSourceFiles(sourceCodes, nav);     // generate source file as html
+  // generate source file as html
+  generateSourceFiles(sourceCodes, nav);
+  // generate static documents from env.opts.query.docs
+  generateStaticDocuments(docFiles, nav);
+  // generate tutorial files
+  //generateTutorialFiles(tutorials.children);
+  generateTutorialFiles(tutorials);
+  // angular directive has its template, we make those as file
   generateTemplateFiles(templateCodes, nav); // generate template file for directives
-  generateStaticDocuments(docFiles, nav);    // generate static documents
 
   // generate jsdoc html files
   classes.forEach(function(doclet) {
