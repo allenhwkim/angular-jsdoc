@@ -41,6 +41,7 @@ Quick Start
       --destination build/docs \
       --readme README.md \
       --recurse directives services
+      --tutorials tutorials
 
 ### Or, With Gulp
 
@@ -51,7 +52,8 @@ Quick Start
         '-t node_modules/angular-jsdoc/angular-template '+   // template file
         '-d build/docs '+                           // output directory
         './README.md ' +                            // to include README.md as index contents
-        '-r directives services'                    // source code directory
+        '-r directives services'  +                 // source code directory
+        '-u tutorials'                              // tutorials directory
     ]));
 
 ### Or, With Grunt
@@ -64,48 +66,13 @@ Quick Start
             destination: 'build/docs',
             configure: 'node_modules/angular-jsdoc/common/conf.json',
             template: 'node_modules/angular-jsdoc/angular-template',
+            tutorial: 'tutorials',
             readme: './README.md'
           }
         }
       }
     });
 
-### Or, With NodeJS
-
-    var angularJsdoc = require('angular-jsdoc');
-    angularJsdoc(['my-source1', 'my-source2']);
-
-
-    // or with options
-    angularJsdoc('sample-codes', {
-      template: 'angular-template',
-      destination: 'default/docs',
-      readme: "sample-codes/README.md"
-    }, function(output) {
-      console.log('output', output);
-    });
-
-
-Specification
---------------
-
-  angularJsdoc(sourceDirectory, options, callback)
-
-  - sourceDirectory: list of source code directories. e.g. ['dir1', 'dir2']
-
-  - options:
-
-    - command: jsdoc.js command
-      Default: node_modules/jsdoc/jsdoc.js
-    - configure: The path to the configuration file.
-      Default: angular-jsdoc/common/conf.json
-    - destination: The path to the output folder. 
-      Default: ./docs
-    - template:  The path to the template to use
-      Default: angular-jsdoc/default
-    - readme: The path to the project's README file.
-      Default: 'README.md'
-  - callback: callback function with output parameter. e.g., `function(output) {console.log(output)}`
 
 Tags Available
 --------
