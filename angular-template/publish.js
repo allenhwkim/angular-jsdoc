@@ -154,7 +154,6 @@ var generateTutorialFile = function(title, tutorial, filename) {
     content: tutorial.parse(),
     children: tutorial.children
   };
-  console.log('tutorialData', tutorialData);
 
   var tutorialPath = path.join(outdir, filename);
   var tutoriallink = function (tutorial) {
@@ -169,7 +168,7 @@ var generateTutorialFile = function(title, tutorial, filename) {
   });
   // yes, you can use {@link} in tutorials too!
   // turn {@link foo} into <a href="foodoc.html">foo</a>
-  html = helper.resolveLinks(html); 
+  html = helper.resolveLinks(html);
   fs.writeFileSync(tutorialPath, html, 'utf8');
 };
 
@@ -285,7 +284,6 @@ exports.publish = function(data, opts, tutorials) {
   // generate static documents from env.opts.query.docs
   generateStaticDocuments(docFiles, nav);
   // generate tutorial files
-  //generateTutorialFiles(tutorials.children);
   generateTutorialFiles(tutorials);
   // angular directive has its template, we make those as file
   generateTemplateFiles(templateCodes, nav); // generate template file for directives

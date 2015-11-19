@@ -76,6 +76,18 @@
             <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
           <% }); %>
         <% } %>
+
+        <% if (typeof tutorials !== 'undefined' && tutorials.length) { %>
+          <h5>Tutorials:</h5>
+          <ul>
+            <% tutorials.forEach(function(tutorial) { %>
+              <li>
+                <%= tutoriallink(tutorial) %>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+
       </dd>
     </div>
 

@@ -10,6 +10,8 @@ var helper = require('jsdoc/util/templateHelper');
 
 var templatePath;
 var outdir = env.opts.destination;
+var defaultModuleName = env.opts.query && env.opts.query.module;
+var docFiles = env.opts.query && env.opts.query.docs.split(",");
 var conf   = env.conf.templates || {}; //jshint ignore:line
 var toc    = {}; //table of contents
 
@@ -111,12 +113,73 @@ var generateSourceFiles = function(sourceFiles, nav) {
   }
 };
 
+var generateStaticDocuments = function(docs, nav) {
+  fs.mkPath(path.join(outdir, "docs"));
+
+  (docs||[]).forEach(function(el) {
+    var outputPath = path.join(outdir, el+".html");
+    var markdown = require('fs').readFileSync(el, 'utf8');
+    var documentData = {
+      nav: nav,
+      readme: marked(markdown),
+      basePath: __dirname,
+      title: el,
+    };
+
+    var layoutPath = path.join(templatePath, 'html', 'layout.html');
+    var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
+    var html = jsTemplate(layoutHtml, documentData);
+    fs.writeFileSync(outputPath, html, 'utf8');
+  });
+};
+
+var generateTutorialFile = function(title, tutorial, filename) {
+  var tutorialData = {
+    title: title,
+    header: tutorial.title,
+    content: tutorial.parse(),
+    children: tutorial.children
+  };
+
+  var tutorialPath = path.join(outdir, filename);
+  var tutoriallink = function (tutorial) {
+    return helper.toTutorial(tutorial, null,
+      { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+  };
+
+  var layoutPath = path.join(templatePath, 'html', 'tutorial.html');
+  var layoutHtml = require('fs').readFileSync(layoutPath, 'utf8');
+  var html = jsTemplate(layoutHtml, {
+    basePath: __dirname,
+    tutorialData: tutorialData,
+    tutoriallink: tutoriallink
+  });
+  // yes, you can use {@link} in tutorials too!
+  // turn {@link foo} into <a href="foodoc.html">foo</a>
+  html = helper.resolveLinks(html);
+  fs.writeFileSync(tutorialPath, html, 'utf8');
+};
+
+var generateTutorialFiles = function(node) {
+  fs.mkPath(path.join(outdir, "tutorials"));
+
+  node.children.forEach(function(child) {
+    generateTutorialFile(
+        'Tutorial: ' + child.title,
+        child,
+        helper.tutorialToUrl(child.name)
+      );
+
+    generateTutorialFiles(child);
+  });
+};
+
 /**
   @param {TAFFY} taffyData See <http://taffydb.com/>.
   @param {object} opts
  */
-exports.publish = function(data, opts) {
-  //console.log('options', opts);
+exports.publish = function(data, opts, tutorials) {
+  helper.setTutorials(tutorials);
   data.sort('longname, version, since');
 
   templatePath = opts.template;
@@ -127,6 +190,11 @@ exports.publish = function(data, opts) {
     doclet.examples = getDocletExamples(doclet);
 
     doclet.jsDocUrl = helper.createLink(doclet);
+    doclet.tutoriallink = function (tutorial) {
+      return helper.toTutorial(tutorial, null,
+        { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+    };
+
     if (doclet.meta) {
       var sourceHtml = doclet.jsDocUrl.replace(/#.*$/,'');
       doclet.sourceUrl = 'source/'+sourceHtml+"#line"+doclet.meta.lineno;
@@ -148,9 +216,11 @@ exports.publish = function(data, opts) {
   var classes  = helper.find(data, {kind: 'class'});
 
   // build navigation
-  var nav = {};
+  var nav = {
+    docs: docFiles || [],
+  };
   classes.forEach(function(doclet) {
-    var module = doclet.memberof || 'undefined';
+    var module = doclet.memberof || defaultModuleName;
     var group = doclet.ngdoc || 'undefined';
     nav[module] = nav[module] || {};
     nav[module][group] = nav[module][group] || {};
@@ -160,6 +230,10 @@ exports.publish = function(data, opts) {
   // generate source html files
   copyStaticFiles();                     //copy static files e.g., css, js
   generateSourceFiles(sourceFiles, nav); //generate source file as html
+  // generate static documents from env.opts.query.docs
+  generateStaticDocuments(docFiles, nav);
+  // generate tutorial files
+  generateTutorialFiles(tutorials);
 
   // generate jsdoc html files
   classes.forEach(function(doclet) {

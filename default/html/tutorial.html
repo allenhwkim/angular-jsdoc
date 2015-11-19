@@ -1,0 +1,19 @@
+<section>
+  <% if (tutorialData && tutorialData.children.length) { %>
+    <header>
+      <ul>
+        <% tutorialData.children.forEach(function(t) { %>
+          <li>
+            <%= tutoriallink(t.name) %>
+          </li>
+        <% }); %>
+      </ul>
+    </header>
+  <% } %>
+
+  <h2><%= tutorialData.header %></h2>
+  <article>
+    <%= tutorialData.content %>
+  </article>
+</section>
+
