@@ -104,8 +104,8 @@
     <section>
       <div class="members" ht-if="children.member">
         <h3 class="subsection-title">Members</h3>
-        <dl>
-          <dt ht-repeat="member in children.member">
+        <dl ht-repeat="member in children.member">
+          <dt>
             <a href="{{ member.sourceUrl }}" class="name-link">
               <h4 class="name">{{ member.name }}</h4>
             </a>
