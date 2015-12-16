@@ -23,6 +23,18 @@
         <li id="app" ng-hide="moduleapp">
           <ul class="group">
             <h3>
+              <a href="" ng-click="appconfig = !appconfig">
+                config
+              </a>
+              <i ng-cloak="" ng-show="appconfig">+</i>
+            </h3>
+            <ul ng-hide="appconfig">
+              <li>
+                <a href="app.config.html">config</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
               <a href="" ng-click="appfilter = !appfilter">
                 filter
               </a>

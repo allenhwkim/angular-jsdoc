@@ -23,6 +23,18 @@
         <li id="app" ng-hide="moduleapp">
           <ul class="group">
             <h3>
+              <a href="" ng-click="appconfig = !appconfig">
+                config
+              </a>
+              <i ng-cloak="" ng-show="appconfig">+</i>
+            </h3>
+            <ul ng-hide="appconfig">
+              <li>
+                <a href="app.config.html">config</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
               <a href="" ng-click="appfilter = !appfilter">
                 filter
               </a>
@@ -134,6 +146,23 @@ of a site.</p>
             </tbody>
           </table>
         </div>
+        <div>
+          <h5>Properties:</h5>
+          <table class="props">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name" nowrap="">obj</td>
+                <td class="type"><span class="param-type">
+                  object
+                </span></td>
+                <td class="description last"><p>property of this service</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </dd>
     </div>
     <section>
@@ -141,7 +170,7 @@ of a site.</p>
         <h3 class="subsection-title">Methods</h3>
         <dl>
           <dt>
-            <a href="source/app.testService.html#line20" class="name-link">
+            <a href="source/app.testService.html#line22" class="name-link">
               <h4 class="name">
                 test
 ///// NO param jsdoc tag here

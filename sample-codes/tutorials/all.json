@@ -1,0 +1,16 @@
+{
+     "tutorial1": {
+         "title": "Tutorial One",
+         "children": {
+             "childA": {
+                 "title": "Child A"
+             },
+             "childB": {
+                 "title": "Child B"
+             }
+         }
+     },
+     "my-tutorial": {
+         "title": "Tutorial Two"
+     }
+ }

@@ -2,7 +2,7 @@
 <html>
   <head>
     <base href="../" />
-    <title>JSDoc: Source:test-service.js</title>
+    <title>JSDoc: Source:config.js</title>
     <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
     <script src="js/prettify.js"></script>
@@ -10,8 +10,15 @@
   <body>
     <nav>
       <h2><a href="index.html">Index</a></h2>
+          <h3>module: docs</h3>
+        <ul>
+        </ul>
           <h3>module: app</h3>
         <ul>
+            <h3>config</h3>
+            <ul>
+                <li><a href="app.config.html">app.config</a></li>
+            </ul>
             <h3>filter</h3>
             <ul>
                 <li><a href="app.customCurrency.html">app.customCurrency</a></li>
@@ -38,32 +45,25 @@
         </ul>
     </nav>
     <h1 class="title">
-      Source:test-service.js
+      Source:config.js
     </h1>
     <div id="main">
       <article>
         <pre class="prettyprint source linenums"><code>(function () {
-  'use strict';
-  angular.module('app').service('testService', testService);
-  /**
-   * The siteLanguageServices provides information about available languges
-   * of a site.
-   *
-   * @memberof app
-   * @ngdoc service
-   * @name testService
-   * @param {$http} Test
-   * @ngInject
-   */
-  function testService ($http) {
-  }
+    'use strict';
+    angular
+    .module('app')
+    .config(stateConfig)
    /**
-    * @memberof testService
-    * @method test
-    * ///// NO param jsdoc tag here
+    * Configures ui-router's states.
+    * @memberof app
+    * @ngdoc config
+    * @name config
+    * @param {Service} $urlRouterProvider Watches $location and provides interface to default state
     */
-   function test() {
-   }
+    function stateConfig($urlRouterProvider) {
+        $urlRouterProvider.otherwise('/search')
+    }
 })();
 </code></pre>
       </article>
@@ -77,9 +77,8 @@
     <!--%= prettyJson %-->
     <script>
       prettyPrint();
-      var lineNo = window.location.hash.match(/([0-9]*)$/)[0] || 1;
-      var line = document.querySelector("ol li:nth-child("+(lineNo||1)+")");
-      line && line.scrollIntoView();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
     </script>
   </body>
 </html>

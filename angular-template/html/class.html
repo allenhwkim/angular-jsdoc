@@ -104,16 +104,22 @@
     <section>
       <div class="members" ht-if="children.member">
         <h3 class="subsection-title">Members</h3>
-        <dl ht-repeat="member in children.member">
-          <dt>
-            <a href="{{ member.sourceUrl }}" class="name-link">
-              <h4 class="name">{{ member.name }}</h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description">{{ member.description }}</div>
-          </dd>
-        </dl>
+        <table class="props">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr ht-repeat="member in children.member">
+              <td class="name" nowrap>{{ member.name }}</td>
+              <td class="type"><span class="param-type">
+                {{ member.type && member.type.names.join(" | ") }}
+              </span></td>
+              <td class="description last">{{ member.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <br/>
       </div>
       <div class="functions" ht-if="children.function">
         <h3 class="subsection-title">Methods</h3>
