@@ -77,7 +77,9 @@ Quick Start
 Tags Available
 --------
 - `@ngdoc` - specifies the type of thing being documented. See below for more detail.
-- `@scope` - specifies that the documented directive will create a new scope
+- `@scope` - specifies the type of scope used by documented directive. Options are `true` for a new inherited
+scope, `false` for shared scope, and either `{}` or `object` for isolate scope. if `@scope` is provided without
+  a value, a new shared scope will be assumed
 - `@priority` - specifies the documented directive's priority
 - `@animations` - specifies the animations that the documented directive supports
 - `@restrict` - specifies how directives should be shown in the usage section. For example, for [E]lement, [A]ttribute, and [C]lass, use @restrict ECA
@@ -86,13 +88,13 @@ Tags Available
 Example
 --------
 
-   - Directive: [map.js](sample-codes/ngmap/map.js) | 
+   - Directive: [map.js](sample-codes/ngmap/map.js) |
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.map.html)
-   - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js) | 
+   - Service: [attr2-options.js](sample-codes/ngmap/attr2-options.js) |
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.Attr2Options.html)
-   - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) | 
+   - Controller: [map-controller.js](sample-codes/ngmap/map-controller.js) |
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/ngmap.MapController.html)
-   - Filter: [custom-currency.js](sample-codes/app/custom-currency.js) | 
+   - Filter: [custom-currency.js](sample-codes/app/custom-currency.js) |
      [Output](https://rawgit.com/allenhwkim/angular-jsdoc/master/angular-template/docs/app.customCurrency.html)
 
 Customization
