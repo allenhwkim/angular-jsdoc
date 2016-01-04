@@ -60,7 +60,21 @@ exports.defineTags = function(dictionary) {
 
   dictionary.defineTag('scope', {
     onTagged: function(doclet, tag) {
-      doclet.newScope = true;
+      var scopeType={
+        'object': '\'isolate\' scope',
+        '{}': '\'isolate\' scope',
+        'true': 'scope which prototypically inherits from its parent',
+        'false': 'shared scope'
+      }
+      var s = function() {
+        return scopeType[tag.value];
+      }();
+      if (!tag.value || !s) {
+        doclet.scopeType = 'scope';
+      } else {
+        doclet.scopeType = s;
+      }
+      doclet.newScope = !(s == 'shared scope');
     }
   });
 };
