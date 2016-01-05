@@ -6,12 +6,17 @@
         </div>
         <div class="details"></div>
         <div ht-if="newScope">
-          <b>Creates a new scope</b>
+          <div ht-if="newScope === true">
+            <h5>Creates a new {{scopeType}}</h5>
+          </div>
+          <div ht-if="newScope !== true">
+            <h5>Uses {{scopeType}}</h5>
+          </div>
         </div>
         <div ht-if="restrict">
             <h5>Restricted on</h5>
-            <ul ht-repeat="rest in restrict">
-                <li>{{rest}}</li>
+            <ul class="chips">
+                <li class="chip" ht-repeat="rest in restrict">{{rest}}</li>
             </ul>
         </div>
         <div ht-if="priority">
