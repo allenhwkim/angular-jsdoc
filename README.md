@@ -29,6 +29,10 @@ Install
 
     $ npm install jsdoc angular-jsdoc --save-dev
 
+If you intend to use it with Grunt also execute:
+
+    $ npm install grunt-jsdoc --save-dev
+
 Quick Start
 -----------
 
@@ -59,7 +63,7 @@ Quick Start
 ### Or, With Grunt
 
     grunt.initConfig({
-      jsdoc : {
+      jsdoc: {
         dist: {
           src: ['directives', 'services'],
           options: {
