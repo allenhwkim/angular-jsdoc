@@ -247,12 +247,12 @@ exports.publish = function(data, opts, tutorials) {
     if (doclet.meta) {
       if (doclet.kind == 'class') {
         doclet.sourceUrl = 'source/'+
-          sourceCodes[doclet.name].longname+
+                encodeURIComponent(sourceCodes[doclet.name].longname)+
           ".html#line"+doclet.meta.lineno;
       } else if ( (doclet.kind == 'function' || doclet.kind == 'member') &&
         sourceCodes[doclet.memberof]) {
         doclet.sourceUrl = 'source/'+
-          sourceCodes[doclet.memberof].longname+
+                encodeURIComponent(sourceCodes[doclet.memberof].longname)+
           ".html#line"+doclet.meta.lineno;
       }
     }
