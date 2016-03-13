@@ -2,7 +2,7 @@
       <dt></dt>
       <dd>
         <div class="description">
-          {{ description }}
+          {{ description.replace(/\{@link (.*)\}/, '<a href="$1.html">$1</a>') }}
         </div>
         <div class="details"></div>
         <div ht-if="newScope">
