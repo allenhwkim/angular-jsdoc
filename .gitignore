@@ -3,3 +3,4 @@ nohup.out
 node_modules
 /tmp/
 /out
+.idea/
