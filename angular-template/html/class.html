@@ -1,7 +1,7 @@
     <div class="container-overview">
       <dt></dt>
       <dd>
-        <div class="description">
+        <div ht-if="description" class="description">
           {{ description.replace(/\{@link (.*)\}/, '<a href="$1.html">$1</a>') }}
         </div>
         <div class="details"></div>
