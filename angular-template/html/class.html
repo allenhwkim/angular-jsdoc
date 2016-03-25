@@ -5,12 +5,9 @@
           {{ description.replace(/\{@link (.*)\}/, '<a href="$1.html">$1</a>') }}
         </div>
         <div class="details"></div>
-        <div ht-if="newScope">
-          <div ht-if="newScope === true">
-            <h5>Creates a new {{scopeType}}</h5>
-          </div>
-          <div ht-if="newScope !== true">
-            <h5>Uses {{scopeType}}</h5>
+        <div>
+          <div>
+            <h5>{{directiveScope}}</h5>
           </div>
         </div>
         <div ht-if="restrict">

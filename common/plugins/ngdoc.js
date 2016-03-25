@@ -59,22 +59,19 @@ exports.defineTags = function(dictionary) {
   });
 
   dictionary.defineTag('scope', {
-    onTagged: function(doclet, tag) {
-      var scopeType={
-        'object': '\'isolate\' scope',
-        '{}': '\'isolate\' scope',
-        'true': 'scope which prototypically inherits from its parent',
-        'false': 'shared scope'
-      }
-      var s = function() {
-        return scopeType[tag.value];
-      }();
-      if (!tag.value || !s) {
-        doclet.scopeType = 'scope';
+    onTagged: function (doclet, tag) {
+      var scopeType = {
+        'object': 'Creates a new isolated scope',
+        '{}': 'Creates a new isolated scope',
+        'true': 'Creates a new scope prototypically inheriting from its parent',
+        'false': 'Shares the scope of the parent'
+      };
+
+      if (!scopeType.hasOwnProperty(tag.value)) {
+        doclet.directiveScope = 'Creates a new scope';
       } else {
-        doclet.scopeType = s;
+        doclet.directiveScope = scopeType[tag.value];
       }
-      doclet.newScope = !(s == 'shared scope');
     }
-  });
+  })
 };
