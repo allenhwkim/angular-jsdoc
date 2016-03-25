@@ -32,11 +32,18 @@
             </thead>
             <tbody>
               <tr ht-repeat="param in params">
-                <td class="name" nowrap>{{ param.name }}</td>
+                <td class="name" nowrap>
+                  <a id="{{ param.name }}"></a>
+                  {{ param.name }}
+                </td>
                 <td class="type"><span class="param-type">
                   {{ param.type && param.type.names.join(" | ") }}
                 </span></td>
-                <td class="description last">{{ param.description }}</td>
+                <td class="description last">
+                  <span ht-if="param.description">
+                    {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -127,7 +134,7 @@
         <h3 class="subsection-title">Methods</h3>
         <dl ht-repeat="func in children.function">
           <dt>
-            <a href="{{ func.sourceUrl }}" class="name-link">
+            <a href="{{ func.sourceUrl }}" class="name-link" id="{{ func.name }}">
               <h4 class="name">
                 {{ func.name }}
                 <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
@@ -139,7 +146,9 @@
           </dt>
           <dd>
             <div class="description">
-              {{ func.description }}
+              <span ht-if="func.description">
+                {{ func.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+              </span>
             </div>
             <div ht-if="func.examples && func.examples.length">
               <h5>Example</h5>
@@ -157,7 +166,11 @@
                     <td class="type"><span class="param-type">
                       {{ param.type && param.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
                     </span></td>
-                    <td class="description last">{{ param.description }}</td>
+                    <td class="description last">
+                      <span ht-if="param.description">
+                        {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                      </span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -173,7 +186,11 @@
                     <td class="type"><span class="param-type">
                       {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
                     </span></td>
-                    <td class="description last">{{ ret.description }}</td>
+                    <td class="description last">
+                      <span ht-if="ret.description">
+                        {{ ret.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                      </span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
