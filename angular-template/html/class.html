@@ -17,7 +17,7 @@
             {{eventType}}
         </div>
         <div ht-if="params">
-          <h5>Dependencies:</h5>
+          <h5>Parameters</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
@@ -41,7 +41,7 @@
           </table>
         </div>
         <div ht-if="properties">
-          <h5>Properties:</h5>
+          <h5>Properties</h5>
           <table class="props">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
@@ -58,7 +58,7 @@
           </table>
         </div>
         <div ht-if="attributes">
-          <h5>Attributes:</h5>
+          <h5>Attributes</h5>
           <table class="params">
             <thead>
               <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
@@ -75,14 +75,14 @@
           </table>
         </div>
         <div ht-if="requires">
-          <h5>Dependencies</h5>
+          <h5>Requirements</h5>
           <ul>
             <li ht-repeat="el in requires">{{ el }} Service</li>
           </ul>
         </div>
 
         <div ht-if="animations">
-          <h5>Animations:</h5>
+          <h5>Animations</h5>
           <pre>{{ animations }}</pre>
         </div>
 
@@ -92,7 +92,7 @@
         </div>
 
         <div ht-if="typeof tutorials !== 'undefined' && tutorials.length">
-          <h5>Tutorials:</h5>
+          <h5>Tutorials</h5>
           <ul>
             <li ht-repeat="tutorial in tutorials">
               {{tutoriallink(tutorial)}}
@@ -147,7 +147,7 @@
               <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
             </div>
             <div ht-if="func.params">
-              <h5>Parameters:</h5>
+              <h5>Parameters</h5>
               <table class="params">
                 <thead>
                   <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
@@ -168,7 +168,7 @@
               </table>
             </div>
             <div ht-if="func.returns">
-              <h5>Returns:</h5>
+              <h5>Returns</h5>
               <table class="params">
                 <thead>
                   <tr><th>Type</th><th class="last">Description</th></tr>
