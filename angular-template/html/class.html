@@ -1,4 +1,9 @@
     <div class="container-overview">
+      <div ht-if="restrict">
+          <ul class="chips">
+              <li class="chip" ht-repeat="rest in restrict">{{rest}}</li>
+          </ul>
+      </div>
       <dt></dt>
       <dd>
         <div ht-if="description" class="description">
@@ -9,12 +14,6 @@
           <div>
             <h5>{{directiveScope}}</h5>
           </div>
-        </div>
-        <div ht-if="restrict">
-            <h5>Restricted on</h5>
-            <ul class="chips">
-                <li class="chip" ht-repeat="rest in restrict">{{rest}}</li>
-            </ul>
         </div>
         <div ht-if="priority">
             <h5>Priority</h5>
