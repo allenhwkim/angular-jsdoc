@@ -80,8 +80,6 @@ nav {
 .chips:after {
     content: '';
     display: block;
-    float: none;
-    clear: both;
 }
 
 .chip {
@@ -99,4 +97,8 @@ nav {
 
 .chip:last-child {
     margin-right: 0;
+}
+
+.clearfix {
+    clear: both;
 }

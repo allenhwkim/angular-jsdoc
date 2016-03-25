@@ -1,20 +1,13 @@
     <div class="container-overview">
-      <div ht-if="restrict">
-          <ul class="chips">
-              <li class="chip" ht-repeat="rest in restrict">{{rest}}</li>
-          </ul>
-      </div>
-      <dt></dt>
-      <dd>
+        <ul class="chips">
+          <li class="chip" ht-if="directiveScope">{{ directiveScope }}</li>
+          <li class="chip" ht-if="restrict" ht-repeat="rest in restrict">{{rest}}</li>
+        </ul>
+        <div class="clearfix"></div>
         <div ht-if="description" class="description">
           {{ description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
         </div>
         <div class="details"></div>
-        <div>
-          <div>
-            <h5>{{directiveScope}}</h5>
-          </div>
-        </div>
         <div ht-if="priority">
             <h5>Priority</h5>
             {{priority}}

@@ -61,14 +61,14 @@ exports.defineTags = function(dictionary) {
   dictionary.defineTag('scope', {
     onTagged: function (doclet, tag) {
       var scopeType = {
-        'object': 'Creates a new isolated scope',
-        '{}': 'Creates a new isolated scope',
-        'true': 'Creates a new scope prototypically inheriting from its parent',
-        'false': 'Shares the scope of the parent'
+        'object': 'Isolated Scope',
+        '{}': 'Isolated Scope',
+        'true': 'Child Scope',
+        'false': 'Shared Scope'
       };
 
       if (!scopeType.hasOwnProperty(tag.value)) {
-        doclet.directiveScope = 'Creates a new scope';
+        doclet.directiveScope = 'New Scope';
       } else {
         doclet.directiveScope = scopeType[tag.value];
       }
