@@ -102,3 +102,7 @@ nav {
 .clearfix {
     clear: both;
 }
+
+.functions {
+    margin-top: 16px;
+}

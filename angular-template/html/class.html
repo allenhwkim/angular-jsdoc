@@ -16,6 +16,12 @@
             <h5>Event type</h5>
             {{eventType}}
         </div>
+        <div ht-if="requires">
+          <h5>Requirements</h5>
+          <ul>
+            <li ht-repeat="el in requires">{{ el }} Service</li>
+          </ul>
+        </div>
         <div ht-if="params">
           <h5>Parameters</h5>
           <table class="params">
@@ -74,12 +80,6 @@
             </tbody>
           </table>
         </div>
-        <div ht-if="requires">
-          <h5>Requirements</h5>
-          <ul>
-            <li ht-repeat="el in requires">{{ el }} Service</li>
-          </ul>
-        </div>
 
         <div ht-if="animations">
           <h5>Animations</h5>
@@ -102,92 +102,90 @@
       </dd>
     </div>
 
-    <section>
-      <div class="members" ht-if="children.member">
-        <h3 class="subsection-title">Members</h3>
-        <table class="props">
-          <thead>
-            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-          </thead>
-          <tbody>
-            <tr ht-repeat="member in children.member">
-              <td class="name" nowrap>{{ member.name }}</td>
-              <td class="type"><span class="param-type">
-                {{ member.type && member.type.names.join(" | ") }}
-              </span></td>
-              <td class="description last">{{ member.description }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <br/>
-        <br/>
-      </div>
-      <div class="functions" ht-if="children.function">
-        <h3 class="subsection-title">Methods</h3>
-        <dl ht-repeat="func in children.function">
-          <dt>
-            <a href="{{ func.sourceUrl }}" class="name-link" id="{{ func.name }}">
-              <h4 class="name">
-                {{ func.name }}
-                <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
-                <span ht-if="func.returns && func.returns[0].type" class="type-signature">
-                  -&gt; {{ func.returns[0].type.names.join(" | ") }}
-                </span>
-              </h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description">
-              <span ht-if="func.description">
-                {{ func.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+    <div class="members" ht-if="children.member">
+      <h3 class="subsection-title">Members</h3>
+      <table class="props">
+        <thead>
+          <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+        </thead>
+        <tbody>
+          <tr ht-repeat="member in children.member">
+            <td class="name" nowrap>{{ member.name }}</td>
+            <td class="type"><span class="param-type">
+              {{ member.type && member.type.names.join(" | ") }}
+            </span></td>
+            <td class="description last">{{ member.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <br/>
+    </div>
+    <div class="functions" ht-if="children.function">
+      <h3 class="subsection-title">Methods</h3>
+      <dl ht-repeat="func in children.function">
+        <dt>
+          <a href="{{ func.sourceUrl }}" class="name-link" id="{{ func.name }}">
+            <h4 class="name">
+              {{ func.name }}
+              <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
+              <span ht-if="func.returns && func.returns[0].type" class="type-signature">
+                -&gt; {{ func.returns[0].type.names.join(" | ") }}
               </span>
-            </div>
-            <div ht-if="func.examples && func.examples.length">
-              <h5>Example</h5>
-              <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
-            </div>
-            <div ht-if="func.params">
-              <h5>Parameters</h5>
-              <table class="params">
-                <thead>
-                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-                </thead>
-                <tbody>
-                  <tr ht-repeat="param in func.params">
-                    <td class="name">{{ param.name }}</td>
-                    <td class="type"><span class="param-type">
-                      {{ param.type && param.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
-                    </span></td>
-                    <td class="description last">
-                      <span ht-if="param.description">
-                        {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div ht-if="func.returns">
-              <h5>Returns</h5>
-              <table class="params">
-                <thead>
-                  <tr><th>Type</th><th class="last">Description</th></tr>
-                </thead>
-                <tbody>
-                  <tr ht-repeat="ret in func.returns">
-                    <td class="type"><span class="param-type">
-                      {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
-                    </span></td>
-                    <td class="description last">
-                      <span ht-if="ret.description">
-                        {{ ret.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </dd>
-        </dl>
-      </div>
-    </section>
+            </h4>
+          </a>
+        </dt>
+        <dd>
+          <div class="description">
+            <span ht-if="func.description">
+              {{ func.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+            </span>
+          </div>
+          <div ht-if="func.examples && func.examples.length">
+            <h5>Example</h5>
+            <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+          </div>
+          <div ht-if="func.params">
+            <h5>Parameters</h5>
+            <table class="params">
+              <thead>
+                <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+              </thead>
+              <tbody>
+                <tr ht-repeat="param in func.params">
+                  <td class="name">{{ param.name }}</td>
+                  <td class="type"><span class="param-type">
+                    {{ param.type && param.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
+                  </span></td>
+                  <td class="description last">
+                    <span ht-if="param.description">
+                      {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ht-if="func.returns">
+            <h5>Returns</h5>
+            <table class="params">
+              <thead>
+                <tr><th>Type</th><th class="last">Description</th></tr>
+              </thead>
+              <tbody>
+                <tr ht-repeat="ret in func.returns">
+                  <td class="type"><span class="param-type">
+                    {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
+                  </span></td>
+                  <td class="description last">
+                    <span ht-if="ret.description">
+                      {{ ret.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </dd>
+      </dl>
+    </div>
