@@ -22,6 +22,48 @@ exports.defineTags = function(dictionary) {
   })
   .synonym('attr');
 
+  dictionary.defineTag('param', {
+    mustHaveValue: true,
+    canHaveType: true,
+    canHaveName: true,
+    onTagged: function(doclet, tag) {
+      if (!doclet.params) {
+        doclet.params = [];
+      }
+
+      var defaultTypes = ['boolean', 'string', 'expression', '*', 'mixed', 'number', 'null', 'undefined', 'function',
+          '{}', 'object', '[]', 'array'];
+
+      var typeRegex = new RegExp(/\{(.*?[^\[\]])?(\[\])?\}.*?/);
+      var matches = typeRegex.exec(tag.text);
+
+      var types = matches[1].split('|');
+      matches[2] = (matches[2] || '');
+      var parsedTypeDefinition = '';
+
+      var i = 0;
+      for (; i < types.length; i++) {
+        var type = types[i];
+
+        if (i > 0) {
+          parsedTypeDefinition += '|';
+        }
+
+        if (defaultTypes.indexOf(type) !== -1 || type[0] === '"') {
+          parsedTypeDefinition += type + matches[2];
+        } else {
+          parsedTypeDefinition += '<a href="' + matches[1] + '.html">' + matches[1] + matches[2] + '</a>';
+        }
+      }
+
+      doclet.params.push({
+        typeDefinition: parsedTypeDefinition,
+        name: tag.value.name,
+        description: tag.value.description
+      });
+    }
+  });
+
   dictionary.defineTag('restrict', {
     mustHaveValue: true,
     onTagged: function(doclet, tag) {
