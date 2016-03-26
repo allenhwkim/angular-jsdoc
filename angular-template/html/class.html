@@ -78,9 +78,13 @@
               <tr ht-repeat="attr in attributes">
                 <td class="name" nowrap>{{ attr.name }}</td>
                 <td class="type"><span class="param-type">
-                  {{ attr.type && attr.type.names.join(" | ") }}
+                  {{ attr.typeDefinition }}
                 </span></td>
-                <td class="description last">{{ marked(attr.description||'') }}</td>
+                <td class="description last">
+                  <span ht-if="attr.description">
+                    {{ marked(attr.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>')||'') }}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -186,9 +190,11 @@
                 </thead>
                 <tbody>
                   <tr ht-repeat="ret in func.returns">
-                    <td class="type"><span class="param-type">
-                      {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
-                    </span></td>
+                    <td class="type">
+                      <span class="param-type">
+                        {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
+                      </span>
+                    </td>
                     <td class="description last">
                       <span ht-if="ret.description">
                         {{ ret.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
