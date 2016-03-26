@@ -30,6 +30,15 @@ exports.defineTags = function(dictionary) {
     }
   });
 
+  dictionary.defineTag('property', {
+    mustHaveValue: true,
+    canHaveType: true,
+    canHaveName: true,
+    onTagged: function(doclet, tag) {
+      doclet.properties = parseParamTypes(doclet.properties, tag);
+    }
+  });
+
   dictionary.defineTag('restrict', {
     mustHaveValue: true,
     onTagged: function(doclet, tag) {

@@ -60,9 +60,11 @@
             <tbody>
               <tr ht-repeat="prop in properties">
                 <td class="name" nowrap>{{ prop.name }}</td>
-                <td class="type"><span class="param-type">
-                  {{ prop.type && prop.type.names.join(" | ") }}
-                </span></td>
+                <td class="type">
+                  <span class="param-type">
+                    {{ prop.typeDefinition }}
+                  </span>
+                </td>
                 <td class="description last">{{ prop.description }}</td>
               </tr>
             </tbody>
