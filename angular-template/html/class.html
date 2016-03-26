@@ -40,7 +40,7 @@
                   {{ param.name }}
                 </td>
                 <td class="type"><span class="param-type">
-                  {{ param.typeDefinition }}
+                  {{ param.typeDefinitionUrl }}
                 </span></td>
                 <td class="description last">
                   <span ht-if="param.description">
@@ -62,7 +62,7 @@
                 <td class="name" nowrap>{{ prop.name }}</td>
                 <td class="type">
                   <span class="param-type">
-                    {{ prop.typeDefinition }}
+                    {{ prop.typeDefinitionUrl }}
                   </span>
                 </td>
                 <td class="description last">{{ prop.description }}</td>
@@ -80,7 +80,7 @@
               <tr ht-repeat="attr in attributes">
                 <td class="name" nowrap>{{ attr.name }}</td>
                 <td class="type"><span class="param-type">
-                  {{ attr.typeDefinition }}
+                  {{ attr.typeDefinitionUrl }}
                 </span></td>
                 <td class="description last">
                   <span ht-if="attr.description">
@@ -147,8 +147,8 @@
               <h4 class="name">
                 {{ func.name }}
                 <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
-                <span ht-if="func.returns && func.returns[0].type" class="type-signature">
-                  -&gt; {{ func.returns[0].type.names.join(" | ") }}
+                <span ht-if="func.returns[0].typeDefinition" class="type-signature">
+                  -&gt; {{ func.returns[0].typeDefinition }}
                 </span>
               </h4>
             </a>
@@ -173,7 +173,7 @@
                   <tr ht-repeat="param in func.params">
                     <td class="name">{{ param.name }}</td>
                     <td class="type"><span class="param-type">
-                      {{ param.typeDefinition }}
+                      {{ param.typeDefinitionUrl }}
                     </span></td>
                     <td class="description last">
                       <span ht-if="param.description">
@@ -194,7 +194,7 @@
                   <tr ht-repeat="ret in func.returns">
                     <td class="type">
                       <span class="param-type">
-                        {{ ret.type && ret.type.names.join(" | ").replace(new RegExp( String.fromCharCode(60), "g" ), "&lt;") }}
+                        {{ ret.typeDefinitionUrl }}
                       </span>
                     </td>
                     <td class="description last">

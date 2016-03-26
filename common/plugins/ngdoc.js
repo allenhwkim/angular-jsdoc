@@ -39,6 +39,20 @@ exports.defineTags = function(dictionary) {
     }
   });
 
+  dictionary.defineTag('returns', {
+    mustHaveValue: false,
+    canHaveType: true,
+    canHaveName: false,
+    onTagged: function(doclet, tag) {
+      var returnsText = new RegExp(/@returns (\{.*\}.*)/).exec(doclet.comment);
+
+      if (returnsText) {
+        tag.text = returnsText[1];
+        doclet.returns = parseParamTypes(doclet.returns, tag);
+      }
+    }
+  });
+
   dictionary.defineTag('restrict', {
     mustHaveValue: true,
     onTagged: function(doclet, tag) {
@@ -101,37 +115,49 @@ function parseParamTypes(docletParams, tag) {
     docletParams = [];
   }
 
+  var result = {
+    name: tag.value.name,
+    description: tag.value.description
+  };
+
   var defaultTypes = ['boolean', 'string', 'expression', '*', 'mixed', 'number', 'null', 'undefined', 'function',
     '{}', 'object', '[]', 'array', 'void'];
   var defaultTypeStarts = ['\'', '"', '[', '{'];
 
-  var typeRegex = new RegExp(/\{(.*?[^\[\]])?(\[\])?\}.*?/);
-  var matches = typeRegex.exec(tag.text);
+  var typeDoc = new RegExp(/\{(.*?)\}/).exec(tag.text);
 
-  var types = matches[1].split('|');
-  matches[2] = (matches[2] || '');
-  var parsedTypeDefinition = '';
+  if (!typeDoc) {
+    result.typeDefinition =  '*';
+    docletParams.push(result);
+    return;
+  }
 
+  var types = typeDoc[1].split('|');
+  var typeRegex = new RegExp(/(.*?)(\[\])?$/);
+
+  var parseTypeDefinitionUrl = '';
+  var parseTypeDefinition = '';
   var i = 0;
   for (; i < types.length; i++) {
-    var type = types[i];
+    var type = typeRegex.exec(types[i]);
 
     if (i > 0) {
-      parsedTypeDefinition += '|';
+      parseTypeDefinitionUrl += '|';
+      parseTypeDefinition += '|';
     }
 
-    if (defaultTypes.indexOf(type) !== -1 || defaultTypeStarts.indexOf(type[0]) !== -1) {
-      parsedTypeDefinition += type + matches[2];
+    if (defaultTypes.indexOf(type[1].toLowerCase()) !== -1 || defaultTypeStarts.indexOf(type[1][0]) !== -1) {
+      parseTypeDefinitionUrl += type[1];
+      parseTypeDefinition += type[1];
     } else {
-      parsedTypeDefinition += '<a href="' + matches[1] + '.html">' + matches[1] + matches[2] + '</a>';
+      parseTypeDefinitionUrl += '<a href="' + type[1] + '.html">' + type[1] + (type[2] || '') + '</a>';
+      parseTypeDefinition += type[1] + (type[2] || '');
     }
   }
 
-  docletParams.push({
-    typeDefinition: parsedTypeDefinition,
-    name: tag.value.name,
-    description: tag.value.description
-  });
+  result.typeDefinitionUrl = parseTypeDefinitionUrl;
+  result.typeDefinition = parseTypeDefinition;
+  docletParams.push(result);
 
   return docletParams;
 }
