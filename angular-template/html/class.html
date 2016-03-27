@@ -65,7 +65,11 @@
                     {{ prop.typeDefinitionUrl }}
                   </span>
                 </td>
-                <td class="description last">{{ prop.description }}</td>
+                <td class="description last">
+                  <span ht-if="prop.description">
+                    {{ prop.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
