@@ -109,6 +109,15 @@
     <pre ht-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
   </div>
 
+  <div ht-if="see">
+    <h5>References</h5>
+    <ul>
+      <li ht-repeat="ref in see">
+        {{ ref.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+      </li>
+    </ul>
+  </div>
+
   <div ht-if="typeof tutorials !== 'undefined' && tutorials.length">
     <h5>Tutorials</h5>
     <ul>
@@ -157,6 +166,14 @@
         <span ht-if="func.description">
           {{ func.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
         </span>
+      </div>
+      <div ht-if="func.see && func.see.length">
+        <h5>References</h5>
+        <ul>
+          <li ht-repeat="ref in func.see">
+            {{ ref.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+          </li>
+        </ul>
       </div>
       <div ht-if="func.examples && func.examples.length">
         <h5>Example</h5>
