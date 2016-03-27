@@ -147,12 +147,12 @@ function parseParamTypes(docletParams, tag) {
     }
 
     if (defaultTypes.indexOf(type[1].toLowerCase()) !== -1 || defaultTypeStarts.indexOf(type[1][0]) !== -1) {
-      parseTypeDefinitionUrl += type[1];
-      parseTypeDefinition += type[1];
+      parseTypeDefinitionUrl += type[1] + (type[2] || '');
     } else {
       parseTypeDefinitionUrl += '<a href="' + type[1] + '.html">' + type[1] + (type[2] || '') + '</a>';
-      parseTypeDefinition += type[1] + (type[2] || '');
     }
+
+    parseTypeDefinition += type[1] + (type[2] || '');
   }
 
   result.typeDefinitionUrl = parseTypeDefinitionUrl;
