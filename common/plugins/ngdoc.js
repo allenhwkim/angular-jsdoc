@@ -120,7 +120,7 @@ function parseParamTypes(docletParams, tag) {
   };
 
   var defaultTypes = ['boolean', 'string', 'expression', '*', 'mixed', 'number', 'null', 'undefined', 'function',
-    '{}', 'object', '[]', 'array', 'void'];
+    'object', 'array', 'void'];
   var defaultTypeStarts = ['\'', '"', '[', '{'];
 
   var typeDoc = new RegExp(/\{(.*?)\}/).exec(tag.text);
