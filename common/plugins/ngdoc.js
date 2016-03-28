@@ -113,8 +113,10 @@ function parseParamTypes(docletParams, tag) {
   }
 
   var result = {
-    name: tag.value.name,
-    description: tag.value.description
+    name: wrapDefaultNotation(tag),
+    description: tag.value.description,
+    optional: !!tag.value.optional,
+    default: tag.value.defaultvalue
   };
 
   var defaultTypes = ['boolean', 'string', 'expression', '*', 'mixed', 'number', 'null', 'undefined', 'function',
@@ -157,4 +159,22 @@ function parseParamTypes(docletParams, tag) {
   docletParams.push(result);
 
   return docletParams;
+}
+
+function wrapDefaultNotation(tag) {
+  var returnName = '';
+
+  if (tag.value.optional) {
+    returnName += '[';
+    returnName += tag.value.name;
+
+    if (tag.value.defaultvalue) {
+      returnName += '=' + tag.value.defaultvalue;
+    }
+
+    returnName += ']';
+    return returnName;
+  }
+
+  return tag.value.name;
 }
