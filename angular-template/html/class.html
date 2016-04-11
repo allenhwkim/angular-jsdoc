@@ -160,7 +160,7 @@
         <h4 class="name">
           {{ func.name }}
           <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
-          <span ht-if="func.returns[0].typeDefinition" class="type-signature">
+          <span ht-if="func.returns && func.returns[0].typeDefinition" class="type-signature">
             -&gt; {{ func.returns[0].typeDefinition }}
           </span>
         </h4>
