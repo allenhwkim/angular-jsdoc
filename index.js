@@ -4,6 +4,7 @@ var spawn = require('child_process').spawn;
 var extend = require('util')._extend;
 var path = require('path');
 var Q = require('q');
+var util = require("util");
 
 /**
  * execute shell command
@@ -11,13 +12,21 @@ var Q = require('q');
 var runCommand = function(cmd, args) {
   var deferred = Q.defer();
 
+  console.log("cwd is: " + __dirname);
   console.log("angularJsdoc Running command\n", cmd, args.join(" "));
-  var child = spawn(cmd,args), result="";
+
+  var child = (process.platform === "win32")
+    // For windows need to spawn a "cmd" instance and pass the command to it
+    ? spawn("cmd", ["/C", cmd + " " + args.join(" ")], { cwd: process.env.PWD, env: process.env})
+    : spawn(cmd, args);
+
+  var result = "";
+
   child.stdout.on("data", function(data) {
-    result += data; 
+    result += data;
   });
-  child.stderr.on("data", function(data) {result += data;});
-  child.stdout.on("end",  function() {deferred.resolve(result);});
+  child.stderr.on("data", function(data) { result += data; });
+  child.stdout.on("end", function() { deferred.resolve(result); });
 
   return deferred.promise;
 };
@@ -28,15 +37,17 @@ var runCommand = function(cmd, args) {
 var angularJsdoc = function(dirs, optionsArg, callback) {
   optionsArg = optionsArg || {};
   dirs = Array.isArray(dirs) ? dirs : dirs.split(" ");
+
   //default values
-  var command = 
-    optionsArg.command || path.join("node_modules", "jsdoc", "jsdoc.js");
+  var command = optionsArg.command || util.format("node %s", path.join("node_modules", "jsdoc", "jsdoc.js"));
+
   var options = extend({
-      configure: path.join(__dirname, "common", "conf.json"),
-      template: path.join(__dirname, "default"),
-      destination: "docs",
-      readme: 'README.md'
-    }, optionsArg); 
+    configure: path.join(__dirname, "common", "conf.json"),
+    template: path.join(__dirname, "default"),
+    destination: "docs",
+    readme: 'README.md'
+  }, optionsArg);
+
   // if given template a single word including dash
   if (optionsArg.template && optionsArg.template.match(/^[\w-]+$/i)) {
     options.template = path.join(__dirname, optionsArg.template);
