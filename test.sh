@@ -13,3 +13,10 @@ node_modules/jsdoc/jsdoc.js\
         --readme sample-codes/README.md\
         --recurse sample-codes\
         --tutorials sample-codes/tutorials
+node_modules/jsdoc/jsdoc.js\
+        --configure common/test_conf.json\
+        --template simple-searchable\
+        --destination simple-searchable/docs\
+        --readme sample-codes/README.md\
+        --recurse sample-codes\
+        --tutorials sample-codes/tutorials

@@ -1,0 +1,233 @@
+<div class="container-overview">
+  <ul class="chips">
+    <li class="chip" ht-if="directiveScope">{{ directiveScope }}</li>
+    <li class="chip" ht-if="restrict" ht-repeat="rest in restrict">{{rest}}</li>
+  </ul>
+
+  <div class="clearfix"></div>
+
+  <div ht-if="description" class="description">
+    <h4>Description</h4>
+    {{ description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+  </div>
+
+  <div class="details"></div>
+  <div ht-if="priority">
+      <h4>Priority</h4>
+      {{priority}}
+  </div>
+
+  <div ht-if="eventType">
+      <h4>Event type</h4>
+      {{eventType}}
+  </div>
+
+  <div ht-if="requires">
+    <h4>Requirements</h4>
+    <ul>
+      <li ht-repeat="el in requires">{{ el }} Service</li>
+    </ul>
+  </div>
+
+  <div ht-if="params">
+    <h4>Parameters</h4>
+    <table class="params">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <tr ht-repeat="param in params">
+          <td class="name" nowrap>
+            <a id="{{ param.name }}"></a>
+            {{ param.name }}
+          </td>
+          <td class="type"><span class="param-type">
+            {{ param.typeDefinitionUrl }}
+          </span></td>
+          <td class="description last">
+            <span ht-if="param.description">
+              {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ht-if="properties">
+    <h4>Properties</h4>
+    <table class="props">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <tr ht-repeat="prop in properties">
+          <td class="name" nowrap>{{ prop.name }}</td>
+          <td class="type">
+            <span class="param-type">
+              {{ prop.typeDefinitionUrl }}
+            </span>
+          </td>
+          <td class="description last">
+            <span ht-if="prop.description">
+              {{ prop.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ht-if="attributes">
+    <h4>Attributes</h4>
+    <table class="params">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <tr ht-repeat="attr in attributes">
+          <td class="name" nowrap>{{ attr.name }}</td>
+          <td class="type"><span class="param-type">
+            {{ attr.typeDefinitionUrl }}
+          </span></td>
+          <td class="description last">
+            <span ht-if="attr.description">
+              {{ marked(attr.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>')||'') }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ht-if="animations">
+    <h4>Animations</h4>
+    <pre>{{ animations }}</pre>
+  </div>
+
+  <div ht-if="typeof examples !== 'undefined' && examples.length">
+    <h4>Example</h4>
+    <pre ht-repeat="example in examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+  </div>
+
+  <div ht-if="see">
+    <h4>References</h4>
+    <ul>
+      <li ht-repeat="ref in see">
+        {{ ref.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+      </li>
+    </ul>
+  </div>
+
+  <div ht-if="author">
+    <h4>Authors</h4>
+    {{ author.map(function (credit) { return credit.replace(/(.*) <(.*)>/, '<a href="mailto:$2">$1</a>'); }).join(', ') }}
+  </div>
+
+  <div ht-if="typeof tutorials !== 'undefined' && tutorials.length">
+    <h4>Tutorials</h4>
+    <ul>
+      <li ht-repeat="tutorial in tutorials">
+        {{tutoriallink(tutorial)}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="members" ht-if="children.member">
+  <h3 class="subsection-title">Members</h3>
+  <table class="props">
+    <thead>
+      <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+    </thead>
+    <tbody>
+      <tr ht-repeat="member in children.member">
+        <td class="name" nowrap>{{ member.name }}</td>
+        <td class="type"><span class="param-type">
+          {{ member.type && member.type.names.join(" | ") }}
+        </span></td>
+        <td class="description last">{{ member.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <br/>
+</div>
+<div class="functions" ht-if="children.function">
+  <h3 class="subsection-title">Methods</h3>
+  <dl ht-repeat="func in children.function">
+    <dt>
+      <a href="{{ func.sourceUrl }}" class="name-link" id="{{ func.name }}">
+        <h4 class="name">
+          {{ func.name }}
+          <span ht-if="func.params" class="signature">({{ func.params.map(function(param){return param.name;}).join(", ") }})</span>
+          <span ht-if="func.returns && func.returns[0].typeDefinition" class="type-signature">
+            -&gt; {{ func.returns[0].typeDefinition }}
+          </span>
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span ht-if="func.description">
+          {{ func.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+        </span>
+      </div>
+      <div ht-if="func.see && func.see.length">
+        <h4>References</h4>
+        <ul>
+          <li ht-repeat="ref in func.see">
+            {{ ref.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+          </li>
+        </ul>
+      </div>
+      <div ht-if="func.examples && func.examples.length">
+        <h4>Example</h4>
+        <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
+      </div>
+      <div ht-if="func.params">
+        <h4>Parameters</h4>
+        <table class="params">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr ht-repeat="param in func.params">
+              <td class="name">{{ param.name }}</td>
+              <td class="type"><span class="param-type">
+                {{ param.typeDefinitionUrl }}
+              </span></td>
+              <td class="description last">
+                <span ht-if="param.description">
+                  {{ param.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ht-if="func.returns">
+        <h4>Returns</h4>
+        <table class="params">
+          <thead>
+            <tr><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr ht-repeat="ret in func.returns">
+              <td class="type">
+                <span class="param-type">
+                  {{ ret.typeDefinitionUrl }}
+                </span>
+              </td>
+              <td class="description last">
+                <span ht-if="ret.description">
+                  {{ ret.description.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </dd>
+  </dl>
+</div>
