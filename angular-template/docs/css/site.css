@@ -7,7 +7,7 @@ html
     font-size: 14px;
 }
 
-h2.module a, a, a:visited, a:active {
+a, a:visited, a:active {
     color: #0095dd;
     text-decoration: none;
 }

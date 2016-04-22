@@ -69,3 +69,40 @@ nav {
     margin-bottom: 1.5rem;
     padding: 2.0rem 1.5rem 3rem 1.5rem;
 }
+
+.chips {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chips:after {
+    content: '';
+    display: block;
+}
+
+.chip {
+    display: block;
+    float: left;
+    background: #eee;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    margin-right: 4px;
+    font-size: 11px;
+    line-height: 13px;
+    font-weight: bold;
+}
+
+.chip:last-child {
+    margin-right: 0;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.functions {
+    margin-top: 16px;
+}
