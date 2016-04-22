@@ -107,6 +107,7 @@ Customization
 Currently, there are two templates built-in;
 
   - default
+  - simple-searchable
   - angular-template (Recommended)
 
 To add your own template, please copy the `angular-template` directory to your own, then, make your own css, js, and html files.   
