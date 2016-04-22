@@ -10,6 +10,7 @@
    * @param NavigatorGeolocation {service} Google NavigatorGeolocation wrapper
    * @param GeoCoder {service} Google GeoCoder wrapper
    * @param Attr2Options {service} Converts element attributes to Google Maps API options
+   * @listens {@link ngmap.map#onLink}
    */
   var MapController = function($scope, $q, NavigatorGeolocation, GeoCoder, Attr2Options) { 
 
@@ -35,8 +36,18 @@
      * @function deleteObject
      * @param {Array} objs the collection of objects. i.e., map.markers
      * @param {Object} obj the object to be removed. i.e., marker
+     * @fires {@link ngmap.MapController#onDeleteObject}
      */
     this.deleteObject = function(groupName, obj) {
+      /**
+       * @event MapController#onDeleteObject
+       * @name MapController#onDeleteObject
+       * @eventof MapController
+       * @description An event at the method/function level.
+       * @eventtype broadcast
+       */
+      $scope.$broadcoast("MapController.onDeleteObject", [groupName, obj]);
+
       // .. code ..
     };
 

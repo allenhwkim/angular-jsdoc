@@ -1,171 +1,284 @@
-    <div class="container-overview">
-      <dt></dt>
+<div class="container-overview">
+  <dt></dt>
+  <dd>
+    <div class="description">
+      <%= description %>
+    </div>
+    <div class="details"></div>
+    <% if (params) { %>
+    <h5>Dependencies:</h5>
+    <table class="params">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <% params.forEach(function(param) { %>
+        <tr>
+          <td class="name" nowrap><%= param.name %></td>
+          <td class="type">
+            <span class="param-type">
+              <%= param.type && param.type.names.join(" | ") %>
+            </span>
+          </td>
+          <td class="description last"><%= param.description %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } %>
+    <% if (properties) { %>
+    <h5>Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <% properties.forEach(function(prop) { %>
+        <tr>
+          <td class="name" nowrap><%= prop.name %></td>
+          <td class="type">
+            <span class="param-type">
+              <%= prop.type && prop.type.names.join(" | ") %>
+            </span>
+          </td>
+          <td class="description last"><%= prop.description %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } %>
+    <% if (attributes) { %>
+    <h5>Attributes:</h5>
+    <table class="params">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <% attributes.forEach(function(attr) { %>
+        <tr>
+          <td class="name" nowrap><%= attr.name %></td>
+          <td class="type">
+            <span class="param-type">
+              <%= attr.type && attr.type.names.join(" | ") %>
+            </span>
+          </td>
+          <td class="description last"><%= marked(attr.description||'') %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } %>
+    <% if (requires) { %>
+    <h5>Dependencies</h5>
+    <ul>
+      <% requires.forEach(function(el) { %>
+      <li><%= el %> Service</li>
+      <% }); %>
+    </ul>
+    <% } %>
+    <% if (typeof examples !== 'undefined' && examples.length) { %>
+    <h5>Example</h5>
+    <% examples.forEach(function(example) { %>
+    <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
+    <% }); %>
+    <% } %>
+
+    <% if (typeof tutorials !== 'undefined' && tutorials.length) { %>
+    <h5>Tutorials:</h5>
+    <ul>
+      <% tutorials.forEach(function(tutorial) { %>
+      <li>
+        <%= tutoriallink(tutorial) %>
+      </li>
+      <% }); %>
+    </ul>
+    <% } %>
+
+  </dd>
+</div>
+
+<section>
+  <% if (listens) { %>
+  <div class="events">
+    <h3 class="subsection-title">Event Listeners</h3>
+
+    <p>Event listeners are registered for the following events.</p>
+
+    <ul>
+      <% listens.forEach(function(event) { %>
+      <li>
+        <%= event.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') %>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+  <% } %>
+
+  <% if (fires) { %>
+  <div class="events">
+    <h3 class="subsection-title">Events Triggered</h3>
+
+    <p>The following events are triggered.</p>
+
+    <ul>
+      <% fires.forEach(function(event) { %>
+      <li>
+        <%= event.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') %>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+  <% } %>
+
+  <% if (children.event) { %>
+  <div class="events">
+    <h3 class="subsection-title">Events</h3>
+
+    <p>The following events are registered.</p>
+
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% children.event.forEach(function(event) { %>
+        <tr>
+          <td class="name" nowrap id="event:<%= event.name %>">
+            <%= event.name %>
+          </td>
+          <td class="type" nowrap>
+            <%= event.eventType %>
+          </td>
+          <td class="description last">
+            <%= event.description %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <br /><br />
+  </div>
+  <% } %>
+</section>
+
+<section>
+  <div class="member">
+    <% if (children.member) { %>
+    <h3 class="subsection-title">Members</h3>
+    <dl>
+      <% children.member.forEach(function(member) { %>
+      <dt>
+        <a href="<%= sourceUrl %>" class="name-link">
+          <h4 class="name"><%= member.name %></h4>
+        </a>
+      </dt>
       <dd>
+        <div class="description"><%= member.description %></div>
+      </dd>
+      <% }); %>
+    </dl>
+    <% } %>
+  </div>
+  <div class="functions">
+    <% if (children.function) { %>
+    <h3 class="subsection-title">Methods</h3>
+    <dl>
+      <% children.function.forEach(function(func) { %>
+      <dt>
+        <a href="<%= sourceUrl %>" class="name-link">
+          <h4 class="name">
+            <%= func.name %>
+            <% if (func.params) { %>
+            <span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
+            <% } %>
+            <% if (func.returns && func.returns.type) { %>
+            <span class="type-signature">
+              -&gt; <%= func.returns[0].type.names.join(" | ") %>
+            </span>
+            <% } %>
+          </h4>
+        </a>
+      </dt>
+      <dd>
+
         <div class="description">
-          <%= description %>
+          <%= func.description %>
         </div>
-        <div class="details"></div>
-        <% if (params) { %>
-          <h5>Dependencies:</h5>
-          <table class="params">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-            <% params.forEach(function(param) { %>
-              <tr>
-                <td class="name" nowrap><%= param.name %></td>
-                <td class="type"><span class="param-type">
-                  <%= param.type && param.type.names.join(" | ") %>
-                </span></td>
-                <td class="description last"><%= param.description %></td>
-              </tr>
-            <% }); %>
-            </tbody>
-          </table>
-        <% } %>
-        <% if (properties) { %>
-          <h5>Properties:</h5>
-          <table class="props">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-            <% properties.forEach(function(prop) { %>
-              <tr>
-                <td class="name" nowrap><%= prop.name %></td>
-                <td class="type"><span class="param-type">
-                  <%= prop.type && prop.type.names.join(" | ") %>
-                </span></td>
-                <td class="description last"><%= prop.description %></td>
-              </tr>
-            <% }); %>
-            </tbody>
-          </table>
-        <% } %>
-        <% if (attributes) { %>
-          <h5>Attributes:</h5>
-          <table class="params">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-            <% attributes.forEach(function(attr) { %>
-              <tr>
-                <td class="name" nowrap><%= attr.name %></td>
-                <td class="type"><span class="param-type">
-                  <%= attr.type && attr.type.names.join(" | ") %>
-                </span></td>
-                <td class="description last"><%= marked(attr.description||'') %></td>
-              </tr>
-            <% }); %>
-            </tbody>
-          </table>
-        <% } %>
-        <% if (requires) { %>
-          <h5>Dependencies</h5>
-          <ul>
-            <% requires.forEach(function(el) { %>
-              <li><%= el %> Service</li>
-            <% }); %>
-          </ul>
-        <% } %>
-        <% if (typeof examples !== 'undefined' && examples.length) { %>
-          <h5>Example</h5>
-          <% examples.forEach(function(example) { %>
-            <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
-          <% }); %>
+
+        <% if (func.examples && func.examples.length) { %>
+        <h5>Example</h5>
+        <% func.examples.forEach(function(example) { %>
+        <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
+        <% }); %>
         <% } %>
 
-        <% if (typeof tutorials !== 'undefined' && tutorials.length) { %>
-          <h5>Tutorials:</h5>
+        <% if (func.params) { %>
+        <h5>Parameters:</h5>
+        <table class="params">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <% func.params.forEach(function(param) { %>
+            <tr>
+              <td class="name"><%= param.name %></td>
+              <td class="type">
+                <span class="param-type">
+                  <%= param.type && param.type.names.join(" | ") %>
+                </span>
+              </td>
+              <td class="description last"><%= param.description %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <% } %>
+
+        <% if (func.returns) { %>
+        <% var ret = func.returns[0];%>
+        <h5>Returns:</h5>
+        <div class="param-desc"><%= ret.description %></div>
+        <% } %>
+
+        <% if (func.fires) { %>
+        <div class="events">
+          <h5>Events Triggered</h5>
+
+          <p>The following events are triggered.</p>
+
           <ul>
-            <% tutorials.forEach(function(tutorial) { %>
-              <li>
-                <%= tutoriallink(tutorial) %>
-              </li>
+            <% func.fires.forEach(function(event) { %>
+            <li>
+              <%= event.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') %>
+            </li>
             <% }); %>
           </ul>
+        </div>
+        <% } %>
+
+        <% if (func.listens) { %>
+        <div class="events">
+          <h5>Event Listeners</h5>
+
+          <p>Event listeners are registered for the following events.</p>
+
+          <ul>
+            <% func.listens.forEach(function(event) { %>
+            <li>
+              <%= event.replace(/\{@link (.*?)(#.*?)?\}/g, '<a href="$1.html$2">$1$2</a>') %>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
         <% } %>
 
       </dd>
-    </div>
-
-    <section>
-      <div class="member">
-      <% if (children.member) { %>
-        <h3 class="subsection-title">Members</h3>
-        <dl>
-        <% children.member.forEach(function(member) { %>
-          <dt>
-            <a href="<%= sourceUrl %>" class="name-link">
-              <h4 class="name"><%= member.name %></h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description"><%= member.description %></div>
-          </dd>
-        <% }); %>
-        </dl>
-      <% } %>
-      </div>
-      <div class="functions">
-      <% if (children.function) { %>
-        <h3 class="subsection-title">Methods</h3>
-        <dl>
-        <% children.function.forEach(function(func) { %>
-          <dt>
-            <a href="<%= sourceUrl %>" class="name-link">
-              <h4 class="name">
-                <%= func.name %>
-                <% if (func.params) { %>
-                  <span class="signature">(<%= func.params.map(function(param){return param.name;}).join(", ") %>)</span>
-                <% } %>
-                <% if (func.returns && func.returns.type) { %>
-                  <span class="type-signature">
-                    -&gt; <%= func.returns[0].type.names.join(" | ") %>
-                  </span>
-                <% } %>
-              </h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description">
-              <%= func.description %>
-            </div>
-            <% if (func.examples && func.examples.length) { %>
-              <h5>Example</h5>
-              <% func.examples.forEach(function(example) { %>
-                <pre class="prettyprint"><code><span class="str"><%= example.code.replace(/</g,"&lt;") %></span></code></pre>
-              <% }); %>
-            <% } %>
-            <% if (func.params) { %>
-              <h5>Parameters:</h5>
-              <table class="params">
-                <thead>
-                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-                </thead>
-                <tbody>
-                <% func.params.forEach(function(param) { %>
-                  <tr>
-                    <td class="name"><%= param.name %></td>
-                    <td class="type"><span class="param-type">
-                      <%= param.type && param.type.names.join(" | ") %>
-                    </span></td>
-                    <td class="description last"><%= param.description %></td>
-                  </tr>
-                <% }); %>
-                </tbody>
-              </table>
-            <% } %>
-            <% if (func.returns) { %>
-              <% var ret = func.returns[0];%>
-              <h5>Returns:</h5>
-              <div class="param-desc"><%= ret.description %></div>
-            <% } %>
-          </dd>
-        <% }); %>
-        </dl>
-      <% } %>
-      </div>
-    </section>
+      <% }); %>
+    </dl>
+    <% } %>
+  </div>
+</section>

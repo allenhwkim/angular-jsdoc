@@ -53,7 +53,15 @@
      * @param {service}   attrs attribute of this element
      * @param {MapController} ctrl map controller
      */
-    var linkFunc = function (scope, element, attrs, ctrl) {
+    var linkFunc = function(scope, element, attrs, ctrl) {
+      /**
+       * @event map#onLink
+       * @name map#onLink
+       * @eventof map
+       * @description An event at the service level.
+       * @eventtype emit
+       */
+      scope.$emit("map.onLink");
       // .. code ..
     };
 
