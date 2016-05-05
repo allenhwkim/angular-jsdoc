@@ -67,7 +67,7 @@ var generate = function(filepath, data) {
 
 // copy the template's static files to outdir
 var copyStaticFiles = function() {
-  ['css', 'js', 'fonts'].forEach(function(dirName) {
+  ['css', 'js'].forEach(function(dirName) {
     var fromDir = path.join(templatePath, dirName);
     var staticFiles = fs.ls(fromDir, 3);
 

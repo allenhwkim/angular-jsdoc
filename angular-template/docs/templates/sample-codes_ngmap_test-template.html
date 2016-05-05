@@ -4,56 +4,54 @@
     <meta charset="utf-8">
     <base href="../">
     <title>JSDoc: template : sample-codes/ngmap/test-template.html</title>
-    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
-    <link href="css/custom.css" type="text/css" rel="stylesheet">
-    <script src="js/prettify.js"></script>
-    <script src="js/angular.min.js"></script>
+    <link href="css/site.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="">
-    <nav>
+    <nav id="toc">
+      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">
+      <div class="nav-wrapper">
       <h2><a href="index.html">Index</a></h2>
       <ul class="module">
         <!-- app -->
-        <h3>
-          <a href="" ng-click="moduleapp = !moduleapp">
+        <h2 class="module">
+          <a chref="" ng-click="moduleapp = !moduleapp">
             module: app
           </a>
           <i ng-cloak="" ng-show="moduleapp">+</i>
-        </h3>
+        </h2>
         <li id="app" ng-hide="moduleapp">
           <ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appconfig = !appconfig">
                 config
               </a>
               <i ng-cloak="" ng-show="appconfig">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appconfig">
               <li>
                 <a href="app.config.html">config</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appfilter = !appfilter">
                 filter
               </a>
               <i ng-cloak="" ng-show="appfilter">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appfilter">
               <li>
                 <a href="app.customCurrency.html">customCurrency</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appservice = !appservice">
                 service
               </a>
               <i ng-cloak="" ng-show="appservice">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appservice">
               <li>
                 <a href="app.testService.html">testService</a>
@@ -63,44 +61,44 @@
         </li>
       </ul><ul class="module">
         <!-- ngmap -->
-        <h3>
-          <a href="" ng-click="modulengmap = !modulengmap">
+        <h2 class="module">
+          <a chref="" ng-click="modulengmap = !modulengmap">
             module: ngmap
           </a>
           <i ng-cloak="" ng-show="modulengmap">+</i>
-        </h3>
+        </h2>
         <li id="ngmap" ng-hide="modulengmap">
           <ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapservice = !ngmapservice">
                 service
               </a>
               <i ng-cloak="" ng-show="ngmapservice">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapservice">
               <li>
                 <a href="ngmap.Attr2Options.html">Attr2Options</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapdirective = !ngmapdirective">
                 directive
               </a>
               <i ng-cloak="" ng-show="ngmapdirective">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapdirective">
               <li>
                 <a href="ngmap.map.html">map</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapcontroller = !ngmapcontroller">
                 controller
               </a>
               <i ng-cloak="" ng-show="ngmapcontroller">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapcontroller">
               <li>
                 <a href="ngmap.MapController.html">MapController</a>
@@ -109,6 +107,7 @@
           </ul>
         </li>
       </ul>
+      </div>
     </nav>
     <div id="content" class="page-wrap">
       <h1 class="title">
@@ -136,6 +135,9 @@
         <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
       </footer>
     </div>
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/site.js"></script>
     <!--%= prettyJson %-->
     <script>
       prettyPrint();

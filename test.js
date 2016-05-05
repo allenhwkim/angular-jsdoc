@@ -13,10 +13,3 @@ angularJsdoc('sample-codes', {
   destination: 'angular-template/docs',
   readme: "sample-codes/README.md"
 });
-
-angularJsdoc('sample-codes', {
-  configure: 'common/test_conf.json',
-  template: 'simple-searchable',
-  destination: 'simple-searchable/docs',
-  readme: "sample-codes/README.md"
-});

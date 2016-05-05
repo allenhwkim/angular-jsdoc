@@ -107,7 +107,6 @@ Customization
 Currently, there are two templates built-in;
 
   - default
-  - simple-searchable
   - angular-template (Recommended)
 
 To add your own template, please copy the `angular-template` directory to your own, then, make your own css, js, and html files.   
@@ -122,8 +121,7 @@ Then, run the `jsdoc.js` command with your template. e.g.,
 
 If you want to share your template with others, please send a pull request after adding your template directory where `angular-template` directory is.
 
-The following is the example of directory with explanation;
-
+The following is the example of directory with explanation:
 
     my-template
       ├── css
@@ -137,6 +135,44 @@ The following is the example of directory with explanation;
       │   └── layout.html     # layout file
       └── publish.js          # the main file that generate jsdoc
 
+
+Currently the default angular-template does not come with custom fonts. If you would like to use a template like angular-template but with custom fonts, change the `copyStaticFiles` method in your publish.js:
+
+__angular-template/publish.js__
+```js
+// copy the template's static files to outdir
+var copyStaticFiles = function() {
+  ['css', 'js'].forEach(function(dirName) {
+    var fromDir = path.join(templatePath, dirName);
+    var staticFiles = fs.ls(fromDir, 3);
+
+    staticFiles.forEach(function(fileName) {
+      var toDir = fs.toDir( fileName.replace(fromDir, path.join(outdir, dirName)) );
+      fs.mkPath(toDir);
+      fs.copyFileSync(fileName, toDir);
+    });
+  });
+};
+```
+
+to:
+
+__my-template/publish.js__
+```js
+// copy the template's static files to outdir
+var copyStaticFiles = function() {
+  ['css', 'js', 'fonts'].forEach(function(dirName) {
+    var fromDir = path.join(templatePath, dirName);
+    var staticFiles = fs.ls(fromDir, 3);
+
+    staticFiles.forEach(function(fileName) {
+      var toDir = fs.toDir( fileName.replace(fromDir, path.join(outdir, dirName)) );
+      fs.mkPath(toDir);
+      fs.copyFileSync(fileName, toDir);
+    });
+  });
+};
+```
 
 Copyright
 --------
