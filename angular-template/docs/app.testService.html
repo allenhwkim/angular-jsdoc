@@ -1,57 +1,56 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>JSDoc: testService</title>
-    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
-    <link href="css/custom.css" type="text/css" rel="stylesheet">
-    <script src="js/prettify.js"></script>
-    <script src="js/angular.min.js"></script>
+    <link href="css/site.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="">
-    <nav>
+    <nav id="toc">
+      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">
+      <div class="nav-wrapper">
       <h2><a href="index.html">Index</a></h2>
       <ul class="module">
         <!-- app -->
-        <h3>
-          <a href="" ng-click="moduleapp = !moduleapp">
+        <h2 class="module">
+          <a chref="" ng-click="moduleapp = !moduleapp">
             module: app
           </a>
           <i ng-cloak="" ng-show="moduleapp">+</i>
-        </h3>
+        </h2>
         <li id="app" ng-hide="moduleapp">
           <ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appconfig = !appconfig">
                 config
               </a>
               <i ng-cloak="" ng-show="appconfig">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appconfig">
               <li>
                 <a href="app.config.html">config</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appfilter = !appfilter">
                 filter
               </a>
               <i ng-cloak="" ng-show="appfilter">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appfilter">
               <li>
                 <a href="app.customCurrency.html">customCurrency</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="appservice = !appservice">
                 service
               </a>
               <i ng-cloak="" ng-show="appservice">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="appservice">
               <li>
                 <a href="app.testService.html">testService</a>
@@ -61,44 +60,44 @@
         </li>
       </ul><ul class="module">
         <!-- ngmap -->
-        <h3>
-          <a href="" ng-click="modulengmap = !modulengmap">
+        <h2 class="module">
+          <a chref="" ng-click="modulengmap = !modulengmap">
             module: ngmap
           </a>
           <i ng-cloak="" ng-show="modulengmap">+</i>
-        </h3>
+        </h2>
         <li id="ngmap" ng-hide="modulengmap">
           <ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapservice = !ngmapservice">
                 service
               </a>
               <i ng-cloak="" ng-show="ngmapservice">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapservice">
               <li>
                 <a href="ngmap.Attr2Options.html">Attr2Options</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapdirective = !ngmapdirective">
                 directive
               </a>
               <i ng-cloak="" ng-show="ngmapdirective">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapdirective">
               <li>
                 <a href="ngmap.map.html">map</a>
               </li>
             </ul>
           </ul><ul class="group">
-            <h3>
+            <h2>
               <a href="" ng-click="ngmapcontroller = !ngmapcontroller">
                 controller
               </a>
               <i ng-cloak="" ng-show="ngmapcontroller">+</i>
-            </h3>
+            </h2>
             <ul ng-hide="ngmapcontroller">
               <li>
                 <a href="ngmap.MapController.html">MapController</a>
@@ -107,6 +106,7 @@
           </ul>
         </li>
       </ul>
+      </div>
     </nav>
     <div id="content" class="page-wrap">
       <h3 style="float:right; color:#ccc">
@@ -122,68 +122,78 @@
         <!-- class files -->
         <div>
           <div><div class="container-overview">
-      <dt></dt>
-      <dd>
-        <div class="description">
-          <p>The siteLanguageServices provides information about available languges
+  <ul class="chips">
+  </ul>
+  <div class="clearfix"></div>
+  <div class="description">
+    <h4>Description</h4>
+    <p>The siteLanguageServices provides information about available languges
 of a site.</p>
-        </div>
-        <div class="details"></div>
-        <div>
-          <h5>Dependencies:</h5>
-          <table class="params">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="name" nowrap="">Test</td>
-                <td class="type"><span class="param-type">
-                  $http
-                </span></td>
-                <td class="description last"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <h5>Properties:</h5>
-          <table class="props">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="name" nowrap="">obj</td>
-                <td class="type"><span class="param-type">
-                  object
-                </span></td>
-                <td class="description last"><p>property of this service</p></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </dd>
-    </div>
-    <section>
-      <div class="functions">
-        <h3 class="subsection-title">Methods</h3>
-        <dl>
-          <dt>
-            <a href="source/app.testService.html#line22" class="name-link">
-              <h4 class="name">
-                test
+  </div>
+  <div class="details"></div>
+  <div>
+    <h4>Parameters</h4>
+    <table class="params">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name" nowrap="">
+            <a id="Test"></a>
+            Test
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="$http.html">$http</a>
+          </span></td>
+          <td class="description last">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h4>Properties</h4>
+    <table class="props">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name" nowrap="">obj</td>
+          <td class="type">
+            <span class="param-type">
+              object
+            </span>
+          </td>
+          <td class="description last">
+            <span>
+              <p>property of this service</p>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="functions">
+  <h3 class="subsection-title">Methods</h3>
+  <dl>
+    <dt>
+      <a href="source/app.testService.html#line22" class="name-link" id="test
+///// NO param jsdoc tag here">
+        <h4 class="name">
+          test
 ///// NO param jsdoc tag here
-              </h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description">
-            </div>
-          </dd>
-        </dl>
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
       </div>
-    </section></div>
+    </dd>
+  </dl>
+</div></div>
         </div>
       </div>
       <footer style="clear:both">
@@ -193,6 +203,9 @@ of a site.</p>
         <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
       </footer>
     </div>
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/site.js"></script>
     <!--%= prettyJson %-->
     <script>
       prettyPrint();

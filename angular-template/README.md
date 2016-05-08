@@ -17,7 +17,6 @@ Angular Template
     angular-template
       ├── css                 # css used in layout.html
       ├── js                  # javascript used in layout.html
-      ├── fonts               # font used in layout.html
       ├── html
       │   ├── class.html      # class layout written in angular-template
       │   └── layout.html     # layout written in angular-template
