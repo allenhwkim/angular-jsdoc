@@ -88,6 +88,10 @@ scope, `false` for shared scope, and either `{}` or `object` for isolate scope. 
 - `@animations` - specifies the animations that the documented directive supports
 - `@restrict` - specifies how directives should be shown in the usage section. For example, for [E]lement, [A]ttribute, and [C]lass, use @restrict ECA
 - `@eventType emit|broadcast` - specifies whether the event is emitted or broadcast
+- `@author` - name an author—or many by using the tag multiple times—of the  directive, service, controller etc.
+- `@see` - Specify a reference that adds up to the documentation of the current part
+- `@link` link to members like using `{@link app.exampleDirective#exampleMember}` would link to another documentation using HTML anchors
+- `@event`, `@listens`, `@fires` - For event-related documentation
 
 Example
 --------
