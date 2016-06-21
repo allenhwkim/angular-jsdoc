@@ -44,7 +44,7 @@ exports.defineTags = function(dictionary) {
     canHaveType: true,
     canHaveName: false,
     onTagged: function(doclet, tag) {
-      var returnsText = new RegExp(/@returns (\{.*\}.*)/).exec(doclet.comment);
+      var returnsText = new RegExp(/@returns? (\{.*\}.*)/).exec(doclet.comment);
 
       if (returnsText) {
         tag.text = returnsText[1];
