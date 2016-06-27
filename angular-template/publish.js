@@ -309,7 +309,7 @@ exports.publish = function(data, opts, tutorials) {
 
   // generate jsdoc html files
   classes.forEach(function(doclet) {
-    var jsDocPath = doclet.jsDocUrl.replace(/#.*$/,'');
+    var jsDocPath = decodeURIComponent(doclet.jsDocUrl.replace(/#.*$/,''));
     var outputPath = path.join(outdir, jsDocPath);
     doclet.nav = nav;
     generate(outputPath, doclet);
