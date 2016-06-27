@@ -30,12 +30,20 @@ var getDocletExamples = function(doclet) {
   return examples;
 };
 
+var memberCache = {};
+
+var getMembers = function(data, doclet){
+    var members = memberCache[doclet.longname];
+    if (typeof members === 'undefined' && doclet.kind === 'class') {
+        members  = memberCache[doclet.name];
+    }
+    return members || [];
+}
+
 // get children doclets that has member of current doclet longname
 var getChildren = function(data, doclet) {
-  var members  = helper.find(data, {memberof: doclet.longname});
-  if (members.length === 0 && doclet.kind === 'class') {
-    members  = helper.find(data, {memberof: doclet.name});
-  }
+
+  var members  = getMembers(data, doclet);
   var children = {};
   members.forEach(function(doclet) {
     children[doclet.kind] = children[doclet.kind] || [];
@@ -231,9 +239,20 @@ exports.publish = function(data, opts, tutorials) {
         templateCodes[doclet.name] = templateCode;
       }
     }
-
   });
 
+  data().each(function(doclet){
+    if(!doclet.memberof){
+      return;
+    }
+    
+    var cache = memberCache[doclet.memberof];
+    if(!cache){
+        memberCache[doclet.memberof] = [doclet];
+    } else {
+        cache.push(doclet);
+    }
+  });
 
   data().each(function(doclet) {
     doclet.children = getChildren(data, doclet);
