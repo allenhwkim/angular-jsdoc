@@ -230,7 +230,7 @@ exports.publish = function(data, opts, tutorials) {
         var templateCode =  {
           name: doclet.name,
           longname: doclet.longname,
-          filePath: templatePath,
+          filePath: path.join(doclet.meta.path, doclet.meta.filename),
           templateUrl: templateUrl,
           outputName: templateUrl.replace(/[\/\\]/g,'_')
         };
