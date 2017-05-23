@@ -185,7 +185,7 @@
         <h4>Example</h4>
         <pre ht-repeat="example in func.examples" class="prettyprint"><code><span class="str">{{ example.code }}</span></code></pre>
       </div>
-      <div ht-if="func.params">
+      <div ht-if="func.params && func.params.length">
         <h4>Parameters</h4>
         <table class="params">
           <thead>
