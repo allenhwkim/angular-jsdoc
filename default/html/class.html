@@ -16,7 +16,7 @@
               <tr>
                 <td class="name" nowrap><%= param.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= param.type && param.type.names.join(" | ") %>
+                  <%= param.typeDefinitionUrl %>
                 </span></td>
                 <td class="description last"><%= param.description %></td>
               </tr>
@@ -35,7 +35,7 @@
               <tr>
                 <td class="name" nowrap><%= prop.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= prop.type && prop.type.names.join(" | ") %>
+                  <%= prop.typeDefinitionUrl %>
                 </span></td>
                 <td class="description last"><%= prop.description %></td>
               </tr>
@@ -54,7 +54,7 @@
               <tr>
                 <td class="name" nowrap><%= attr.name %></td>
                 <td class="type"><span class="param-type">
-                  <%= attr.type && attr.type.names.join(" | ") %>
+                  <%= attr.typeDefinitionUrl %>
                 </span></td>
                 <td class="description last"><%= marked(attr.description||'') %></td>
               </tr>
@@ -150,7 +150,7 @@
                   <tr>
                     <td class="name"><%= param.name %></td>
                     <td class="type"><span class="param-type">
-                      <%= param.type && param.type.names.join(" | ") %>
+                      <%= param.typeDefinitionUrl %>
                     </span></td>
                     <td class="description last"><%= param.description %></td>
                   </tr>
