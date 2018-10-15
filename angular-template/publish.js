@@ -82,7 +82,7 @@ var copyStaticFiles = function() {
     staticFiles.forEach(function(fileName) {
       var toDir = fs.toDir( fileName.replace(fromDir, path.join(outdir, dirName)) );
       fs.mkPath(toDir);
-      fs.copyFileSync(fileName, toDir);
+      fs.copyFileSync(fileName, path.join(toDir, fileName.replace(/^.*[\\\/]/, '')));
     });
   });
 };
